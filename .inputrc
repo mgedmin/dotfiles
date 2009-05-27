@@ -1,0 +1,3 @@
+# http://linuxart.com/log/archives/2005/10/13/search-history-in-bash/
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward

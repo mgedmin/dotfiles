@@ -1,0 +1,7 @@
+startup_message off
+defscrollback 1000
+defescape ^bb
+escape ^bb
+
+# gimme back my scrollback in xterm!
+termcapinfo xterm|xterms|xs ti=\E7\E[?47l

@@ -1,0 +1,27 @@
+#!/bin/sh
+# sourced by /bin/sh from /etc/X11/Xsession.d/55gnome-session_gnomerc
+# beware of set -e!
+set +e
+
+# import environment ($PATH and other stuff), but first make sure the
+# noninteractive shell check works in my .bashrc.   Yes, this is a hack.
+old_PS1=$PS1
+export PS1=
+. ~/.profile
+PS1=$old_PS1
+
+# turn the fricking keyboard bell off
+xset -b
+
+# meh: disable touchpad buttons -- needs patched X11 synaptics driver
+# (http://mg.pov.lt/xserver-xorg-input-synaptics-0.14.6-touchpad-buttons-off.patch)
+# and Option "SHMConfig" "On" in xorg.conf
+##synclient TouchpadOff=3
+# XXX I suspect gnome-settings-daemon or something resets that option later on?
+#     Actually, suspend/resume does too.
+
+# nowadays we use xinput to adjust options
+enable-wheel-emulation
+enable-two-finger-scroll
+
+set -e
