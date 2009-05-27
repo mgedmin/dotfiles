@@ -1,5 +1,6 @@
 #!/bin/sh
 # assumes this directory is ~/dotfiles
+cd ~/dotfiles/
 for fn in .[a-z]*; do
     if [ "$fn" = ".svn" ]; then
         continue # don't fiddle with svn metadata!!!
