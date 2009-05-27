@@ -2,9 +2,22 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Add directories to $PATH if they're not there already
+echo :$PATH:|grep -q :/usr/local/bin:	|| PATH=/usr/local/bin:$PATH
+echo :$PATH:|grep -q :/usr/local/sbin:	|| PATH=/usr/local/sbin:$PATH
+echo :$PATH:|grep -q :/usr/games:	|| PATH=$PATH:/usr/games
+echo :$PATH:|grep -q :$HOME/bin:	|| PATH=$HOME/bin:$PATH
+export PATH
+
+# Define some aliases
 alias sb-login=/scratchbox/login
 
-# If not running interactively, don't do anything
+# Load local stuff, if any
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
+# If not running interactively, don't do anything else
 [ -z "$PS1" ] && return
 
 # Development
