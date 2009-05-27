@@ -13,14 +13,7 @@ PS1=$old_PS1
 # turn the fricking keyboard bell off
 xset -b
 
-# meh: disable touchpad buttons -- needs patched X11 synaptics driver
-# (http://mg.pov.lt/xserver-xorg-input-synaptics-0.14.6-touchpad-buttons-off.patch)
-# and Option "SHMConfig" "On" in xorg.conf
-##synclient TouchpadOff=3
-# XXX I suspect gnome-settings-daemon or something resets that option later on?
-#     Actually, suspend/resume does too.
-
-# nowadays we use xinput to adjust options
+# call some scripts from ~/bin/
 enable-wheel-emulation
 enable-two-finger-scroll
 
