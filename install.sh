@@ -2,9 +2,13 @@
 # assumes this directory is ~/dotfiles
 cd ~/dotfiles/
 for fn in [a-z]*; do
-    if [ "$fn" = "install.sh" ]; then
-        continue # ignore
-    fi
+    case "$fn" in
+        *.sh)
+            continue # ignore
+            ;;
+        *)
+            ;;
+    esac
     if [ -L "$HOME/.$fn" ] && [ "`readlink $HOME/.$fn`" = "dotfiles/$fn" ]; then
         continue # already a symlink to the right place
     fi
