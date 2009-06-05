@@ -56,6 +56,16 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF'
 
+# check for screen sessions
+if [ -d /var/run/screen/S-mg/ ]; then
+    n=`find  /var/run/screen/S-mg/ -type p|wc -l`
+    if [ $n -gt 0 ]; then
+        test x"$TERM" = xscreen \
+            && echo "You have $n active screen sessions (and this is one of them)." \
+            || echo "You have $n active screen sessions."
+    fi
+fi
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
@@ -105,13 +115,4 @@ if [ -z "$MC_SID" ]; then
         ;;
     esac
 fi
-
-# check for screen sessions
-if [ -d /var/run/screen/S-mg/ ]; then
-    n=`find  /var/run/screen/S-mg/ -type p|wc -l`
-    if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen \
-            && echo "You have $n active screen sessions (and this is one of them)." \
-            || echo "You have $n active screen sessions."
-    fi
-fi
+# show_command_in_title_bar should be the last thing in this file
