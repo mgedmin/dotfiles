@@ -6,7 +6,7 @@ set +e
 # import environment ($PATH and other stuff), but first make sure the
 # noninteractive shell check works in my .bashrc.   Yes, this is a hack.
 old_PS1=$PS1
-export PS1=
+PS1=
 . ~/.profile
 PS1=$old_PS1
 
