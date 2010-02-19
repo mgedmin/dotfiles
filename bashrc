@@ -34,6 +34,9 @@ export HISTCONTROL=ignoredups
 export HISTFILESIZE=5000
 export HISTSIZE=5000
 
+# Kobodl hangs on exit holding the X server lock unless I do this
+export SDL_AUDIODRIVER=pulse
+
 # disable history expansion (!)
 set +H
 
