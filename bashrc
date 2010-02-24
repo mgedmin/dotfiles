@@ -25,7 +25,7 @@ export IVIJA_ROOT=svn+ssh://fridge/svn/ivija
 export ZOPE_ROOT=svn+ssh://svn.zope.org/repos/main
 
 # Enable tab-completion in python
-export PYTHONSTARTUP=~/.python
+test -f ~/.python && export PYTHONSTARTUP=~/.python
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
