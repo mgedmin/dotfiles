@@ -21,7 +21,7 @@ for fn in [a-z]*; do
             echo "contents identical, replacing $HOME/.$fn with symlink"
             rm $HOME/.$fn
         else
-            echo "files differ: $HOME/.$fn $HOME/dotfiles/$fn" 1>&2
+            echo "contents differ, skipping: $HOME/.$fn $HOME/dotfiles/$fn" 1>&2
             continue
         fi
     fi
