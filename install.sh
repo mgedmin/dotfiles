@@ -16,5 +16,14 @@ for fn in [a-z]*; do
         # move old symlink to new one
         rm $HOME/.$fn
     fi
+    if [ -f "$HOME/.$fn" ]; then
+        if cmp "$HOME/.$fn" "$HOME/dotfiles/$fn" > /dev/null; then
+            echo "contents identical, replacing $HOME/.$fn with symlink"
+            rm $HOME/.$fn
+        else
+            echo "files differ: $HOME/.$fn $HOME/dotfiles/$fn" 1>&2
+            continue
+        fi
+    fi
     ln -s dotfiles/$fn $HOME/.$fn
 done
