@@ -1,0 +1,57 @@
+#
+# 'inst' is an alias to sudo apt-get install
+#
+_apt_packages()
+{
+    local cur prev
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    if [ $prev = -t ]; then
+        COMPREPLY=( $( apt-cache policy | grep "release.o=Debian,a=$cur" | \
+                       sed -e "s/.*a=\(\w*\).*/\1/" | uniq ) )
+        return 0
+    fi
+    COMPREPLY=( $( apt-cache pkgnames $cur 2> /dev/null ) )
+    return 0
+}
+complete -F _apt_packages inst apt-changelog dpkg-changelog
+
+#
+# mtr is a better traceroute
+# multiping.py is a better ping
+#
+complete -F _known_hosts mtr multiping.py
+
+#
+# 'scp': default scp completion expands 'host:pat' -> 'host:host\:path/'
+#
+_scp()
+{
+        local cur userhost path
+
+        COMPREPLY=()
+        cur=${COMP_WORDS[COMP_CWORD]}
+
+        _expand || return 0
+
+        if [[ "$cur" == *:* ]]; then
+                # remove backslash escape from :
+                cur=${cur/\\:/:}
+                userhost=${cur%%?(\\):*}
+                path=${cur#*:}
+                if [ -z "$path" ]; then
+                        # default to home dir of specified user on remote host
+                        path=$( ssh -o 'Batchmode yes' $userhost pwd 2>/dev/null)
+                fi
+                COMPREPLY=( $( compgen \
+                               -W "`echo $( ssh -o 'Batchmode yes' $userhost \
+                                            compgen -f -- $path 2>/dev/null)`"))
+                return 0
+        fi
+
+        [[ "$cur" == */* ]] || _known_hosts -c -a
+        _filedir
+
+        return 0
+}
+complete $filenames -F _scp $nospace scp
