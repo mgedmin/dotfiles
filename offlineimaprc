@@ -1,0 +1,71 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# suit to get started fast.
+
+[general]
+##accounts = Work, Home, Vartai
+##accounts = Work, Home
+accounts = Home
+##ui = Curses.Blinkenlights
+ui = TTY.TTYUI
+
+pythonfile = ~/.offlineimap.py
+
+maxsyncaccounts = 2
+maxconnections = 1
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/muttrc.mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+[Account Work]
+localrepository = Work
+remoterepository = Fridge
+
+[Account Home]
+localrepository = Home
+remoterepository = Musmire
+
+##[Account Vartai]
+##localrepository = Vartai
+##remoterepository = VartaiB4netLt
+
+[Repository Work]
+type = Maildir
+localfolders = ~/Mail/Work
+
+[Repository Home]
+type = Maildir
+localfolders = ~/Mail/Home
+
+##[Repository Vartai]
+##type = Maildir
+##localfolders = ~/Mail/Vartai
+
+[Repository Fridge]
+type = IMAP
+ssl = yes
+remotehost = fridge.pov.lt
+remoteuser = mg
+preauthtunnel = ssh -q fridge /usr/lib/dovecot/imap
+folderfilter = lambda foldername: foldername not in ['spamlock', 'hamlock', 'IN.SPAM']
+foldersort = mycmp
+
+[Repository Musmire]
+type = IMAP
+ssl = yes
+remotehost = musmire.gedmin.as
+remoteuser = mg
+preauthtunnel = ssh -q musmire /usr/lib/dovecot/imap
+#folderfilter = lambda foldername: foldername not in ['IN.root']
+foldersort = mycmp
+
+##[Repository VartaiB4netLt]
+##type = IMAP
+##ssl = yes
+##remotehost = vartai.b4net.lt
+##remoteuser = mgedmin
+##preauthtunnel = ssh -q vartai.b4net.lt /usr/lib/dovecot/imap
