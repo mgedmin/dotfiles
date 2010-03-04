@@ -74,9 +74,13 @@ fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc).
-if [ -f ~/.bash_completion.short ]; then
-    . ~/.bash_completion.short
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
 fi
+# If the above slows down bash startup too much, try this cut-down version:
+##if [ -f ~/.bash_completion.short ]; then
+##    . ~/.bash_completion.short
+##fi
 
 # set variable identifying the chroot you work in
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
