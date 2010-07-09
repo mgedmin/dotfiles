@@ -1,0 +1,3 @@
+--extra=+f
+--python-kinds=-i
+--langmap=html:+.mako
