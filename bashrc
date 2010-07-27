@@ -111,6 +111,9 @@ if [ -z "$MC_SID" ]; then
                     # In any case nested escapes confuse the terminal, so don't
                     # output them.
                     ;;
+                *\033*|*\007*|*\e*)
+                    # actually just avoid escapes of any kind in the title
+                    ;;
                 *)
                     echo -ne "\033]0;${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD}\007"
                     ;;
