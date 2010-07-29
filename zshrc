@@ -18,3 +18,6 @@ setopt sharehistory
 
 autoload -U colors && colors
 PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~ %{$reset_color%}%% "
+
+bindkey "\e[5~" history-beginning-search-backward
+bindkey "\e[6~" history-beginning-search-forward
