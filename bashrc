@@ -111,7 +111,7 @@ if [ -z "$MC_SID" ]; then
                     # In any case nested escapes confuse the terminal, so don't
                     # output them.
                     ;;
-                *\033*|*\007*|*\e*)
+                *\033*|*\007*|*\\e*)
                     # actually just avoid escapes of any kind in the title
                     ;;
                 *)
