@@ -3,5 +3,9 @@ defscrollback 1000
 defescape ^bb
 escape ^bb
 
+# some kinda crutch that kinda helps when screen is run from osso-xterm
+# instead of display corruption I end up seeing question marks...
+defutf8 on
+
 # gimme back my scrollback in xterm!
 termcapinfo xterm|xterms|xs ti=\E7\E[?47l
