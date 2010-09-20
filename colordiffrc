@@ -10,8 +10,10 @@ banner=no
 #                        darkblue, darkcyan, darkred,
 #                        darkmagenta, darkblack
 #
-plain=darkblack
-newtext=darkcyan
-oldtext=darkmagenta
-diffstuff=darkgreen
-cvsstuff=black
+
+# this works better on terminals with white background:
+##plain=darkblack
+##newtext=darkcyan
+##oldtext=darkmagenta
+##diffstuff=darkgreen
+##cvsstuff=black
