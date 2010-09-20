@@ -1,2 +1,6 @@
 [ui]
 username = Marius Gedminas <marius@gedmin.as>
+
+
+[tortoisehg]
+vdiff = gvimdiff
