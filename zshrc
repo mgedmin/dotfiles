@@ -22,6 +22,9 @@ PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~ %{$reset_color%}%% "
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
 
+# from http://www.zsh.org/mla/users/2000/msg00685.html
+WORDCHARS=${WORDCHARS:s,/,,}
+
 # from http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#ss4.1
 case $TERM in
     xterm*)
