@@ -22,8 +22,21 @@ PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~ %{$reset_color%}%% "
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
 
+if [ "$TERM" != "dumb" ]; then
+    eval `dircolors -b`
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+fi
+
 # from http://www.zsh.org/mla/users/2000/msg00685.html
-WORDCHARS=${WORDCHARS:s,/,,}
+##WORDCHARS=${WORDCHARS:s,/,,}
+##WORDCHARS=
+
+# from http://ubuntu.stackexchange.com/questions/1577/moving-from-bash-to-zsh
+autoload select-word-style
+select-word-style shell
+
+REPORTTIME=10
 
 # from http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#ss4.1
 case $TERM in
