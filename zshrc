@@ -47,3 +47,13 @@ case $TERM in
         preexec () { print -Pn "\e]0;$1 - %n@%m: %~\a" }
         ;;
 esac
+
+# from http://linuxinnovations.blogspot.com/2010/10/ultimate-tab-completion.html
+command_not_found_handler() { /usr/lib/command-not-found "$1" }
+zle_highlight=(default:bold)
+bindkey '^[[Z' reverse-menu-complete
+setopt interactivecomments
+
+# from http://github.com/robbyrussell/oh-my-zsh/blob/master/lib/completion.zsh
+zstyle ':completion:*:*:*:*:*' menu select
+
