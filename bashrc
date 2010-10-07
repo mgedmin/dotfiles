@@ -97,11 +97,12 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;
 if [ -z "$MC_SID" ]; then
     case "$TERM" in
     xterm*|rxvt*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"'
 
         # Show the currently running command in the terminal title:
         # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
-        # Note that this breaks the use of $_ in interactive shell sessions :-/
+        # Note that this breaks the use of $_ in interactive shell sessions,
+        # so get into the habit of using M-.
         show_command_in_title_bar()
         {
             case "$BASH_COMMAND" in
