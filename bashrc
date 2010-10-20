@@ -60,8 +60,8 @@ fi
 #alias l='ls -CF'
 
 # check for screen sessions
-if [ -d /var/run/screen/S-mg/ ]; then
-    n=`find  /var/run/screen/S-mg/ -type p|wc -l`
+if [ -d /var/run/screen/S-$USER/ ]; then
+    n=$(find  /var/run/screen/S-$USER/ -type p|wc -l)
     if [ $n -gt 0 ]; then
         test x"$TERM" = xscreen \
             && echo "You have $n active screen sessions (and this is one of them)." \
