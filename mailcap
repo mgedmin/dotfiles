@@ -1,3 +1,5 @@
 # from http://wiki.mutt.org/?MuttFaq/Charset
 text/html; /usr/bin/w3m -dump -T text/html -I %{charset}; copiousoutput; description=HTML Text
 
+# what idiot put evince for image/* in /etc/mailcap?
+image/*; eog '%s'; test=test -n "$DISPLAY"
