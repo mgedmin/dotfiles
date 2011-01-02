@@ -27,8 +27,14 @@ else:
     except IOError:
         pass
     import atexit
-    atexit.register(readline.write_history_file, histfile)
-    del histfile, atexit
+    def write_history(readline=readline):
+        try:
+            readline.write_history_file(histfile)
+        except IOError:
+            # root, nfs-mounted home with root_squash -> permission denied
+            pass
+    atexit.register(write_history)
+    del histfile, atexit, write_history
     # tab completion
     try:
         sys.path.append(os.path.join(os.getenv('HOME'), 'src', 'rlcompleter2'))
