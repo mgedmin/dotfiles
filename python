@@ -27,7 +27,7 @@ else:
     except IOError:
         pass
     import atexit
-    def write_history(readline=readline):
+    def write_history(readline=readline, histfile=histfile):
         try:
             readline.write_history_file(histfile)
         except IOError:
