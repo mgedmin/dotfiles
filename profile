@@ -19,6 +19,7 @@ export EDITOR=vim
 export VISUAL=vim
 
 export PYTHONPATH=$HOME/py-lib
+export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip
 
 test -d $HOME/Mail/Home/INBOX/ && export MAIL=$HOME/Mail/Home/INBOX/
 
