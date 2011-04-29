@@ -5,14 +5,18 @@ import os, sys
 
 # Coloured prompt
 if os.getenv('TERM') in ('xterm', 'vt100', 'rxvt', 'Eterm', 'putty'):
-    try:
-        import readline
-    except ImportError:
-        sys.ps1 = '\033[0;32m>>> \033[0m'
-        sys.ps2 = '\033[0;32m... \033[0m'
-    else:
-        sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
-        sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
+    sys.ps1 = '\033[0;32m>>> \033[0m'
+    sys.ps2 = '\033[0;32m... \033[0m'
+    if 'PyPy' not in sys.version:
+        # PyPy uses pyrepl instead of readline, and doesn't understand
+        # the \001 \002 convention
+        try:
+            import readline
+        except ImportError:
+            pass
+        else:
+            sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
+            sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
 
 # Completion!
 try:
