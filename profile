@@ -13,6 +13,10 @@ export DEBEMAIL=$EMAIL
 export DEBFULLNAME="Marius Gedminas"
 export GPGKEY=E7A6D78F
 
+# http://wiki.debian.org/UsingQuilt recommends this
+export QUILT_PATCHES=debian/patches
+export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
+
 # my environment choices
 export LC_CTYPE=lt_LT.UTF-8
 export EDITOR=vim
