@@ -6,7 +6,9 @@
 ##accounts = Work, Home
 accounts = Home
 ##ui = Curses.Blinkenlights
-ui = TTY.TTYUI
+##ui = TTY.TTYUI
+# "WARNING:root:Using old interface name, consider using one of machineui, blinkenlights, quiet, ttyui, basic"
+ui = ttyui
 
 pythonfile = ~/.offlineimap.py
 
