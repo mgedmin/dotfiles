@@ -69,6 +69,12 @@ if [ -d /var/run/screen/S-$USER/ ]; then
     fi
 fi
 
+# remind me that I've set up a proxy connection; because having it on
+# will break empathy without any clues as to why it fails to work
+if [ -x /usr/bin/gconftool -a x"$(gconftool -g /system/proxy/mode)" != x"none" ]; then
+    echo "You have a proxy server enabled."
+fi
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
