@@ -97,7 +97,7 @@ fi
 #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w \$ '
 
 # Comment in the above and uncomment this below for a color prompt
-PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\] \$ '
+PS1='\n${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\] \$ '
 
 # If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
 if [ -z "$MC_SID" ]; then
