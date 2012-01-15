@@ -18,6 +18,6 @@ for arg; do
     fi
     mv -i $HOME/.$fn $HOME/dotfiles/$fn
     ln -s dotfiles/$fn $HOME/.$fn
-    svn add dotfiles/$fn
+    svn add $HOME/dotfiles/$fn
 done
 exit $rc
