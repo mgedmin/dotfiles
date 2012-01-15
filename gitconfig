@@ -1,0 +1,18 @@
+[github]
+	user = mgedmin
+	token = 73cd704bc07da3ba6d7ee026c8527ca9
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+[user]
+	name = Marius Gedminas
+	email = marius@gedmin.as
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 904x650+338+24
+	history-view-vpane-position = 324
+	main-window-view = HistoryView
+	file-view-vpane-position = 156
+[core]
+	excludesfile = /home/mg/.gitignore_global
