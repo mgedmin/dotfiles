@@ -40,9 +40,10 @@ export SDL_AUDIODRIVER=pulse
 # disable history expansion (!)
 set +H
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# checkwinsize: check the window size after each command and, if necessary,
+#   update the values of LINES and COLUMNS.
+# globstar: enable ** expansion
+shopt -s checkwinsize globstar
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
