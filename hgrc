@@ -4,3 +4,11 @@ username = Marius Gedminas <marius@gedmin.as>
 
 [tortoisehg]
 vdiff = gvimdiff
+
+[extensions]
+hgsubversion =
+color = 
+pager =
+
+[pager]
+pager = less -FRSX
