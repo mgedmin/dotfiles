@@ -98,11 +98,14 @@ fi
 #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w \$ '
 
 # Comment in the above and uncomment this below for a color prompt
+reset='\[\033[0m\]'
+red='\[\033[0;31m\]'
 green='\[\033[0;32m\]'
 blue='\[\033[0;34m\]'
-reset='\[\033[0m\]'
+purple='\[\033[0;35m\]'
 chroot='${debian_chroot:+($debian_chroot)}'
-PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${reset} \$ "
+git='$(__git_ps1 " [%s]")'
+PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${git}${reset} \$ "
 
 # If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
 if [ -z "$MC_SID" ]; then
