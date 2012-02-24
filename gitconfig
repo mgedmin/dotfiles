@@ -20,3 +20,5 @@
 	httpd = apache2 -f
 [web]
 	browser = chromium
+[bz]
+	browser = chromium
