@@ -34,6 +34,9 @@ export HISTCONTROL=ignoredups
 export HISTFILESIZE=5000
 export HISTSIZE=5000
 
+# Don't overwrite the history file (and wipe the history of other xterms)
+shopt -s histappend
+
 # Kobodl hangs on exit holding the X server lock unless I do this
 export SDL_AUDIODRIVER=pulse
 
@@ -107,11 +110,17 @@ chroot='${debian_chroot:+($debian_chroot)}'
 git='$(__git_ps1 " [%s]")'
 PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${git}${reset} \$ "
 
+# Save the history after every command
+PROMPT_COMMAND='history -a'
+
+# Note to self: use 'history -an' to load the history
+# Source: http://briancarper.net/blog/248/
+
 # If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
 if [ -z "$MC_SID" ]; then
     case "$TERM" in
     xterm*|rxvt*)
-        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"'
+        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"; history -a'
 
         # Show the currently running command in the terminal title:
         # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
@@ -128,6 +137,9 @@ if [ -z "$MC_SID" ]; then
                     ;;
                 *\033*|*\007*|*\\e*)
                     # actually just avoid escapes of any kind in the title
+                    ;;
+                history\ -a)
+                    # this is $PROMPT_COMMAND again, most likely
                     ;;
                 *)
                     echo -ne "\033]0;${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD}\007"
