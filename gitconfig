@@ -22,3 +22,5 @@
 	browser = chromium
 [bz]
 	browser = chromium
+[url "git://git.gnome.org/"]
+	insteadof = gnome:
