@@ -18,6 +18,7 @@ for arg; do
     fi
     mv -i $HOME/.$fn $HOME/dotfiles/$fn
     ln -s dotfiles/$fn $HOME/.$fn
-    svn add $HOME/dotfiles/$fn
+    test -d .svn && svn add $HOME/dotfiles/$fn
+    (cd $GOME/dotfiles && test -d .git && git add $fn)
 done
 exit $rc
