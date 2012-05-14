@@ -100,7 +100,7 @@ fi
 
 # remind me that I've set up a proxy connection; because having it on
 # will break empathy without any clues as to why it fails to work
-if [ -x /usr/bin/gconftool -a x"$(gconftool -g /system/proxy/mode)" != x"none" ]; then
+if [ -x /usr/bin/gconftool ] && [ x"$(gconftool -g /system/proxy/mode)" != x"none" ]; then
     echo "You have a proxy server enabled."
 fi
 
