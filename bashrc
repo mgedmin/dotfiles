@@ -27,41 +27,66 @@ export ZOPE_ROOT=svn+ssh://svn.zope.org/repos/main
 # Enable tab-completion in python
 test -f ~/.python && export PYTHONSTARTUP=~/.python
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
-
-# Big history (note: big ~/.bash_history costs in startup time)
-export HISTFILESIZE=5000
-export HISTSIZE=5000
-
-# Don't overwrite the history file (and wipe the history of other xterms)
-shopt -s histappend
-
 # Kobodl hangs on exit holding the X server lock unless I do this
 export SDL_AUDIODRIVER=pulse
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+# (otherwise we would lose history of other xterms)
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=5000
+HISTFILESIZE=5000
+# note: big ~/.bash_history costs in startup time
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
 
 # disable history expansion (!)
 set +H
 
-# checkwinsize: check the window size after each command and, if necessary,
-#   update the values of LINES and COLUMNS.
-# globstar: enable ** expansion
-shopt -s checkwinsize globstar
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval `dircolors -b`
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
-#alias ll='ls -l'
+#alias ll='ls -alF'
 #alias la='ls -A'
 #alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # check for screen sessions
 if [ -d /var/run/screen/S-$USER/ ]; then
@@ -79,11 +104,9 @@ if [ -x /usr/bin/gconftool -a x"$(gconftool -g /system/proxy/mode)" != x"none" ]
     echo "You have a proxy server enabled."
 fi
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
 # enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc).
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
