@@ -19,6 +19,7 @@ setopt sharehistory
 autoload -U colors && colors
 PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~ %{$reset_color%}%% "
 
+# PageUp/PageDown = prefix-based history search
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
 
@@ -34,7 +35,7 @@ fi
 
 # from http://ubuntu.stackexchange.com/questions/1577/moving-from-bash-to-zsh
 autoload select-word-style
-select-word-style shell
+##select-word-style shell
 
 REPORTTIME=10
 
