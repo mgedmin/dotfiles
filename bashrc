@@ -131,6 +131,10 @@ blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
 chroot='${debian_chroot:+($debian_chroot)}'
 git='$(__git_ps1 " [%s]")'
+GIT_PS1_SHOWDIRTYSTATE=1  # adds * and/or + if there are changes
+GIT_PS1_SHOWSTASHSTATE=1  # adds $ if something is stashed
+GIT_PS1_SHOWSTASHSTATE=1  # adds % if there are untacked files
+GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
 PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${git}${reset} \$ "
 
 # Save the history after every command
