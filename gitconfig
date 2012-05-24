@@ -8,6 +8,7 @@
 [user]
 	name = Marius Gedminas
 	email = marius@gedmin.as
+	signingkey = E7A6D78F
 [giggle]
 	main-window-maximized = false
 	main-window-geometry = 904x650+338+24
