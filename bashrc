@@ -115,6 +115,26 @@ fi
 ##    . ~/.bash_completion.short
 ##fi
 
+# svn branch name in shell prompt
+# based on /etc/bash_completion.d/git and https://gist.github.com/657287
+# (the latter is from http://edgar.tumblr.com/post/1449437754/show-ruby-version-and-svn-git-branch-in-prompt)
+# oh and also http://hocuspokus.net/2009/07/add-git-and-svn-branch-to-bash-prompt/
+__svn_ps1()
+{
+    if [ -d .svn ]; then
+        local svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
+        local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
+        local trunk_pattern="^URL: .*/trunk(/.*)?$"
+        local branch=""
+        if [[ ${svn_info} =~ $branch_pattern ]]; then
+            branch=${BASH_REMATCH[2]}
+        elif [[ ${svn_info} =~ $trunk_pattern ]]; then
+            branch='trunk'
+        fi
+        printf -- "${1:- (%s)}" "$branch"
+    fi
+}
+
 # set variable identifying the chroot you work in
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -130,12 +150,13 @@ green='\[\033[0;32m\]'
 blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
 chroot='${debian_chroot:+($debian_chroot)}'
+svn='$(__svn_ps1 " [%s]")'
 git='$(__git_ps1 " [%s]")'
 GIT_PS1_SHOWDIRTYSTATE=1  # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1  # adds $ if something is stashed
 GIT_PS1_SHOWSTASHSTATE=1  # adds % if there are untacked files
 GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
-PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${git}${reset} \$ "
+PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${svn}${git}${reset} \$ "
 
 # Save the history after every command
 PROMPT_COMMAND='history -a'
