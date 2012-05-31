@@ -92,9 +92,19 @@ fi
 if [ -d /var/run/screen/S-$USER/ ]; then
     n=$(find  /var/run/screen/S-$USER/ -type p|wc -l)
     if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen \
+        test x"$TERM" = xscreen && test -n "$WINDOW" \
             && echo "You have $n active screen sessions (and this is one of them)." \
             || echo "You have $n active screen sessions."
+    fi
+fi
+
+# check for tmux sessions
+if [ -x /usr/bin/tmux ]; then
+    n=$(tmux list-sessions 2>/dev/null|wc -l)
+    if [ $n -gt 0 ]; then
+        test x"$TERM" = xscreen && test -n "$TMUX" \
+            && echo "You have $n active tmux sessions (and this is one of them)." \
+            || echo "You have $n active tmux sessions."
     fi
 fi
 
