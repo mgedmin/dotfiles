@@ -6,7 +6,14 @@ Instructions to self
 
 To start using on a new machine:
 
-  1. check out the dotfiles repo into ~/dotfiles
+  1. check out the dotfiles repo into ~/dotfiles::
+
+        git clone https://github.com/mgedmin/dotfiles
+
+     or ::
+
+        git clone git@github.com:mgedmin/dotfiles.git
+
   2. run ~/dotfiles/install.sh
 
 It will replace ~/.randomdotfile with symlinks to ~/dotfiles/randomdotfile,
