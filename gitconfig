@@ -25,3 +25,5 @@
 	browser = chromium
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
+[url "git@github.com:mgedmin/"]
+	insteadof = github:
