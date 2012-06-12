@@ -27,3 +27,10 @@
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
 	insteadof = github:
+[url "git@github.com:"]
+	insteadof = github-rw:
+[url "git://github.com/"]
+	insteadof = github-ro:
+[alias]
+	outgoing = log --oneline origin..
+	incoming = !git fetch && git log --oneline ..origin
