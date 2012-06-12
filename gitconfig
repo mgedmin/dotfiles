@@ -32,5 +32,17 @@
 [url "git://github.com/"]
 	insteadof = github-ro:
 [alias]
+# I'm used to this
+	st = status
+	ci = commit
+# I like hg incoming/hg outgoing; they make perfect sense to me
+# NB: starting with git 1.7.0 I can use @{u} to refer to origin
+# see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
 	outgoing = log --oneline origin..
 	incoming = !git fetch && git log --oneline ..origin
+# From https://git.wiki.kernel.org/index.php/Aliases
+# (I had to fix alias by adding "" so the # wouldn't truncate the command
+	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+
