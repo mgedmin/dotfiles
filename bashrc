@@ -166,7 +166,7 @@ GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
 GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files
 GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
-PS1="\n${chroot}${green}\u@\h${reset}:${blue}\w${purple}${svn}${git}${reset} \$ "
+PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${reset} \\$ "
 
 # Save the history after every command
 PROMPT_COMMAND='history -a'
