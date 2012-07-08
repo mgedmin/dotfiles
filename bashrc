@@ -145,6 +145,18 @@ __svn_ps1()
     fi
 }
 
+# hg branch name in shell prompt
+# based on http://www.amateurinmotion.com/articles/2010/01/28/mercurial-branch-in-bash-prompt.html
+# I'm not using http://mercurial.selenic.com/wiki/PromptExtension because fuck
+# nonstandard extensions I can't apt-get install; why can't they include this
+# in the core?
+__hg_ps1()
+{
+    if [ -n "$(hg root 2> /dev/null)" ]; then
+        printf -- "$1" "$(hg branch)"
+    fi
+}
+
 # set variable identifying the chroot you work in
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -160,13 +172,14 @@ green='\[\033[0;32m\]'
 blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
 chroot='${debian_chroot:+($debian_chroot)}'
-svn='$(__svn_ps1 " [%s]")'
-git='$(__git_ps1 " [%s]")'
+svn='$(__svn_ps1 " [svn:%s]")'
+git='$(__git_ps1 " [git:%s]")'
+hg='$(__hg_ps1 " [hg:%s]")'
 GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
 GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files
 GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
-PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${reset} \\$ "
+PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${reset} \\$ "
 
 # Save the history after every command
 PROMPT_COMMAND='history -a'
