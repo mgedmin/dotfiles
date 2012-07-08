@@ -9,6 +9,7 @@ vdiff = gvimdiff
 ##hgsubversion =
 color = 
 pager =
+record =
 
 [pager]
 pager = less -FRSX
