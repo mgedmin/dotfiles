@@ -1,0 +1,26 @@
+##$(HOME)/Mail/Work/INBOX
+$(HOME)/Mail/Home/INBOX
+$(HOME)/Mail/Home/IN.personal
+$(HOME)/Mail/Home/IN.root
+
+# :r !ls ~/Mail/Home/IN.*
+
+##$(HOME)/Mail/Home/IN.b4net
+$(HOME)/Mail/Home/IN.fbreader
+##$(HOME)/Mail/Home/IN.i18n
+##$(HOME)/Mail/Home/IN.kenis
+$(HOME)/Mail/Home/IN.mplayer
+#$(HOME)/Mail/Home/IN.personal
+$(HOME)/Mail/Home/IN.pygame
+$(HOME)/Mail/Home/IN.pylons
+$(HOME)/Mail/Home/IN.reportlab
+#$(HOME)/Mail/Home/IN.root
+##$(HOME)/Mail/Home/IN.SPAM
+$(HOME)/Mail/Home/IN.thinkpad
+$(HOME)/Mail/Home/IN.tip
+##$(HOME)/Mail/Home/IN.virus
+$(HOME)/Mail/Home/IN.xorg
+$(HOME)/Mail/Home/IN.zope
+##$(HOME)/Mail/Home/IN.zope3-dev
+$(HOME)/Mail/Home/IN.zope-dev
+$(HOME)/Mail/Home/IN.meego
