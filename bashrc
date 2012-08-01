@@ -162,8 +162,8 @@ __hg_ps1()
 # because http://martin-ueding.de/computer_stuff/vcs_prompt/de.html is too long
 __bzr_ps1()
 {
-    if [ -n "$(bzr root 2> /dev/null)" ]; then
-        printf -- "$1" "$(bzr nick)"
+    if [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
+        printf -- "$1" "$(bzr --no-plugins nick)"
     fi
 }
 
