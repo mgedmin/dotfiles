@@ -157,6 +157,16 @@ __hg_ps1()
     fi
 }
 
+# bzr branch name in shell prompt
+# based on my __hg_ps1 hack
+# because http://martin-ueding.de/computer_stuff/vcs_prompt/de.html is too long
+__bzr_ps1()
+{
+    if [ -n "$(bzr root 2> /dev/null)" ]; then
+        printf -- "$1" "$(bzr nick)"
+    fi
+}
+
 # set variable identifying the chroot you work in
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -175,11 +185,12 @@ chroot='${debian_chroot:+($debian_chroot)}'
 svn='$(__svn_ps1 " [svn:%s]")'
 git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
+bzr='$(__bzr_ps1 " [bzr:%s]")'
 GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
 GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files
 GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
-PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${reset} \\$ "
+PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset} \\$ "
 
 # Save the history after every command
 PROMPT_COMMAND='history -a'
