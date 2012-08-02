@@ -195,7 +195,7 @@ PS1="\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${bz
 # Save the history after every command
 PROMPT_COMMAND='history -a'
 
-# Note to self: use 'history -an' to load the history
+# Note to self: use 'history -n' to load the history
 # Source: http://briancarper.net/blog/248/
 
 # If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
