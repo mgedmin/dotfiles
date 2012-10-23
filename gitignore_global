@@ -2,3 +2,5 @@
 *.pyc
 tags
 mg.cfg
+prof.out
+src/profilehooks.py
