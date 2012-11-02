@@ -12,7 +12,9 @@ priority = {'IN.personal': -10,
            }
 
 def prioritize(x):
-    if x.startswith('IN'):
+    # old offlineimap: x is a folder name
+    # new offlineimap: x is an IMAPFolder object
+    if getattr(x, 'name', x).startswith('IN'):
         default = -5
     else:
         default = 0
