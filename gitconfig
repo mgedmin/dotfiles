@@ -31,6 +31,8 @@
 	insteadof = github-rw:
 [url "git://github.com/"]
 	insteadof = github-ro:
+[url "bzr::lp:"]
+	insteadof = lp:
 [alias]
 # I'm used to this
 	st = status
