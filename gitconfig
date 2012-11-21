@@ -51,3 +51,5 @@
 
 [push]
 	default = current
+[gui]
+	recentrepo = /home/mg/dotfiles
