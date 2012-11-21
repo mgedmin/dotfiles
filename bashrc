@@ -182,7 +182,7 @@ green='\[\033[0;32m\]'
 blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
 grey='\[\033[1;30m\]'
-exitcode="\`__ps_rc=\$?; test \$__ps_rc -ne 0 && echo -ne '\n[exitted with $red'\$__ps_rc'$reset]'\`"
+exitcode="\`__ps_rc=\$?; test \$__ps_rc -ne 0 && echo -ne '\n[exited with $red'\$__ps_rc'$reset]'\`"
 chroot='${debian_chroot:+($debian_chroot)}'
 svn='$(__svn_ps1 " [svn:%s]")'
 git='$(__git_ps1 " [git:%s]")'
