@@ -195,7 +195,7 @@ bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
 GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
-GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files
+##GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files -- slow for large trees!
 GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged)
 PS1="${exitcode}\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
