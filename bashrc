@@ -6,6 +6,9 @@
 echo :$PATH:|grep -q :/usr/local/bin:	|| PATH=/usr/local/bin:$PATH
 echo :$PATH:|grep -q :/usr/local/sbin:	|| PATH=/usr/local/sbin:$PATH
 echo :$PATH:|grep -q :/usr/games:	|| PATH=$PATH:/usr/games
+test -d /usr/lib/ccache && {
+  echo :$PATH:|grep -q :usr/lib/ccache:	|| PATH=/usr/lib/ccache:$PATH
+}
 echo :$PATH:|grep -q :$HOME/bin:	|| PATH=$HOME/bin:$PATH
 export PATH
 
