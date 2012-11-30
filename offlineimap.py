@@ -14,11 +14,12 @@ priority = {'IN.personal': -10,
 def prioritize(x):
     # old offlineimap: x is a folder name
     # new offlineimap: x is an IMAPFolder object
-    if getattr(x, 'name', x).startswith('IN'):
+    name = getattr(x, 'name', x)
+    if name.startswith('IN'):
         default = -5
     else:
         default = 0
-    return priority.get(x, default)
+    return priority.get(name, default)
 
 def mycmp(x, y):
     return cmp((prioritize(x), x),
