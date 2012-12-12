@@ -1,6 +1,13 @@
 .*.swp
-*.pyc
+
+# XXX: is it a good idea to have global ignores for these?
+*.py[co]
 tags
+TAGS
+ID
+
+# These are droppings I tend to leave all over the place
 mg.cfg
 prof.out
 src/profilehooks.py
+.tags.new
