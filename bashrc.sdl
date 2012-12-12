@@ -1,0 +1,4 @@
+# Kobodl hangs on exit holding the X server grab unless I do this
+export SDL_AUDIODRIVER=pulse
+
+# vim: ft=sh

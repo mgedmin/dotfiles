@@ -1,0 +1,8 @@
+# Remind me that I've set up a proxy connection; because having it on
+# will break Empathy without any clues as to why it fails to work
+
+if [ -x /usr/bin/gconftool ] && [ x"$(gconftool -g /system/proxy/mode)" != x"none" ]; then
+    echo "You have a proxy server enabled."
+fi
+
+# vim: ft=sh

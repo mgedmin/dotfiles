@@ -1,0 +1,29 @@
+# Configure history management:
+# - ignore duplicates
+# - ignore lines starting with a space
+# - keep longer history
+# - append when writing (don't lose history of other terminal tabs)
+# - save history after every command
+# Note to self: use 'history -n' to get the history from other terminal
+# tabs.
+# Source: http://briancarper.net/blog/248/
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+# (otherwise we would lose history of other xterms)
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=50000
+HISTFILESIZE=50000
+# note: big ~/.bash_history costs in startup time
+# (stupid readline O(N**2) "append to end of singly-linked list" algorithm)
+
+# Save the history after every command
+# (note: PROMPT_COMMAND is overwritten by bashrc.title)
+PROMPT_COMMAND='history -a'
+
+# vim: ft=sh

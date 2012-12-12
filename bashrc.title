@@ -1,0 +1,49 @@
+# Meaningful xterm title:
+# At the prompt show
+#       user@host: /pwd
+# While a command is running, show
+#       command args - user@host: /pwd
+# If a command exits with a non-zero exit code, show
+#       rc=NNN user@host: /pwd
+
+# If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
+if [ -z "$MC_SID" ]; then
+    case "$TERM" in
+    xterm*|rxvt*)
+        # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
+        # and this overrides it.  Instead of fancy concatenation logic
+        # I just tacked 'history -a' here as well
+        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"; history -a'
+
+        # Show the currently running command in the terminal title:
+        # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+        # Note that this breaks the use of $_ in interactive shell sessions,
+        # so get into the habit of using M-.
+        show_command_in_title_bar()
+        {
+            case "$BASH_COMMAND" in
+                *\033]0*)
+                    # The command is trying to set the title bar as well;
+                    # this is most likely the execution of $PROMPT_COMMAND.
+                    # In any case nested escapes confuse the terminal, so don't
+                    # output them.
+                    ;;
+                *\033*|*\007*|*\\e*)
+                    # actually just avoid escapes of any kind in the title
+                    ;;
+                history\ -a)
+                    # this is $PROMPT_COMMAND again, most likely
+                    ;;
+                *)
+                    echo -ne "\033]0;${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD}\007"
+                    ;;
+            esac
+        }
+        trap show_command_in_title_bar DEBUG
+        ;;
+    *)
+        ;;
+    esac
+fi
+# show_command_in_title_bar should be the last thing in this file
+# vim: ft=sh

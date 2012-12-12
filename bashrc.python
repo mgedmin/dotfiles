@@ -1,0 +1,5 @@
+# Enable tab-completion and other goodies in Python
+
+test -f ~/.python && export PYTHONSTARTUP=~/.python
+
+# vim: ft=sh
