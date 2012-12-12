@@ -1,8 +1,11 @@
 # Remind me that I've set up a proxy connection; because having it on
 # will break Empathy without any clues as to why it fails to work
 
-if [ -x /usr/bin/gconftool ] && [ x"$(gconftool -g /system/proxy/mode)" != x"none" ]; then
-    echo "You have a proxy server enabled."
+if [ -x /usr/bin/gconftool ]; then
+    mode=$(gconftool -g /system/proxy/mode 2>/dev/null)
+    if [ -n "$mode" -a "$mode" != "none" ]; then
+        echo "You have a proxy server enabled."
+    fi
 fi
 
 # vim: ft=sh
