@@ -11,6 +11,8 @@ color =
 pager =
 record =
 schemes =
+rebase =
+mq =
 
 [pager]
 pager = less -FRSX
