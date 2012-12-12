@@ -15,6 +15,7 @@
 # oh and also http://hocuspokus.net/2009/07/add-git-and-svn-branch-to-bash-prompt/
 __svn_ps1()
 {
+    # XXX: svn 1.7 no longer has .svn in every directory
     if [ -d .svn ]; then
         local svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
         local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
@@ -36,7 +37,7 @@ __svn_ps1()
 # in the core?
 __hg_ps1()
 {
-    if [ -n "$(hg root 2> /dev/null)" ]; then
+    if [ -x /usr/bin/hg ] && [ -n "$(hg root 2> /dev/null)" ]; then
         printf -- "$1" "$(hg branch)"
     fi
 }
@@ -46,7 +47,7 @@ __hg_ps1()
 # because http://martin-ueding.de/computer_stuff/vcs_prompt/de.html is too long
 __bzr_ps1()
 {
-    if [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
+    if [ -x /usr/bin/bzr ] && [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
         printf -- "$1" "$(bzr --no-plugins nick)"
     fi
 }
