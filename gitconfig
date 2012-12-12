@@ -1,28 +1,30 @@
-[github]
-	user = mgedmin
-	token = 73cd704bc07da3ba6d7ee026c8527ca9
-[color]
-	ui = auto
-	diff = auto
-	status = auto
 [user]
 	name = Marius Gedminas
 	email = marius@gedmin.as
 	signingkey = E7A6D78F
-[giggle]
-	main-window-maximized = false
-	main-window-geometry = 904x650+338+24
-	history-view-vpane-position = 324
-	main-window-view = HistoryView
-	file-view-vpane-position = 156
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+[push]
+	default = current
 [core]
-	excludesfile = /home/mg/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [instaweb]
 	httpd = apache2 -f
 [web]
 	browser = chromium
+
 [bz]
+# git-bz plugin
+# http://git.fishsoup.net/man/git-bz.html
 	browser = chromium
+
+[github]
+# https://github.com/blog/180-local-github-config
+# I'm not sure anything uses this any more, now that basic token auth is gone
+	user = mgedmin
+
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
@@ -32,7 +34,9 @@
 [url "git://github.com/"]
 	insteadof = github-ro:
 [url "bzr::lp:"]
+# http://felipec.wordpress.com/2012/11/13/git-remote-hg-bzr-2/
 	insteadof = lp:
+
 [alias]
 # I'm used to this
 	st = status
@@ -49,7 +53,3 @@
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-[push]
-	default = current
-[gui]
-	recentrepo = /home/mg/dotfiles
