@@ -55,4 +55,7 @@
 	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
-
+# cd'ing to the right directory is sometimes a pain
+	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
+	lcommit = "!f() { dir=$1; shift; cd $dir && git commit \"$@\"; }; f"
+	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
