@@ -25,6 +25,9 @@
 # I'm not sure anything uses this any more, now that basic token auth is gone
 	user = mgedmin
 
+[tig "bind"]
+	status = C !git commit -v
+
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
