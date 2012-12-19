@@ -25,7 +25,7 @@
 [ -f ~/.bashrc.less ] && . ~/.bashrc.less
 
 # Enable color support of ls and grep
-[ -f ~/.bashrc.color ] && . ~/.bashrc.color
+[ -f ~/.bashrc.colors ] && . ~/.bashrc.colors
 
 # Enable tab-completion and other goodies in Python
 [ -f ~/.bashrc.python ] && . ~/.bashrc.python
