@@ -59,3 +59,5 @@
 	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
 	lcommit = "!f() { dir=$1; shift; cd $dir && git commit \"$@\"; }; f"
 	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
+# creating new projects on fridge
+	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge git init --bare $repo && git remote add origin fridge:$repo && git push -u origin master; }; f"
