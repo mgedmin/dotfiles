@@ -17,7 +17,7 @@ __svn_ps1()
 {
     # XXX: svn 1.7 no longer has .svn in every directory
     if [ -d .svn ]; then
-        local svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
+        local svn_info="$(svn info 2> /dev/null | egrep '^URL: ')"
         local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
         local trunk_pattern="^URL: .*/trunk(/.*)?$"
         local branch=""
