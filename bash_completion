@@ -55,3 +55,30 @@ _scp()
         return 0
 }
 complete $filenames -F _scp $nospace scp
+
+# eazysvn is https://github.com/mgedmin/eazysvn
+_eazysvn()
+{
+    local cur
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    case $prev in
+      switch|rmbranch|mvbranch|branchurl|branchdiff|branchpoint)
+        COMPREPLY=( $( compgen -W "`ezswitch -l 2> /dev/null`" $cur ) )
+        return 0
+        ;;
+    esac
+    COMPREPLY=( $( compgen -W "branchdiff branchpoint branchurl help merge mvbranch revert rmbranch selftest switch tag" $cur ) )
+    return 0
+}
+complete -F _eazysvn eazysvn
+
+# ezswitch/ezbranch are from eazysvn (https://github.com/mgedmin/eazysvn)
+_ezswitch()
+{
+    local cur
+    cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( compgen -W "`ezswitch -l 2> /dev/null`" $cur ) )
+    return 0
+}
+complete -F _ezswitch ezswitch ezbranch
