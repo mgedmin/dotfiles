@@ -32,6 +32,8 @@
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
 	insteadof = github:
+[url "git@github.com:zopefoundation/"]
+	insteadof = zf:
 [url "git@github.com:"]
 	insteadof = github-rw:
 [url "git://github.com/"]
