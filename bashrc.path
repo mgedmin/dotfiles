@@ -7,6 +7,7 @@ echo :$PATH:|grep -q :/usr/games:	|| PATH=$PATH:/usr/games
 test -d /usr/lib/ccache && {
   echo :$PATH:|grep -q :usr/lib/ccache:	|| PATH=/usr/lib/ccache:$PATH
 }
+echo :$PATH:|grep -q :$HOME/.venv/bin:	|| PATH=$HOME/.venv/bin:$PATH
 # this ought to be last so ~/bin is first in path
 echo :$PATH:|grep -q :$HOME/bin:	|| PATH=$HOME/bin:$PATH
 export PATH

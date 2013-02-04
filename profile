@@ -24,7 +24,6 @@ export EDITOR=vim
 export VISUAL=vim
 
 # my custom Python stuff
-export PYTHONPATH=$HOME/py-lib
 export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip
 
 # offlineimap on my laptop puts mail here
@@ -38,7 +37,4 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+# ~/bin is added to PATH in ~/.bashrc.path
