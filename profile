@@ -37,4 +37,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# ~/bin is added to PATH in ~/.bashrc.path
+# ~/bin is added to PATH in ~/.bashrc.path, but GUI sessions don't parse
+# .bashrc.  Ubuntu's X sessions, however, do parse ~/.profile, so if I
+# want to launch apps using Alt-F2, I need to add ~/bin to $PATH here
+PATH="$HOME/bin:$HOME/.venv/bin:$PATH"
