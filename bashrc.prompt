@@ -52,6 +52,24 @@ __bzr_ps1()
     fi
 }
 
+# format the "[exited with 42]" line
+__exit_line()
+{
+    local rc=$1
+
+    local reset='\033[0m'
+    local red='\033[0;31m'
+    local green='\033[0;32m'
+    local blue='\033[0;34m'
+    local purple='\033[0;35m'
+    local grey='\033[0;37m'
+    local darkgrey='\033[1;30m'
+
+    if [ $rc -ne 0 ]; then
+        echo -ne "\n${grey}[exited with ${red}${rc}${grey}]${reset}"
+    fi
+}
+
 # Debian standard stuff that I never actually use
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -64,7 +82,8 @@ blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
 grey='\[\033[0;37m\]'
 darkgrey='\[\033[1;30m\]'
-exitcode="\`__ps_rc=\$?; test \$__ps_rc -ne 0 && echo -ne '\n$grey[exited with $red'\$__ps_rc'$grey]$reset'\`"
+
+exitcode="\`__exit_line \$?\`"
 chroot='${debian_chroot:+($debian_chroot)}'
 svn='$(__svn_ps1 " [svn:%s]")'
 git='$(__git_ps1 " [git:%s]")'
