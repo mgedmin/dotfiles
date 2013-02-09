@@ -13,7 +13,8 @@ if [ -z "$MC_SID" ]; then
         # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
         # and this overrides it.  Instead of fancy concatenation logic
         # I just tacked 'history -a' here as well
-        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${TITLE_PREFIX}${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"; history -a'
+        # Oh, and same for the __cmdstart=go thing.
+        PROMPT_COMMAND='__rc="rc=$? "; echo -ne "\033]0;${TITLE_PREFIX}${__rc/rc=0 /}${USER}@${HOSTNAME}: ${PWD}\007"; history -a; __do_cmdstart=go'
 
         # Show the currently running command in the terminal title:
         # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
@@ -31,17 +32,22 @@ if [ -z "$MC_SID" ]; then
                 *\033*|*\007*|*\\e*)
                     # actually just avoid escapes of any kind in the title
                     ;;
-                history\ -a)
+                history\ -a|__do_cmdstart=go)
                     # this is $PROMPT_COMMAND again, most likely
                     ;;
                 *)
                     echo -ne "\033]0;${TITLE_PREFIX}${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD}\007"
                     ;;
             esac
+
+            # Do some work for bashrc.prompt
+            update_cmdstart
         }
         trap show_command_in_title_bar DEBUG
         ;;
     *)
+        # Do some work for bashrc.prompt
+        trap update_cmdstart DEBUG
         ;;
     esac
 fi

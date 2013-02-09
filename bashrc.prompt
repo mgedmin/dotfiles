@@ -7,7 +7,15 @@
 #  mg@hostname:/pwd [git:branch] $
 #
 
+# show command running time if longer than $PS1_SLOW_COMMAND seconds
+PS1_SLOW_COMMAND=30
+
 # __git_ps1 is defined by /etc/bash_completion.d/git
+
+GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
+GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
+##GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files -- slow for large trees!
+GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged) / = (in sync)
 
 # svn branch name in shell prompt
 # based on /etc/bash_completion.d/git and https://gist.github.com/657287
@@ -65,10 +73,39 @@ __exit_line()
     local grey='\033[0;37m'
     local darkgrey='\033[1;30m'
 
+    local cmdtime=0
+    if [ -n "$__cmdstart" -a "$__cmdstart" != "go" ]; then
+        cmdtime=$((`date +%s` - $__cmdstart))
+    fi
+
+    local message=
+    if [ $cmdtime -ge $PS1_SLOW_COMMAND ]; then
+        local h=$((cmdtime / 3600))
+        local m=$((cmdtime % 3600 / 60))
+        local s=$((cmdtime % 60))
+        test $h -ne 0 && message="${message}${purple}${h}${grey}h"
+        test $m -ne 0 && message="${message}${purple}${m}${grey}m"
+        test $s -ne 0 && message="${message}${purple}${s}${grey}s"
+    fi
     if [ $rc -ne 0 ]; then
-        echo -ne "\n${grey}[exited with ${red}${rc}${grey}]${reset}"
+        test -n "$message" && message="${message}, "
+        message="${message}exited with ${red}${rc}${grey}"
+    fi
+    if [ -n "$message" ]; then
+        echo -ne "\n${grey}[${message}]${reset}"
     fi
 }
+
+update_cmdstart()
+{
+    test go = "$__do_cmdstart" && __do_cmdstart= __cmdstart=$(date +%s)
+}
+
+PROMPT_COMMAND='__do_cmdstart=go'
+
+# I cannot do that here, as it'll prevent the trap command in bashrc.title
+# from working.  I don't understand this.
+##trap update_cmdstart DEBUG
 
 # Debian standard stuff that I never actually use
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
@@ -90,10 +127,6 @@ git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
 bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
-GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
-GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
-##GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files -- slow for large trees!
-GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged) / = (in sync)
 PS1="${exitcode}\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
