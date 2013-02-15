@@ -127,6 +127,6 @@ git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
 bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
-PS1="${exitcode}\n${chroot}${green}\\u@\\h${reset}:${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+PS1="${exitcode}\n${chroot}${green}\\u@\\h${reset}: ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
