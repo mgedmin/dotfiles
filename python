@@ -1,6 +1,13 @@
-# Python startup script.            vim: set ft=python :
-# from http://www.norvig.com/python-iaq.html
-# also see Tarek Ziade's _Expert_Pythom_Programming_ page 19
+#
+# Python startup script
+#
+# To enable, add
+#    export PYTHONSTARTUP=~/.python
+# to your ~/.bashrc
+#
+# For more information see http://www.norvig.com/python-iaq.html
+# and also Tarek Ziade's _Expert_Pythom_Programming_ page 19
+#
 import os, sys
 
 # Coloured prompt
@@ -13,13 +20,13 @@ if os.getenv('TERM') in ('xterm', 'vt100', 'rxvt', 'Eterm', 'putty'):
         sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
         sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
 
-# Completion!
+# Tab-completion!
 try:
     import readline
 except ImportError:
     print("Module readline not available.")
 else:
-    # persistent history
+    # Persistent history!
     histfile = os.path.expanduser('~/.pythonhistory')
     try:
         readline.read_history_file(histfile)
@@ -34,7 +41,7 @@ else:
             pass
     atexit.register(write_history)
     del histfile, atexit, write_history
-    # tab completion
+    # Tab completion
     try:
         sys.path.append(os.path.join(os.getenv('HOME'), 'src', 'rlcompleter2'))
         import rlcompleter2
@@ -48,3 +55,5 @@ else:
 
 del sys
 del os
+
+# vim: set ft=python :
