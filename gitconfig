@@ -63,3 +63,4 @@
 	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
 # creating new projects on fridge
 	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge git init --bare $repo && git remote add origin fridge:$repo && git push -u origin master; }; f"
+	roots = log --all --oneline --decorate --max-parents=0
