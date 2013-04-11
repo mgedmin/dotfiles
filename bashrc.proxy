@@ -4,8 +4,15 @@
 if [ -x /usr/bin/gconftool ]; then
     mode=$(gconftool -g /system/proxy/mode 2>/dev/null)
     if [ -n "$mode" -a "$mode" != "none" ]; then
-        echo "You have a proxy server enabled."
+        echo "You have a proxy server enabled for GNOME."
     fi
+fi
+
+# And now for something completely different
+
+if [ -n "$(netstat -tnl | grep ':3128 ')" ]; then
+    export http_proxy=http://localhost:3128
+    echo "Using a local Squid proxy for this terminal session."
 fi
 
 # vim: ft=sh
