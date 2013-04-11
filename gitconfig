@@ -7,7 +7,7 @@
 	diff = auto
 	status = auto
 [push]
-	default = current
+	default = upstream
 [core]
 	excludesfile = ~/.gitignore_global
 [instaweb]
