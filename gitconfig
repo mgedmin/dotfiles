@@ -32,6 +32,9 @@
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
 	insteadof = github:
+[url "git@gist.github.com:"]
+# Use: git clone gist:1234.git
+	insteadof = gist:
 [url "git@github.com:zopefoundation/"]
 	insteadof = zf:
 [url "git@github.com:"]
