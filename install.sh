@@ -20,7 +20,11 @@ for fn in [a-z]*; do
         if cmp "$HOME/.$fn" "$HOME/dotfiles/$fn" > /dev/null; then
             echo "contents identical, replacing $HOME/.$fn with symlink"
             rm $HOME/.$fn
+        elif cmp "$HOME/.$fn" "/etc/skel/.$fn" > /dev/null; then
+            echo "identical to /etc/skel/ version, replacing $HOME/.$fn with symlink"
+            rm $HOME/.$fn
         else
+            sha1sum=
             echo "contents differ, skipping: $HOME/.$fn $HOME/dotfiles/$fn" 1>&2
             continue
         fi
