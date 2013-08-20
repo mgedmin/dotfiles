@@ -8,11 +8,14 @@ if [ -x /usr/bin/gconftool ]; then
     fi
 fi
 
-# And now for something completely different
+# And now for something completely different: I used to use Squid locally,
+# because PyPI was being painfully slow and unreliable.  But then CDN happened
+# and it was no longer slow and unreliable, and then HTTPS happened, so Squid
+# was no longer being used in any case.
 
-if [ -n "$(netstat -tnl | grep ':3128 ')" ]; then
-    export http_proxy=http://localhost:3128
-    echo "Using a local Squid proxy for this terminal session."
-fi
+##if [ -n "$(netstat -tnl | grep ':3128 ')" ]; then
+##    export http_proxy=http://localhost:3128
+##    echo "Using a local Squid proxy for this terminal session."
+##fi
 
 # vim: ft=sh
