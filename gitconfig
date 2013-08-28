@@ -26,8 +26,12 @@
 	user = mgedmin
 
 [tig "bind"]
+# override the default C binding which calls git commit without -v
 	status = C !git commit -v
 
+#
+# URL shortcuts
+#
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
@@ -50,22 +54,36 @@
 [alias]
 # I'm used to this
 	st = status
-	ci = commit
+	ci = commit -v
+
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
 # see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
 	outgoing = log --oneline origin..
 	incoming = !git fetch && git log --oneline ..origin
+
 # From https://git.wiki.kernel.org/index.php/Aliases
 # (I had to fix alias by adding "" so the # wouldn't truncate the command)
 # also, git new doesn't appear to accept any command-line arguments??
 	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+
 # cd'ing to the right directory is sometimes a pain
 	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
-	lcommit = "!f() { dir=$1; shift; cd $dir && git commit \"$@\"; }; f"
+	lcommit = "!f() { dir=$1; shift; cd $dir && git commit -v \"$@\"; }; f"
 	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
+
 # creating new projects on fridge
 	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge git init --bare $repo && git remote add origin fridge:$repo && git push -u origin master; }; f"
+
+# list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
+
+# managing many git checkouts
+	all = "!f() { c=\"\\033[0;35m\"; r=\"\\033[0m\"; for d in $(git config alias.all.dirs); do test -d $d/.git && { echo \"$c+ $d$r\"; cd $d && git \"$@\"; }; done; }; f"
+	whatsmodified = !git all st -su
+	wm = !git all st -su
+
+[alias "all"]
+	dirs = /etc /root /usr/local/bin /usr/local/sbin
