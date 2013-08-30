@@ -80,6 +80,9 @@
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
 
+# show commits after the last release
+	unreleased = !git shortlog $(git describe --tags --abbrev=0)..
+
 # managing many git checkouts
 	all = "!f() { c=\"\\033[0;35m\"; r=\"\\033[0m\"; for d in $(git config alias.all.dirs); do test -d $d/.git && { echo \"$c+ $d$r\"; cd $d && git \"$@\"; }; done; }; f"
 	whatsmodified = !git all st -su
