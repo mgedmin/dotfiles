@@ -56,7 +56,9 @@ _scp()
 }
 complete $filenames -F _scp $nospace scp
 
+#
 # eazysvn is https://github.com/mgedmin/eazysvn
+#
 _eazysvn()
 {
     local cur
@@ -83,15 +85,19 @@ _ezswitch()
 }
 complete -F _ezswitch ezswitch ezbranch
 
-# pov-fab is an alias for fab -f ~/src/pov-admin/fabfile.py
-_pov_fab()
+#
+# Fabric completion
+# based on https://github.com/marcelor/fabric-bash-autocompletion/blob/master/fab
+# 
+_fab()
 {
     local cur
+    fab=${COMP_WORDS[0]}
     cur=${COMP_WORDS[COMP_CWORD]}
-    local tasks=$(pov-fab -l 2>/dev/null | grep "^    " | awk '{print $1;}')
+    local tasks=$("$fab" -l 2>/dev/null | sed -ne '/^Available commands/,$p' | grep "^    " | awk '{print $1;}')
     COMPREPLY=( $( compgen -W "${tasks}" $cur ) )
     return 0
 }
-
-complete -F _pov_fab pov-fab
+# pov-fab is an alias for fab -f ~/src/pov-admin/fabfile.py
+complete -F _fab fab bin/fab pov-fab
 
