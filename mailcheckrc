@@ -9,7 +9,7 @@ $(HOME)/Mail/Home/IN.root
 $(HOME)/Mail/Home/IN.fbreader
 ##$(HOME)/Mail/Home/IN.i18n
 ##$(HOME)/Mail/Home/IN.kenis
-$(HOME)/Mail/Home/IN.mplayer
+##$(HOME)/Mail/Home/IN.mplayer
 #$(HOME)/Mail/Home/IN.personal
 $(HOME)/Mail/Home/IN.pygame
 $(HOME)/Mail/Home/IN.pylons
@@ -23,4 +23,6 @@ $(HOME)/Mail/Home/IN.xorg
 $(HOME)/Mail/Home/IN.zope
 ##$(HOME)/Mail/Home/IN.zope3-dev
 $(HOME)/Mail/Home/IN.zope-dev
-$(HOME)/Mail/Home/IN.meego
+##$(HOME)/Mail/Home/IN.meego
+$(HOME)/Mail/Home/IN.vim
+$(HOME)/Mail/Home/IN.sphinx
