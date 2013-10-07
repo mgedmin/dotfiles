@@ -1,5 +1,6 @@
 # Word
 application/msword; catdoc -d utf-8 %s; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.documen; docx2txt '%s' -; copiousoutput
 
 # pdf -- mutt always uses the first one for <enter> in attachment list; and copiousoutput for auto_view
 application/pdf; evince '%s'; test=test -n "$DISPLAY"
