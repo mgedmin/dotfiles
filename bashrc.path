@@ -1,15 +1,28 @@
 # Make sure my $PATH has everything I need
 
 # Add directories to $PATH if they're not there already
-echo :$PATH:|grep -q :/usr/local/bin:	|| PATH=/usr/local/bin:$PATH
-echo :$PATH:|grep -q :/usr/local/sbin:	|| PATH=/usr/local/sbin:$PATH
-echo :$PATH:|grep -q :/usr/games:	|| PATH=$PATH:/usr/games
-test -d /usr/lib/ccache && {
-  echo :$PATH:|grep -q :usr/lib/ccache:	|| PATH=/usr/lib/ccache:$PATH
+
+_addpath() {
+    case :$PATH: in
+        *:$1:*)
+            # already have it on the path
+            ;;
+        *)
+            PATH=$1:$PATH
+            ;;
+    esac
 }
-echo :$PATH:|grep -q :$HOME/.venv/bin:	|| PATH=$HOME/.venv/bin:$PATH
-# this ought to be last so ~/bin is first in path
-echo :$PATH:|grep -q :$HOME/bin:	|| PATH=$HOME/bin:$PATH
+_addpath_if_exists() {
+    test -d $1 && _addpath $1
+}
+
+_addpath /usr/local/bin
+_addpath /usr/local/sbin
+_addpath /usr/games
+_addpath_if_exists /usr/lib/ccache
+_addpath $HOME/.venv/bin
+_addpath $HOME/bin # this ought to be last so ~/bin is first in path
+
 export PATH
 
 # vim: ft=sh
