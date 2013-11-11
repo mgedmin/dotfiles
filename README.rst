@@ -6,19 +6,19 @@ Instructions to self
 
 To start using on a new machine:
 
-  1. check out the dotfiles repo into ~/dotfiles::
+1. check out the dotfiles repo into ``~/dotfiles``::
 
         git clone https://github.com/mgedmin/dotfiles
 
-     or ::
+   or (for an editable version) ::
 
         git clone git@github.com:mgedmin/dotfiles.git
 
-  2. run ~/dotfiles/install.sh
+2. run ``~/dotfiles/install.sh``
 
-It will replace ~/.randomdotfile with symlinks to ~/dotfiles/randomdotfile,
-safely.  If you have a conflict (~/.foo exists and differs in content from
-~/dotfiles/foo), the install script will warn and keep your current ~/.foo,
+It will replace ``~/.randomdotfile`` with symlinks to ``~/dotfiles/randomdotfile``,
+*safely*.  If you have a conflict (``~/.foo`` exists and differs in content from
+``~/dotfiles/foo``), the install script will warn and keep your current ``~/.foo``,
 so you don't have to worry about accidentally losing data.
 
 You need to re-run the install script every time you pull in new dotfiles from
@@ -26,8 +26,8 @@ a remote repository.
 
 To add a new dotfile to your collection:
 
-  1. run ~/dotfiles/grab.sh ~/.dotfilename
+1. run ``~/dotfiles/grab.sh ~/.dotfilename``
 
-It will move ~/.dotfilename too ~/dotfiles/dotfilename and create the
-appropriate symlink.  Don't forget to commit the newly added file!
+It will move ``~/.dotfilename`` to ``~/dotfiles/dotfilename`` and create the
+appropriate symlink.  Don't forget to commit the newly-added file!
 
