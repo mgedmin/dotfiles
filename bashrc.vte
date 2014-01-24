@@ -1,0 +1,19 @@
+# Support for $PWD detection in modern gnome-terminal
+#
+# Since version 3.10 gnome-terminal doesn't play games with /proc to find out
+# the current working directory of the running shell, instead it wants the
+# shell to tell it, by echoing an escape sequence.
+#
+# There's /etc/profile.d/vte.sh that sets up PROMPT_COMMAND to echo what's
+# needed.  Only gnome-terminal doesn't launch login shells by default AFAICT,
+# so /etc/profile.d is not executed for each tab.  And while the X session
+# does source the profile, it doesn't do that in a terminal, so the "are
+# we running under VTE" check in vte.sh fails and it bails early.
+
+if ! declare -f __vte_osc7 > /dev/null; then
+    if [ "${VTE_VERSION:-0}" -ge 3405 ]; then
+        . /etc/profile.d/vte.sh
+    else
+        __vte_osc7() { :; }
+    fi
+fi

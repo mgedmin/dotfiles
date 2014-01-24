@@ -45,5 +45,8 @@
 # Bash prompt (should come after bash_completion)
 [ -f ~/.bashrc.prompt ] && . ~/.bashrc.prompt
 
+# GNOME Terminal support
+[ -f ~/.bashrc.vte ] && . ~/.bashrc.vte
+
 # Set xterm title (should be the last thing in this file)
 [ -f ~/.bashrc.title ] && . ~/.bashrc.title
