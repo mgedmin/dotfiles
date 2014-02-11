@@ -22,7 +22,8 @@ It will replace ``~/.randomdotfile`` with symlinks to ``~/dotfiles/randomdotfile
 so you don't have to worry about accidentally losing data.
 
 You need to re-run the install script every time you pull in new dotfiles from
-a remote repository.
+a remote repository.  Running ``~/dotfiles/update.sh`` does that (git pull +
+running install.sh).
 
 To add a new dotfile to your collection:
 
