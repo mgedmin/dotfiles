@@ -35,7 +35,7 @@
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
 [url "git@github.com:mgedmin/"]
-	insteadof = github:
+	insteadof = my-github:
 [url "git@github.com:ProgrammersOfVilnius/"]
 	insteadof = pov:
 [url "git@gist.github.com:"]
@@ -44,7 +44,7 @@
 [url "git@github.com:zopefoundation/"]
 	insteadof = zf:
 [url "git@github.com:"]
-	insteadof = github-rw:
+	insteadof = github:
 [url "git://github.com/"]
 	insteadof = github-ro:
 [url "bzr::lp:"]
