@@ -117,6 +117,7 @@ if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
 fi
 
 reset='\[\033[0m\]'
+cr='\[\015\]'
 red='\[\033[0;31m\]'
 green='\[\033[0;32m\]'
 blue='\[\033[0;34m\]'
@@ -130,6 +131,6 @@ git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
 bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
-PS1="${chroot}${green}\\u@\\h${reset}: ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+PS1="${chroot}${green}${cr}\\u@\\h${reset}: ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
