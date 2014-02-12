@@ -87,6 +87,7 @@
 	all = "!f() { c=\"\\033[0;35m\"; r=\"\\033[0m\"; for d in $(git config alias.all.dirs); do test -d $d/.git && { echo \"$c+ $d$r\"; cd $d && git \"$@\"; }; done; }; f"
 	whatsmodified = !git all st -su
 	wm = !git all st -su
+	fetch-pull-requests = fetch origin '+refs/pull/*/head:refs/remotes/origin/pull/*'
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
