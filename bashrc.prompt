@@ -131,8 +131,8 @@ git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
 bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
-restart_required='$(test -f /run/reboot-required && echo "!")'
-no_restart_required='$(test -f /run/reboot-required || echo ":")'
+restart_required='$(test -f /var/run/reboot-required && echo "!")'
+no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
 PS1="${chroot}${green}${cr}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
