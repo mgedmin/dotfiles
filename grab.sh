@@ -1,9 +1,11 @@
 #!/bin/sh
 # assumes this directory is ~/dotfiles
+cd ~/dotfiles/
 rc=0
 for arg; do
-    fn=${arg#.}
-    if ! [ x".$fn" = x"$arg" ]; then
+    s=${arg#$HOME/}
+    fn=${s#.}
+    if ! [ x".$fn" = x"$s" ]; then
         echo "$arg: not a dotfile" 1>&2
         rc=1
         continue
