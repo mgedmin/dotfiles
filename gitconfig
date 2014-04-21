@@ -59,6 +59,10 @@
 	st = status
 	ci = commit -v
 
+# These are extremely nice
+	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
+	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .git/info/exclude; done; }; f"
+
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
 # see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
