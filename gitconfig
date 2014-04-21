@@ -66,7 +66,7 @@
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
 # see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
-	outgoing = log --oneline origin..
+	outgoing = log --oneline @{u}..
 	incoming = !git fetch && git log --oneline ..origin
 
 # From https://git.wiki.kernel.org/index.php/Aliases
