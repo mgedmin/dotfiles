@@ -25,6 +25,10 @@ export VISUAL=vim
 
 # my custom Python stuff
 export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip
+export PIP_WHEEL_DIR=$HOME/.cache/wheels
+export PIP_FIND_LINKS=file://$PIP_WHEEL_DIR
+# do 'pip wheel $name' to create a wheel in the cache so that subsequent
+# 'pip install $name' will be faster
 
 # offlineimap on my laptop puts mail here
 test -d $HOME/Mail/Home/INBOX/ && export MAIL=$HOME/Mail/Home/INBOX/
