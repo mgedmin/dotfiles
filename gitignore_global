@@ -1,4 +1,5 @@
-.*.sw[po]
+.*.sw[a-p]
+.sw[a-p]
 
 # These are droppings I tend to leave all over the place
 mg.cfg
