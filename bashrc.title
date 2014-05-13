@@ -5,6 +5,8 @@
 #       command args - user@host: /pwd
 # If a command exits with a non-zero exit code, show
 #       rc=NNN user@host: /pwd
+# You can set $TITLE_PREFIX to something if you want to differentiate your
+# xterms manually
 
 # If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
 if [ -z "$MC_SID" ]; then
@@ -15,7 +17,7 @@ if [ -z "$MC_SID" ]; then
         # I just tacked 'history -a' here as well
         # Oh, and same for the __cmdstart=go thing.
         # And __vte_osc7
-        PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; echo -ne "\033]0;${TITLE_PREFIX}${__msg/rc=0 /}${USER}@${HOSTNAME}: ${PWD/#$HOME/~}\007"; history -a; __exit_line $__rc'
+        PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; printf "\e]0;%s%s%s@%s: %s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/\~}"; history -a; __exit_line $__rc'
 
         # Since we overwrite the magic of /etc/profile.d/vte.sh that's
         # needed for gnome-terminal's $PWD detection, add it back here if
@@ -35,7 +37,7 @@ if [ -z "$MC_SID" ]; then
         show_command_in_title_bar()
         {
             case "$BASH_COMMAND" in
-                *\033]0*)
+                *\033]0*|*\\e]0*)
                     # The command is trying to set the title bar as well;
                     # this is most likely the execution of $PROMPT_COMMAND.
                     # In any case nested escapes confuse the terminal, so don't
@@ -48,7 +50,7 @@ if [ -z "$MC_SID" ]; then
                     # this is $PROMPT_COMMAND again, most likely
                     ;;
                 *)
-                    echo -ne "\033]0;${TITLE_PREFIX}${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD/#$HOME/~}\007"
+                    printf "\e]0;%s%s - %s@%s: %s\a" "${TITLE_PREFIX}" "${BASH_COMMAND}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/\~}"
                     ;;
             esac
 
