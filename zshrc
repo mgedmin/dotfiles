@@ -17,7 +17,7 @@ compinit
 setopt sharehistory
 
 autoload -U colors && colors
-PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~ %{$reset_color%}%% "
+PS1="%{$fg[green]%}%n@%m%{$reset_color%}: %{$fg[blue]%}%~ %{$reset_color%}%% "
 
 # PageUp/PageDown = prefix-based history search
 bindkey "\e[5~" history-beginning-search-backward
