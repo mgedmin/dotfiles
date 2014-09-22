@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+[ -f /etc/bashrc ] && . /etc/bashrc
+
 # Add directories to $PATH if they're not there already
 [ -f ~/.bashrc.path ] && . ~/.bashrc.path
 
