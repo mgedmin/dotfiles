@@ -10,6 +10,16 @@
 # show command running time if longer than $PS1_SLOW_COMMAND seconds
 PS1_SLOW_COMMAND=30
 
+__virtualenv_name() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        name=$(basename "$VIRTUAL_ENV")
+        if [ "$name" = "__" ]; then
+            name=$(basename $(dirname "$VIRTUAL_ENV"))
+        fi
+        printf -- "$1" "$name"
+    fi
+}
+
 # __git_ps1 used to be defined by /etc/bash_completion.d/git
 # then it was moved to /usr/lib/git-core/git-sh-prompt
 if ! declare -f __git_ps1 > /dev/null; then
@@ -144,12 +154,15 @@ reset='\[\033[0m\]'
 cr='\[\015\]'
 red='\[\033[0;31m\]'
 green='\[\033[0;32m\]'
+brown='\[\033[0;33m\]'
 blue='\[\033[0;34m\]'
 purple='\[\033[0;35m\]'
+cyan='\[\033[0;36m\]'
 grey='\[\033[0;37m\]'
 darkgrey='\[\033[1;30m\]'
 
-chroot='${debian_chroot:+($debian_chroot)}'
+chroot='${debian_chroot:+($debian_chroot) }'
+virtualenv='$(__virtualenv_name "(%s) ")'
 svn='$(__svn_ps1 " [svn:%s]")'
 git='$(__git_ps1 " [git:%s]")'
 hg='$(__hg_ps1 " [hg:%s]")'
@@ -157,6 +170,6 @@ bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
 restart_required='$(test -f /var/run/reboot-required && echo "!")'
 no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
-PS1="${chroot}${green}${cr}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+PS1="${cr}${chroot}${cyan}${virtualenv}${green}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
