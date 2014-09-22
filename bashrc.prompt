@@ -162,26 +162,40 @@ grey='\[\033[0;37m\]'
 darkgrey='\[\033[1;30m\]'
 
 # This is configurable: set it to any key found in the colors array
-prompt_color=green
+case "$BASH_VERSION" in
+    [0-3]*)
+        # no configurability, hardcoded to brown
+        _prompt_color='\[$(printf "\033[0;33m")\]'
+        ;;
+    *)
+        # configurable, default to green
+        # you can specify color name or color number (30..37)
+        # you can specify 256-color numbers too with "38;5;nnn", e.g.
+        #    prompt_color="38;5;197"
+        prompt_color=green
 
-declare -A colors
-colors[reset]=0
-colors[black]=30
-colors[red]=31
-colors[green]=32
-colors[brown]=33
-colors[blue]=34
-colors[purple]=35
-colors[cyan]=36
-colors[grey]=37
-colors[darkgrey]="1;30"
-colors[brightred]="1;31"
-colors[brightgreen]="1;32"
-colors[yellow]="1;33"
-colors[brightblue]="1;34"
-colors[brightpurple]="1;35"
-colors[brightcyan]="1;36"
-colors[white]="1;37"
+        declare -A colors
+        colors[reset]=0
+        colors[black]=30
+        colors[red]=31
+        colors[green]=32
+        colors[brown]=33
+        colors[blue]=34
+        colors[purple]=35
+        colors[cyan]=36
+        colors[grey]=37
+        colors[darkgrey]="1;30"
+        colors[brightred]="1;31"
+        colors[brightgreen]="1;32"
+        colors[yellow]="1;33"
+        colors[brightblue]="1;34"
+        colors[brightpurple]="1;35"
+        colors[brightcyan]="1;36"
+        colors[white]="1;37"
+
+        _prompt_color='\[$(printf "\033[0;%sm" ${colors[$prompt_color]:-$prompt_color})\]'
+        ;;
+esac
 
 chroot='${debian_chroot:+($debian_chroot) }'
 virtualenv='$(__virtualenv_name "(%s) ")'
@@ -192,7 +206,6 @@ bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
 restart_required='$(test -f /var/run/reboot-required && echo "!")'
 no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
-_prompt_color='\[$(printf "\033[0;%sm" ${colors[$prompt_color]})\]'
 PS1="${cr}${chroot}${cyan}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # vim: ft=sh
