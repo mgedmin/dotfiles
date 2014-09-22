@@ -10,7 +10,19 @@
 # show command running time if longer than $PS1_SLOW_COMMAND seconds
 PS1_SLOW_COMMAND=30
 
-# __git_ps1 is defined by /etc/bash_completion.d/git
+# __git_ps1 used to be defined by /etc/bash_completion.d/git
+# then it was moved to /usr/lib/git-core/git-sh-prompt
+if ! declare -f __git_ps1 > /dev/null; then
+    if [ -e /usr/lib/git-core/git-sh-prompt ]; then
+        . /usr/lib/git-core/git-sh-prompt
+    elif [ -e /etc/bash_completion.d/git ]; then
+        . /etc/bash_completion.d/git
+    elif [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+        # CentOS
+        . /usr/share/git-core/contrib/completion/git-prompt.sh
+    fi
+    # otherwise let's hope 
+fi
 
 GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
 GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
