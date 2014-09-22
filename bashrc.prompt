@@ -24,10 +24,22 @@ if ! declare -f __git_ps1 > /dev/null; then
     # otherwise let's hope 
 fi
 
-GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
-GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
-##GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files -- slow for large trees!
-GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged) / = (in sync)
+turn_on_git_details() {
+    GIT_PS1_SHOWDIRTYSTATE=1     # adds * and/or + if there are changes
+    GIT_PS1_SHOWSTASHSTATE=1     # adds $ if something is stashed
+    ##GIT_PS1_SHOWUNTRACKEDFILES=1 # adds % if there are untracked files -- slow for large trees!
+    GIT_PS1_SHOWUPSTREAM="auto"  # < (behind) / > (ahead) / <> (diverged) / = (in sync)
+}
+
+turn_off_git_details() {
+    # call this if prompt is too slow
+    GIT_PS1_SHOWDIRTYSTATE=
+    GIT_PS1_SHOWSTASHSTATE=
+    GIT_PS1_SHOWUNTRACKEDFILES=
+    GIT_PS1_SHOWUPSTREAM=
+}
+
+turn_on_git_details
 
 # svn branch name in shell prompt
 # based on /etc/bash_completion.d/git and https://gist.github.com/657287
