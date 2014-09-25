@@ -16,6 +16,8 @@ _addpath_if_exists() {
     test -d $1 && _addpath $1
 }
 
+_addpath /sbin
+_addpath /usr/sbin
 _addpath /usr/local/bin
 _addpath /usr/local/sbin
 _addpath /usr/games
