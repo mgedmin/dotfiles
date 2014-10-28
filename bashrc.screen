@@ -4,7 +4,7 @@
 if [ -d /var/run/screen/S-$USER/ ]; then
     n=$(find  /var/run/screen/S-$USER/ -type p|wc -l)
     if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen && test -n "$WINDOW" \
+        test x"$TERM" = xscreen || test x"$TERM" = xscreen-256color && test -n "$WINDOW" \
             && echo "You have $n active screen sessions (and this is one of them)." \
             || echo "You have $n active screen sessions."
     fi
@@ -14,7 +14,7 @@ fi
 if [ -x /usr/bin/tmux ]; then
     n=$(tmux list-sessions 2>/dev/null|wc -l)
     if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen && test -n "$TMUX" \
+        test x"$TERM" = xscreen || test x"$TERM" = xscreen-256color && test -n "$TMUX" \
             && echo "You have $n active tmux sessions (and this is one of them)." \
             || echo "You have $n active tmux sessions."
     fi

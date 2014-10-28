@@ -1,3 +1,17 @@
+# Make sure we advertise 256-color support
+
+# Note: gnome-terminal doesn't set $COLORTERM since version 3.14, so we can't
+# distinguish gnome-terminal from other xterm clones any more and have to
+# assume all xterms support 256-color modes nowadays.
+[ "$TERM" = "xterm" ] && TERM=xterm-256color
+[ "$TERM" = "screen" ] && TERM=screen-256color
+
+# Make sure we don't use 256-color $TERM if it's not supported by the system
+# terminfo (even if TERM was propagated by ssh from a local system where it is
+# supported by terminfo).
+[ "$TERM" = "xterm-256color" ] && ! [ -f /lib/terminfo/x/xterm-256color ] && TERM=xterm
+[ "$TERM" = "screen-256color" ] && ! [ -f /lib/terminfo/s/screen-256color ] && TERM=screen
+
 # Enable color support of ls and grep
 
 if [ -x /usr/bin/dircolors ]; then

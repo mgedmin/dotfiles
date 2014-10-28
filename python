@@ -8,10 +8,11 @@
 # For more information see http://www.norvig.com/python-iaq.html
 # and also Tarek Ziade's _Expert_Pythom_Programming_ page 19
 #
-import os, sys
+import os
+import sys
 
 # Coloured prompt
-if os.getenv('TERM') in ('xterm', 'vt100', 'rxvt', 'Eterm', 'putty'):
+if os.getenv('TERM') in ('xterm', 'xterm-256color', 'screen', 'screen-256color', 'vt100', 'rxvt', 'Eterm', 'putty'):
     try:
         import readline
     except ImportError:
@@ -22,7 +23,7 @@ if os.getenv('TERM') in ('xterm', 'vt100', 'rxvt', 'Eterm', 'putty'):
 
 # Tab-completion!
 try:
-    import readline
+    import readline  # noqa: imported for side effects only
 except ImportError:
     print("Module readline not available.")
 else:
