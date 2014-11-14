@@ -9,3 +9,6 @@
 # Ctrl+left/right in gnome-terminal
 "\e[1;5D": backward-word
 "\e[1;5C": forward-word
+
+# Ctrl-Del in gnome-terminal
+"\e[3;5~": kill-word
