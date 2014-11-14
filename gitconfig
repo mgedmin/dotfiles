@@ -103,3 +103,5 @@
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
 [include]
 	path = ~/.gitconfig.local
+[merge]
+	tool = gvimdiff
