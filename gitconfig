@@ -85,7 +85,7 @@
 	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
 
 # creating new projects on fridge
-	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge git init --bare $repo && git remote add origin fridge.pov.lt:$repo && git push -u origin master; }; f"
+	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge.pov.lt git init --bare $repo && git remote add origin fridge.pov.lt:$repo && git push -u origin master; }; f"
 
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
