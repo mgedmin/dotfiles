@@ -13,6 +13,8 @@ export EMAIL=marius@gedmin.as
 export DEBEMAIL=$EMAIL
 export DEBFULLNAME="Marius Gedminas"
 export GPGKEY=E7A6D78F
+export DEB_SIGN_KEYID=$GPGKEY       # for debhelper
+export DEBSIGN_KEYID=$GPGKEY        # for debsign
 
 # http://wiki.debian.org/UsingQuilt recommends this
 export QUILT_PATCHES=debian/patches
