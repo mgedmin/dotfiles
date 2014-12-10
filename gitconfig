@@ -98,6 +98,7 @@
 	whatsmodified = !git all st -su
 	wm = !git all st -su
 	fetch-pull-requests = fetch origin '+refs/pull/*/head:refs/remotes/origin/pull/*'
+	autosquash = rebase -i --autosquash
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
