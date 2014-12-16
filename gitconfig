@@ -99,6 +99,8 @@
 	wm = !git all st -su
 	fetch-pull-requests = fetch origin '+refs/pull/*/head:refs/remotes/origin/pull/*'
 	autosquash = rebase -i --autosquash
+	amend = commit --amend -C HEAD
+	uncommit = reset HEAD^
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
