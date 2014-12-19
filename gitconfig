@@ -120,6 +120,9 @@
 # git commit -C ORIG_HEAD.
 	uncommit = reset HEAD^
 
+# git archive-branch branchname renames it to applied/branchname
+	archive-branch = "!f() { b=\"$1\"; git branch -m \"$b\" \"applied/$b\"; }; f"
+
 # other
 
 [alias "all"]
