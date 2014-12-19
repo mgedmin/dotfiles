@@ -74,33 +74,53 @@
 
 # From https://git.wiki.kernel.org/index.php/Aliases
 # (I had to fix alias by adding "" so the # wouldn't truncate the command)
-# also, git new doesn't appear to accept any command-line arguments??
-	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-# cd'ing to the right directory is sometimes a pain
+# I don't think I ever use this
+# also from https://git.wiki.kernel.org/index.php/Aliases
+# BTW git new doesn't appear to accept any command-line arguments??
+	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+
+# cd'ing to the right directory is sometimes a pain, but these are cumbersome to use so I generally don't
 	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
 	lcommit = "!f() { dir=$1; shift; cd $dir && git commit -v \"$@\"; }; f"
 	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
 
-# creating new projects on fridge
+# creating new projects on fridge: git push-to-fridge [path/repo.git]
 	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge.pov.lt git init --bare $repo && git remote add origin fridge.pov.lt:$repo && git push -u origin master; }; f"
 
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
 
-# show commits after the last release
-	unreleased = !git shortlog $(git describe --tags --abbrev=0).. "$@"
+# show commits after the last release (but now that I have projects.gedmin.as I never use this)
+	unreleased = !git shortlog $(git describe --tags --abbrev=0)..
 
 # managing many git checkouts
 	all = "!f() { c=\"\\033[0;35m\"; r=\"\\033[0m\"; rc=0; for d in $(git config alias.all.dirs); do if [ -d $d/.git ]; then echo \"$c+ $d$r\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
 	whatsmodified = !git all st -su
 	wm = !git all st -su
+
+# fetch pull requests from github so you can 'git checkout pull/123' and test it locally
 	fetch-pull-requests = fetch origin '+refs/pull/*/head:refs/remotes/origin/pull/*'
+
+# use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
+# NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash
+
+# I'm not sure about what 'git amend' should do.  Currently you have to git add
+# bits in advance OR use git amend -a OR -p OR maybe FILENAME.  It reuses the
+# existing commit message.  Is it a footgun?  Dunno.  I generally use git ci
+# --amend -a/-p, but then I found that git commit --amend -a -C HEAD was a bit
+# too much typing then decided to leave off the -a for some reason (to make the
+# footgun smaller?).  You can see I'm undecided :)
 	amend = commit --amend -C HEAD
+
+# 'bzr uncommit' wasn't bad, really, sometimes.  You can undo the uncommit with
+# git commit -C ORIG_HEAD.
 	uncommit = reset HEAD^
+
+# other
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
