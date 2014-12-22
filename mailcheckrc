@@ -5,6 +5,7 @@ $(HOME)/Mail/Home/IN.root
 
 # :r !ls ~/Mail/Home/IN.*
 
+$(HOME)/Mail/Home/IN.distutils
 ##$(HOME)/Mail/Home/IN.b4net
 $(HOME)/Mail/Home/IN.fbreader
 ##$(HOME)/Mail/Home/IN.i18n
