@@ -10,10 +10,6 @@ To start using on a new machine:
 
         git clone https://github.com/mgedmin/dotfiles
 
-   or (for an editable version) ::
-
-        git clone git@github.com:mgedmin/dotfiles.git
-
 2. run ``~/dotfiles/install.sh``
 
 It will replace ``~/.randomdotfile`` with symlinks to ``~/dotfiles/randomdotfile``,
@@ -31,4 +27,3 @@ To add a new dotfile to your collection:
 
 It will move ``~/.dotfilename`` to ``~/dotfiles/dotfilename`` and create the
 appropriate symlink.  Don't forget to commit the newly-added file!
-
