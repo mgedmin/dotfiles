@@ -14,7 +14,7 @@ __virtualenv_name() {
     if [ -n "$VIRTUAL_ENV" ]; then
         name=$(basename "$VIRTUAL_ENV")
         if [ "$name" = "__" ]; then
-            name=$(basename $(dirname "$VIRTUAL_ENV"))
+            name=$(basename "$(dirname "$VIRTUAL_ENV")")
         fi
         printf -- "$1" "$name"
     fi
