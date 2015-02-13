@@ -109,7 +109,7 @@ __exit_line()
 
     local cmdtime=0
     if [ -n "$__cmdstart" -a "$__cmdstart" != "go" ]; then
-        cmdtime=$((`date +%s` - $__cmdstart))
+        cmdtime=$(($(date +%s) - __cmdstart))
     fi
 
     local message=
@@ -136,7 +136,7 @@ __exit_line()
 
 update_cmdstart()
 {
-    test go = "$__do_cmdstart" && __do_cmdstart= __cmdstart=$(date +%s)
+    test go = "$__do_cmdstart" && __do_cmdstart="" __cmdstart=$(date +%s)
 }
 
 PROMPT_COMMAND='__exit_line $?; __do_cmdstart=go'
