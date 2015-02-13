@@ -7,8 +7,8 @@
 #  mg@hostname:/pwd [git:branch] $
 #
 
-# show command running time if longer than $PS1_SLOW_COMMAND seconds
-PS1_SLOW_COMMAND=30
+# show command running time if it's $PS1_SLOW_COMMAND or more seconds
+PS1_SLOW_COMMAND=10
 
 __virtualenv_name() {
     if [ -n "$VIRTUAL_ENV" ]; then
