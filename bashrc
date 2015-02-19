@@ -53,4 +53,6 @@ if [ -n "$PS1" ]; then
 fi
 
 # Load local stuff, if any (do this last so it can override any of the above)
-[ -f ~/.bashrc.local ] && . ~/.bashrc.local
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
