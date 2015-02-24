@@ -131,3 +131,5 @@
 	path = ~/.gitconfig.local
 [merge]
 	tool = gvimdiff
+[fetch]
+	recurseSubmodules = on-demand
