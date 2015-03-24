@@ -1,3 +1,9 @@
+# allow ~/.gitconfig.local to override anything (works with git 1.7.10+, which
+# means Ubuntu 14.04+)
+[include]
+	path = ~/.gitconfig.local
+
+# some basics
 [user]
 	name = Marius Gedminas
 	email = marius@gedmin.as
@@ -132,8 +138,6 @@
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
-[include]
-	path = ~/.gitconfig.local
 [merge]
 	tool = gvimdiff
 [fetch]
