@@ -128,6 +128,7 @@
 
 # git archive-branch branchname renames it to applied/branchname
 	archive-branch = "!f() { b=\"$1\"; git branch -m \"$b\" \"applied/$b\"; }; f"
+	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
 
 # other
 
