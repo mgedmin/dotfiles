@@ -38,8 +38,10 @@
 #
 [url "git://git.gnome.org/"]
 	insteadof = gnome:
-[url "git@github.com:"]
+[url "https://github.com/"]
 	insteadof = github:
+[url "git@github.com:"]
+	pushInsteadOf = github:
 	pushInsteadOf = https://github.com/
 	pushInsteadOf = git://github.com/
 [url "git@gist.github.com:"]
