@@ -9,6 +9,7 @@ defutf8 on
 
 # gimme back my scrollback in xterm!
 termcapinfo xterm|xterms|xs ti=\E7\E[?47l
+termcapinfo xterm-256color|xs ti=\E7\E[?47l
 
 # 256-color for all xterms
 # termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
