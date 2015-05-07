@@ -1,22 +1,29 @@
 # Remind me about any backgrounded screen/tmux sessions
 
 # check for screen sessions
-if [ -d /var/run/screen/S-$USER/ ]; then
-    n=$(find /var/run/screen/S-$USER/ -type p|wc -l)
-    if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen || test x"$TERM" = xscreen-256color && test -n "$WINDOW" \
-            && echo "You have $n active screen sessions (and this is one of them)." \
-            || echo "You have $n active screen sessions."
+if [ -d "/var/run/screen/S-$USER/" ]; then
+    n=$(find "/var/run/screen/S-$USER/" -type p|wc -l)
+    if [[ $n -gt 0 ]]; then
+        if [[ $TERM =~ ^screen && -n $WINDOW ]]; then
+            echo "You have $n active screen sessions (and this is one of them)."
+            TITLE_SUFFIX=" {screen}"
+        else
+            echo "You have $n active screen sessions."
+        fi
     fi
 fi
 
 # check for tmux sessions
 if [ -x /usr/bin/tmux ]; then
     n=$(tmux list-sessions 2>/dev/null|wc -l)
-    if [ $n -gt 0 ]; then
-        test x"$TERM" = xscreen || test x"$TERM" = xscreen-256color && test -n "$TMUX" \
-            && echo "You have $n active tmux sessions (and this is one of them)." \
-            || echo "You have $n active tmux sessions."
+    if [[ $n -gt 0 ]]; then
+        if [[ $TERM =~ ^screen && -n $TMUX ]]; then
+            echo "You have $n active tmux sessions (and this is one of them)."
+            # tmux doesn't appear to be passing the terminal title through :/
+            TITLE_SUFFIX=" {tmux}"
+        else
+            echo "You have $n active tmux sessions."
+        fi
     fi
 fi
 
