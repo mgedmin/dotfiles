@@ -8,8 +8,12 @@ escape ^bb
 defutf8 on
 
 # gimme back my scrollback in xterm!
-termcapinfo xterm|xterms|xs ti=\E7\E[?47l
-termcapinfo xterm-256color|xs ti=\E7\E[?47l
+# init string: replaces \E[?47h (use alt screen) with \E[?47l (use normal
+# screen)
+# exit string: adds "go to top; clear screen" to the beginning (gnome-terminal
+# does this without losing scrollback history), drops the \E8 (cursor position
+# restore) since the screen is clear and we're good at the top-left thanks.
+termcapinfo xterm|xterm-256color ti=\E7\E[?47l:te=\E[H\E[2J\E[?47l
 
 # 256-color for all xterms
 # termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
