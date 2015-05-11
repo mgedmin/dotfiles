@@ -1,30 +1,71 @@
 # Remind me about any backgrounded screen/tmux sessions
 
-# check for screen sessions
-if [ -d "/var/run/screen/S-$USER/" ]; then
-    n=$(find "/var/run/screen/S-$USER/" -type p|wc -l)
-    if [[ $n -gt 0 ]]; then
-        if [[ $TERM =~ ^screen && -n $WINDOW ]]; then
-            echo "You have $n active screen sessions (and this is one of them)."
-            TITLE_SUFFIX=" {screen}"
-        else
-            echo "You have $n active screen sessions."
+_report() {
+    local n=$1
+    local tool=${2:-screen}
+    local user=${3:-$USER}
+    local active=$4
+    if [[ $n -eq 0 ]]; then
+        return
+    fi
+    local msg
+    if [[ $n -eq 1 ]]; then
+        msg="You have $n $tool session"
+    else
+        msg="You have $n $tool sessions"
+    fi
+    if [[ $USER != $user || -n $SUDO_USER ]]; then
+        msg="$msg as $user"
+    fi
+    if [[ $TERM =~ ^screen ]]; then
+        export TITLE_SUFFIX=" {$tool}"
+        if [[ -n $active && -z $SUDO_USER ]]; then
+            if [[ $n -eq 1 ]]; then
+                msg="$msg (this is it)"
+            else
+                msg="$msg (and this is one of them)"
+            fi
+        elif [[ -n $SUDO_USER ]]; then
+            if [[ $n -eq 1 ]]; then
+                msg="$msg (this might be it)"
+            else
+                msg="$msg (and this might be one of them)"
+            fi
         fi
     fi
-fi
+    printf "%s.\n" "$msg"
+}
 
-# check for tmux sessions
-if [ -x /usr/bin/tmux ]; then
-    n=$(tmux list-sessions 2>/dev/null|wc -l)
-    if [[ $n -gt 0 ]]; then
-        if [[ $TERM =~ ^screen && -n $TMUX ]]; then
-            echo "You have $n active tmux sessions (and this is one of them)."
-            # tmux doesn't appear to be passing the terminal title through :/
-            TITLE_SUFFIX=" {tmux}"
-        else
-            echo "You have $n active tmux sessions."
-        fi
+_checkscreen() {
+    local user=$1
+    if [[ -z $user ]] || ! [[ -d /var/run/screen/S-$user/ ]]; then
+        return
     fi
-fi
+    local n=$(find "/var/run/screen/S-$user/" -type p|wc -l)
+    _report "$n" screen "$user" "$WINDOW"
+}
+
+_checktmux() {
+    local user=$1
+    local uid=$2
+    if [[ -z $user ]]; then
+        return
+    fi
+    if [[ -n $uid ]]; then
+        if ! [[ -e /tmp/tmux-$uid/default ]]; then
+            return
+        fi
+        n=$(tmux -S "/tmp/tmux-$uid/default" list-sessions 2>/dev/null|wc -l)
+    else
+        n=$(tmux list-sessions 2>/dev/null|wc -l)
+        user=""
+    fi
+    _report "$n" tmux "$user" "$TMUX"
+}
+
+_checkscreen "$USER"
+_checkscreen "$SUDO_USER"
+_checktmux "$USER"
+_checktmux "$SUDO_USER" "$SUDO_UID"
 
 # vim: ft=sh
