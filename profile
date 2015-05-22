@@ -27,8 +27,8 @@ export VISUAL=vim
 
 # my custom Python stuff
 # export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip -- not needed with pip 6
-export PIP_WHEEL_DIR=$HOME/.cache/wheels
-export PIP_FIND_LINKS=file://$PIP_WHEEL_DIR
+# export PIP_WHEEL_DIR=$HOME/.cache/wheels -- not needed with pip 7
+# export PIP_FIND_LINKS=file://$PIP_WHEEL_DIR -- not needed with pip 7
 # do 'pip wheel $name' to create a wheel in the cache so that subsequent
 # 'pip install $name' will be faster
 
