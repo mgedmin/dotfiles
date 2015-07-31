@@ -2,6 +2,7 @@
 $(HOME)/Mail/Home/INBOX
 $(HOME)/Mail/Home/IN.personal
 $(HOME)/Mail/Home/IN.root
+$(HOME)/Mail/Home/IN.github
 
 # :r !ls ~/Mail/Home/IN.*
 
