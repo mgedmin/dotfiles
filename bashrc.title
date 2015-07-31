@@ -8,63 +8,69 @@
 # You can set $TITLE_PREFIX and $TITLE_SUFFIX to something if you want to
 # differentiate your xterms manually
 
-# If this is an xterm set the title to user@host:dir, except when we're running under Midnight Commander
-if [ -z "$MC_SID" ]; then
+xterm_title=0
+# If this is an xterm set the title to user@host:dir, except when we're running
+# under Midnight Commander, or when we're running screen in a Linux virtual
+# console
+if [ -z "$MC_SID" ] && [ -n "$DISPLAY" ] ; then
     case "$TERM" in
     xterm*|rxvt*|screen*)
-        # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
-        # and this overrides it.  Instead of fancy concatenation logic
-        # I just tacked 'history -a' here as well
-        # Oh, and same for the __cmdstart=go thing.
-        # And __vte_osc7
-        PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; __tilde="~"; printf "\e]0;%s%s%s@%s: %s%s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"; history -a; __exit_line $__rc'
-
-        # Since we overwrite the magic of /etc/profile.d/vte.sh that's
-        # needed for gnome-terminal's $PWD detection, add it back here if
-        # necessary
-        if declare -f __vte_osc7 > /dev/null; then
-            PROMPT_COMMAND="$PROMPT_COMMAND; __vte_osc7"
-        fi
-
-        # __do_cmdstart needs to be the last thing in $PROMPT_COMMAND,
-        # otherwise we start the command timer too early
-        PROMPT_COMMAND="$PROMPT_COMMAND; __do_cmdstart=go"
-
-        # Show the currently running command in the terminal title:
-        # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
-        # Note that this breaks the use of $_ in interactive shell sessions,
-        # so get into the habit of using M-.
-        show_command_in_title_bar()
-        {
-            case "$BASH_COMMAND" in
-                *\033]0*|*\\e]0*)
-                    # The command is trying to set the title bar as well;
-                    # this is most likely the execution of $PROMPT_COMMAND.
-                    # In any case nested escapes confuse the terminal, so don't
-                    # output them.
-                    ;;
-                *\033*|*\007*|*\\e*)
-                    # actually just avoid escapes of any kind in the title
-                    ;;
-                history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7)
-                    # this is $PROMPT_COMMAND again, most likely
-                    ;;
-                *)
-                    __tilde="~"
-                    printf "\e]0;%s%s - %s@%s: %s%s\a" "${TITLE_PREFIX}" "${BASH_COMMAND}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"
-                    ;;
-            esac
-
-            # Do some work for bashrc.prompt
-            update_cmdstart
-        }
-        trap show_command_in_title_bar DEBUG
-        ;;
-    *)
-        # Do some work for bashrc.prompt
-        trap update_cmdstart DEBUG
+        xterm_title=1
         ;;
     esac
+fi
+
+if [ $xterm_title -ne 0 ]; then
+    # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
+    # and this overrides it.  Instead of fancy concatenation logic
+    # I just tacked 'history -a' here as well
+    # Oh, and same for the __cmdstart=go thing.
+    # And __vte_osc7
+    PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; __tilde="~"; printf "\e]0;%s%s%s@%s: %s%s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"; history -a; __exit_line $__rc'
+
+    # Since we overwrite the magic of /etc/profile.d/vte.sh that's
+    # needed for gnome-terminal's $PWD detection, add it back here if
+    # necessary
+    if declare -f __vte_osc7 > /dev/null; then
+        PROMPT_COMMAND="$PROMPT_COMMAND; __vte_osc7"
+    fi
+
+    # __do_cmdstart needs to be the last thing in $PROMPT_COMMAND,
+    # otherwise we start the command timer too early
+    PROMPT_COMMAND="$PROMPT_COMMAND; __do_cmdstart=go"
+
+    # Show the currently running command in the terminal title:
+    # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+    # Note that this breaks the use of $_ in interactive shell sessions,
+    # so get into the habit of using M-.
+    show_command_in_title_bar()
+    {
+        case "$BASH_COMMAND" in
+            *\033]0*|*\\e]0*)
+                # The command is trying to set the title bar as well;
+                # this is most likely the execution of $PROMPT_COMMAND.
+                # In any case nested escapes confuse the terminal, so don't
+                # output them.
+                ;;
+            *\033*|*\007*|*\\e*)
+                # actually just avoid escapes of any kind in the title
+                ;;
+            history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7)
+                # this is $PROMPT_COMMAND again, most likely
+                ;;
+            *)
+                __tilde="~"
+                printf "\e]0;%s%s - %s@%s: %s%s\a" "${TITLE_PREFIX}" "${BASH_COMMAND}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"
+                ;;
+        esac
+
+        # Do some work for bashrc.prompt
+        update_cmdstart
+    }
+    trap show_command_in_title_bar DEBUG
+else
+    # Do some work for bashrc.prompt
+    trap update_cmdstart DEBUG
 fi
 # show_command_in_title_bar should be the last thing in this file
 # vim: ft=sh
