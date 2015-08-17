@@ -71,7 +71,7 @@
 
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
-	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .git/info/exclude; done; }; f"
+	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> \"$(git rev-parse --git-dir)/info/exclude\"; done; }; f"
 
 # I like bzr whoami
 # NB: a better implementation is at https://github.com/petere/git-whoami/blob/master/git-whoami
