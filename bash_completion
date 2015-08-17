@@ -132,3 +132,12 @@ _muttfiledir()
 
     return 0
 }
+
+#
+# Source ~/.bash_completion.d/*.bash
+#
+if [[ -d ~/.bash_completion.d/ ]]; then
+    for i in ~/.bash_completion.d/*.bash; do
+        [[ -f $i ]] && . "$i"
+    done
+fi
