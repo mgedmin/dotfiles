@@ -9,13 +9,23 @@
 # differentiate your xterms manually
 
 xterm_title=0
-# If this is an xterm set the title to user@host:dir, except when we're running
-# under Midnight Commander, or when we're running screen in a Linux virtual
-# console
-if [ -z "$MC_SID" ] && [ -n "$DISPLAY" ] ; then
+# We can't set the title in two situations:
+# - we're running under Midnight Commande ($MC_SID is set)
+# - we're running in a Linux virtual console ($TERM is linux)
+# Except actually in the 2nd situation TERM might be 'screen' as well.  Oops.
+# We can't know the original $TERM.  We could look for $DISPLAY, but ssh also
+# clears that (unless you explicitly enable X11 forwarding).
+if [ -z "$MC_SID" ]; then
     case "$TERM" in
-    xterm*|rxvt*|screen*)
+    xterm*|rxvt*)
         xterm_title=1
+        ;;
+    screen*)
+        if [ -n "$DISPLAY" ]; then
+            xterm_title=1
+        elif [ -n "$SSH_AUTH_SOCK" ]; then
+            xterm_title=1
+        fi
         ;;
     esac
 fi
