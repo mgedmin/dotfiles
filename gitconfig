@@ -147,11 +147,10 @@
 	tool = gvimdiff
 [fetch]
 	recurseSubmodules = on-demand
-
+[gitreview]
+	username = mgedmin
 
 # allow ~/.gitconfig.local to override anything (works with git 1.7.10+, which
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
-[gitreview]
-	username = mgedmin
