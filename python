@@ -54,6 +54,13 @@ else:
         del rlcompleter
     del readline
 
+# reload() on Python 3
+try:
+    reload
+except NameError:
+    from importlib import reload
+
+# Cleanup
 del sys
 del os
 
