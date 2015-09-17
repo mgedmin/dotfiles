@@ -14,7 +14,7 @@ for arg; do
         # a symlink to the right place
         rm "$HOME/.$fn"
         cp "$fn" "$HOME/.$fn"
-    else:
+    else
         echo "$arg: not a symlink to ~/dotfiles" 1>&2
         rc=1
         continue
