@@ -75,7 +75,7 @@
 
 # I like bzr whoami
 # NB: a better implementation is at https://github.com/petere/git-whoami/blob/master/git-whoami
-    whoami = !git var GIT_COMMITTER_IDENT | sed 's/ [0-9]\\+ [-+0-9]\\+$//'
+	whoami = !git var GIT_COMMITTER_IDENT | sed 's/ [0-9]\\+ [-+0-9]\\+$//'
 
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
@@ -138,6 +138,13 @@
 # git archive-branch branchname renames it to applied/branchname
 	archive-branch = "!f() { b=\"$1\"; git branch -m \"$b\" \"applied/$b\"; }; f"
 	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
+
+# splitting the last commit interactively
+	split-commit = !git tag ORIG_MESSAGE && git reset HEAD^ && echo "Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE"
+	ci-split = !git ci -c ORIG_MESSAGE
+
+# ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
+	serve = daemon --reuseaddr --base-path=. --export-all --verbose
 
 # other
 
