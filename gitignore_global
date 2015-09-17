@@ -1,6 +1,6 @@
 .*.sw[a-p]
 .sw[a-p]
-.sv[a-z]
+.s[vuts][a-z]
 
 # These are droppings I tend to leave all over the place
 mg.cfg
