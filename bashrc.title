@@ -77,10 +77,14 @@ if [ $xterm_title -ne 0 ]; then
         # Do some work for bashrc.prompt
         update_cmdstart
     }
-    trap show_command_in_title_bar DEBUG
+    # show_command_in_title_bar ignores arguments, so by passing $_ we
+    # can avoid bash destroying the original $_ value
+    trap 'show_command_in_title_bar "$_"' DEBUG
 else
     # Do some work for bashrc.prompt
-    trap update_cmdstart DEBUG
+    trap 'update_cmdstart "$_"' DEBUG
 fi
-# show_command_in_title_bar should be the last thing in this file
+# the debug trap installation should be the last thing in this file: it'll
+# be executed for everything now, and you don't every .bashrc statement to
+# show up in your xterm title, do you?
 # vim: ft=sh
