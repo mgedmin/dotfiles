@@ -154,6 +154,8 @@
 	tool = gvimdiff
 [fetch]
 	recurseSubmodules = on-demand
+[rebase]
+	autosquash = true
 [gitreview]
 	username = mgedmin
 
