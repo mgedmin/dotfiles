@@ -1,0 +1,89 @@
+#
+# Valgrind suppression file for Python.  Because the default one
+# (/usr/lib/valgrind/python.supp on Debian) doesn't suppress anything.
+#
+# https://github.com/python/cpython/blob/master/Misc/README.valgrind explains
+# why:
+#
+#     Second, you must do one of the following:
+#
+#     * Uncomment Py_USING_MEMORY_DEBUGGER in Objects/obmalloc.c,
+#       then rebuild Python
+#     * Uncomment the lines in Misc/valgrind-python.supp that
+#       suppress the warnings for PyObject_Free and PyObject_Realloc
+#
+# This file contains the uncommented lines from python.supp that suppress the
+# warnings for PyObject_Free and PyObject_Realloc.
+#
+# NB: /usr/lib/valgrind/python.supp says
+#
+#     The file Misc/valgrind-python.supp is placed in an modified form into the
+#     directory /usr/lib/valgrind as python.supp. There's no need to to add it
+#     with the --suppressions option.
+#
+# Therefore run 'valgrind --suppressions $HOME/.python.supp' and be happy.
+#
+{
+   ADDRESS_IN_RANGE/Invalid read of size 4
+   Memcheck:Addr4
+   fun:PyObject_Free
+}
+
+{
+   ADDRESS_IN_RANGE/Invalid read of size 4
+   Memcheck:Value4
+   fun:PyObject_Free
+}
+
+{
+   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
+   Memcheck:Cond
+   fun:PyObject_Free
+}
+
+{
+   ADDRESS_IN_RANGE/Invalid read of size 4
+   Memcheck:Addr4
+   fun:PyObject_Realloc
+}
+
+{
+   ADDRESS_IN_RANGE/Invalid read of size 4
+   Memcheck:Value4
+   fun:PyObject_Realloc
+}
+
+{
+   ADDRESS_IN_RANGE/Conditional jump or move depends on uninitialised value
+   Memcheck:Cond
+   fun:PyObject_Realloc
+}
+
+
+#
+# Okay, the above was not enough OF COURSE, so here are my additions
+#
+
+{
+   Use of uninitialised value of size 8
+   Memcheck:Addr8
+   fun:PyObject_Free
+}
+
+{
+   Use of uninitialised value of size 8
+   Memcheck:Value8
+   fun:PyObject_Free
+}
+
+{
+   Use of uninitialised value of size 8
+   Memcheck:Addr8
+   fun:PyObject_Realloc
+}
+
+{
+   Use of uninitialised value of size 8
+   Memcheck:Value8
+   fun:PyObject_Realloc
+}
