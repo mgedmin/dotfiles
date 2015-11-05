@@ -62,6 +62,8 @@
 
 #
 # Okay, the above was not enough OF COURSE, so here are my additions
+# https://bugs.launchpad.net/ubuntu/+source/python-defaults/+bug/1512622
+# https://bugs.launchpad.net/ubuntu/+source/python3-defaults/+bug/1513364
 #
 
 {
