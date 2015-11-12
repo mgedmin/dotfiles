@@ -20,3 +20,6 @@ termcapinfo xterm|xterm-256color ti=\E7\E[?47l:te=\E[H\E[2J\E[?47l
 
 # supposedly fun
 nethack on
+
+# select panes with the mouse
+mousetrack on
