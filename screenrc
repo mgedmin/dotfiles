@@ -22,4 +22,5 @@ termcapinfo xterm|xterm-256color ti=\E7\E[?47l:te=\E[H\E[2J\E[?47l
 nethack on
 
 # select panes with the mouse
+# NB: screen in Ubuntu 12.04 LTS is too old to support this :(
 mousetrack on
