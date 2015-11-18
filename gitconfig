@@ -57,6 +57,7 @@
 	insteadof = zf:
 [url "git@github.com:mgedmin/"]
 	insteadof = my-github:
+	pushInsteadOf = https://gedmin.as/
 [url "git@github.com:ProgrammersOfVilnius/"]
 	insteadof = pov:
 [url "bzr::lp:"]
