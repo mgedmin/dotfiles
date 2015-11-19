@@ -31,3 +31,14 @@ for fn in [a-z]*; do
     fi
     ln -s dotfiles/$fn $HOME/.$fn
 done
+if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ]; then
+    # this looks like an interactive session, i.e. the user did
+    #   . ~/dotfiles/install.sh
+    # instead of
+    #   ~/dotfiles/install.sh
+    # so let's reload their .profile and .inputrc for convenience
+    echo "reloading .profile"
+    . ~/.profile
+    echo "reloading .inputrc"
+    bind -f ~/.inputrc
+fi
