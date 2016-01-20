@@ -108,6 +108,9 @@
 # show commits after the last release (but now that I have projects.gedmin.as I never use this)
 	unreleased = !git shortlog $(git describe --tags --abbrev=0)..
 
+# show diff since the last release
+	unreleased-diff = !git diff $(git describe --tags --abbrev=0)
+
 # show changelog since the last release
 	unreleased-changelog = !git diff $(git describe --tags --abbrev=0) -- CHANGES.rst
 
