@@ -2,3 +2,7 @@
 --python-kinds=-i
 --langmap=html:+.mako
 --exclude=.tox
+--exclude=*.pxd
+--exclude=*.pyx
+--exclude=*.min.js
+--exclude=build
