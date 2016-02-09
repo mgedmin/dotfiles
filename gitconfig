@@ -141,7 +141,15 @@
 
 # git archive-branch branchname renames it to applied/branchname
 	archive-branch = "!f() { b=\"$1\"; git branch -m \"$b\" \"applied/$b\"; }; f"
+
+# git branches lists all interesting branches
 	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
+
+# git list-merged-branches
+	list-merged-branches = "!f() { git branch --merged master | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
+
+# git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
+	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
 
 # splitting the last commit interactively
 	split-commit = !git tag ORIG_MESSAGE && git reset HEAD^ && echo "Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE"
