@@ -20,6 +20,9 @@ $(HOME)/Mail/Home/IN.reportlab
 ##$(HOME)/Mail/Home/IN.SPAM
 $(HOME)/Mail/Home/IN.thinkpad
 $(HOME)/Mail/Home/IN.tip
+$(HOME)/Mail/Home/IN.twitter
+$(HOME)/Mail/Home/IN.ubuntu
+$(HOME)/Mail/Home/IN.ubuntu-devel
 $(HOME)/Mail/Home/IN.ubuntu-gnome
 ##$(HOME)/Mail/Home/IN.virus
 $(HOME)/Mail/Home/IN.xorg
