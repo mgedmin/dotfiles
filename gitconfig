@@ -166,6 +166,7 @@
 	tool = gvimdiff
 [fetch]
 	recurseSubmodules = on-demand
+	prune = true
 [rebase]
 	autosquash = true
 [gitreview]
