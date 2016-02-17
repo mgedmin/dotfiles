@@ -24,7 +24,6 @@ for fn in [a-z]*; do
             echo "identical to /etc/skel/ version, replacing $HOME/.$fn with symlink"
             rm $HOME/.$fn
         else
-            sha1sum=
             echo "contents differ, skipping: $HOME/.$fn $HOME/dotfiles/$fn" 1>&2
             continue
         fi
