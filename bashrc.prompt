@@ -25,11 +25,11 @@ __virtualenv_name() {
 if ! declare -f __git_ps1 > /dev/null; then
     if [ -e /usr/lib/git-core/git-sh-prompt ]; then
         . /usr/lib/git-core/git-sh-prompt
-    elif [ -e /etc/bash_completion.d/git ]; then
-        . /etc/bash_completion.d/git
     elif [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
         # CentOS
         . /usr/share/git-core/contrib/completion/git-prompt.sh
+    elif [ -e /etc/bash_completion.d/git ]; then
+        . /etc/bash_completion.d/git
     fi
     # otherwise let's hope 
 fi
