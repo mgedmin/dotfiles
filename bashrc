@@ -44,7 +44,11 @@ if [ -n "$PS1" ]; then
     [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
     # Enable programmable completion features
-    [ -f /etc/bash_completion ] && ! shopt -oq posix && . /etc/bash_completion
+    if [ -f ~/.bash_completion.sh ] && ! shopt -oq posix; then
+        . ~/.bash_completion.sh
+    else
+        [ -f /etc/bash_completion ] && ! shopt -oq posix && . /etc/bash_completion
+    fi
 
     # Bash prompt (should come after bash_completion)
     [ -f ~/.bashrc.prompt ] && . ~/.bashrc.prompt
