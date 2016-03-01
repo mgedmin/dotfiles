@@ -3,7 +3,12 @@
 # for examples
 
 # Load system-wide bashrc
-[ -f /etc/bashrc ] && . /etc/bashrc
+if [ -f /etc/bashrc ]; then
+    # don't let it set PS1 for non-interactive sessions
+    saved_PS1="$PS1"
+    . /etc/bashrc
+    PS1="$saved_PS1"
+fi
 
 # Add directories to $PATH if they're not there already
 [ -f ~/.bashrc.path ] && . ~/.bashrc.path
