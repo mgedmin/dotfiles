@@ -208,4 +208,7 @@ restart_required='$(test -f /var/run/reboot-required && echo "!")'
 no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
 PS1="${cr}${chroot}${cyan}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
+# tell virtualenv not to overwrite PS1, my prompt already includes virtualenv name
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # vim: ft=sh
