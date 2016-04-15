@@ -11,8 +11,8 @@ image/*; eog '%s'; test=test -n "$DISPLAY" && test -x /usr/bin/eog
 image/*; gqview %s; test=test -n "$DISPLAY" && test -x /usr/bin/gqview
 
 # HTML
-text/html; /usr/bin/links '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
-##text/html; /usr/bin/links -dump '%s'; copiousoutput; description=HTML Text; nametemplate=%s.html
+text/html; /usr/bin/links -html-assume-codepage %{charset} '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
+# maybe also consider -html-hard-assume 1
 
 # from http://wiki.mutt.org/?MuttFaq/Charset
 text/html; /usr/bin/w3m -dump -T text/html -I %{charset}; copiousoutput; description=HTML Text
