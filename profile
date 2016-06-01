@@ -32,6 +32,9 @@ export VISUAL=vim
 # do 'pip wheel $name' to create a wheel in the cache so that subsequent
 # 'pip install $name' will be faster
 
+# my custom Go stuff
+export GOPATH=~/gocode/
+
 # offlineimap on my laptop puts mail here
 test -d $HOME/Mail/Home/INBOX/ && export MAIL=$HOME/Mail/Home/INBOX/
 
