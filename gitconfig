@@ -151,6 +151,9 @@
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
 
+# git update pulls latest stuff from upstream and cleans merged branches
+	update = !git checkout master && git pull --ff-only && git clean-merged-branches
+
 # splitting the last commit interactively
 	split-commit = !git tag ORIG_MESSAGE && git reset HEAD^ && echo "Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE"
 	ci-split = !git ci -c ORIG_MESSAGE
