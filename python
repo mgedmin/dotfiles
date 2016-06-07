@@ -58,7 +58,12 @@ else:
 try:
     reload
 except NameError:
-    from importlib import reload
+    try:
+        # Python 3.4
+        from importlib import reload
+    except ImportError:
+        # Python 3.3
+        from imp import reload
 
 # Cleanup
 del sys
