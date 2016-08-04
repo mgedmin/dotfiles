@@ -2,6 +2,7 @@
 #
 priority = {'IN.personal': -10,
             'INBOX': -10,
+            'IN.root': -9,
             'postponed': -7,
             'mbox': -1,
             'sent-mail': -1,
