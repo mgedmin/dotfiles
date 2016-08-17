@@ -152,6 +152,7 @@
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
 
 # git update pulls latest stuff from upstream and cleans merged branches
+	up = !git update
 	update = !git checkout master && git pull --ff-only && git clean-merged-branches
 
 # splitting the last commit interactively
@@ -161,12 +162,16 @@
 # ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
 	serve = daemon --reuseaddr --base-path=. --export-all --verbose
 
+# testing merges
+	preview-merge = "!f() { b=origin/$1; git log --oneline master..$b && git merge --no-commit --no-ff $b; }; f"
+
 # other
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
 [merge]
 	tool = gvimdiff
+	conflictStyle = diff3
 [fetch]
 	recurseSubmodules = on-demand
 	prune = true
