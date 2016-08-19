@@ -164,6 +164,8 @@
 
 # testing merges
 	preview-merge = "!f() { b=origin/$1; git log --oneline master..$b && git merge --no-commit --no-ff $b; }; f"
+	branch-changes = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git diff $m^...$m^2 \"$@\"; }; f"
+	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
 
 # other
 
