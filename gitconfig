@@ -145,15 +145,19 @@
 # git branches lists all interesting branches
 	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
 
+# git master-branch [name] -- get or set the name of the default branch (usually 'master')
+# used by other aliases such as 'git list-merged-branches' or 'git up'
+	master-branch = "!f() { git config alias.master-branch.name \"$@\" || echo master; }; f"
+
 # git list-merged-branches
-	list-merged-branches = "!f() { git branch --merged master | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
+	list-merged-branches = "!f() { git branch --merged $(git master-branch) | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
 
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
 
 # git update pulls latest stuff from upstream and cleans merged branches
 	up = !git update
-	update = !git checkout master && git pull --ff-only && git clean-merged-branches
+	update = !git checkout $(git master-branch) && git pull --ff-only && git clean-merged-branches
 
 # splitting the last commit interactively
 	split-commit = !git tag ORIG_MESSAGE && git reset HEAD^ && echo "Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE"
