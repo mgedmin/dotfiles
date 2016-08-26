@@ -139,8 +139,8 @@
 # git commit -C ORIG_HEAD.
 	uncommit = reset HEAD^
 
-# git archive-branch branchname renames it to applied/branchname
-	archive-branch = "!f() { b=\"$1\"; git branch -m \"$b\" \"applied/$b\"; }; f"
+# git archive-branch branchname renames it to archive/branchname
+	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
 
 # git branches lists all interesting branches
 	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
