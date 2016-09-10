@@ -36,12 +36,12 @@ export VISUAL=vim
 export GOPATH=~/gocode/
 
 # offlineimap on my laptop puts mail here
-test -d $HOME/Mail/Home/INBOX/ && export MAIL=$HOME/Mail/Home/INBOX/
+test -d "$HOME/Mail/Home/INBOX/" && export MAIL="$HOME/Mail/Home/INBOX/"
 
 # ~/bin is added to PATH in ~/.bashrc.path, but GUI sessions don't parse
 # .bashrc.  Ubuntu's X sessions, however, do parse ~/.profile, so if I
 # want to launch apps using Alt-F2, I need to add ~/bin to $PATH here
-PATH="$HOME/bin:$HOME/.venv/bin:$HOME/.local/bin:$HOME/gopath/bin:$PATH"
+[ -f "$HOME/.bashrc.path" ] && . "$HOME/.bashrc.path"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

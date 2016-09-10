@@ -1,4 +1,5 @@
 # Make sure my $PATH has everything I need
+# Note: this file is sourced from ~/.profile so it must not use any bashisms
 
 # Add directories to $PATH if they're not there already
 
@@ -24,7 +25,7 @@ _addpath /usr/games
 _addpath_if_exists /usr/lib/ccache
 _addpath_if_exists "$HOME"/android/tools
 _addpath_if_exists "$HOME"/android/platform-tools
-_addpath_if_exists "$HOME"/gopath/bin
+_addpath_if_exists "$HOME"/gocode/bin
 _addpath "$HOME"/.local/bin
 _addpath "$HOME"/.venv/bin
 _addpath "$HOME"/bin/local
