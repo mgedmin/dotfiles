@@ -39,7 +39,7 @@ for fn in [a-z]*; do
         continue # already a symlink to the right place
     fi
     if [ -f "$dotfile" ]; then
-        if cmp "$dotfile" "$HOME/$targets" > /dev/null; then
+        if cmp "$dotfile" "$HOME/$target" > /dev/null; then
             echo "contents identical, replacing $dotfile with symlink"
             rm $dotfile
         elif [ -f "$skeleton" ] && cmp "$dotfile" "$skeleton" > /dev/null; then
@@ -51,8 +51,9 @@ for fn in [a-z]*; do
             echo "contents differ, skipping: $dotfile $HOME/$target" 1>&2
             continue
         fi
+    else
+        info "$dotfile -> $target"
     fi
-    info "$dotfile -> $target"
     ln -s $target $dotfile
 done
 if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ]; then
