@@ -13,7 +13,7 @@ _addpath() {
     esac
 }
 _addpath_if_exists() {
-    test -d $1 && _addpath $1
+    test -d "$1" && _addpath "$1"
 }
 
 _addpath /sbin
@@ -22,12 +22,13 @@ _addpath /usr/local/bin
 _addpath /usr/local/sbin
 _addpath /usr/games
 _addpath_if_exists /usr/lib/ccache
-_addpath_if_exists $HOME/android/tools
-_addpath_if_exists $HOME/android/platform-tools
-_addpath $HOME/.local/bin
-_addpath $HOME/.venv/bin
-_addpath $HOME/bin/local
-_addpath $HOME/bin # this ought to be last so ~/bin is first in path
+_addpath_if_exists "$HOME"/android/tools
+_addpath_if_exists "$HOME"/android/platform-tools
+_addpath_if_exists "$HOME"/gopath/bin
+_addpath "$HOME"/.local/bin
+_addpath "$HOME"/.venv/bin
+_addpath "$HOME"/bin/local
+_addpath "$HOME"/bin # this ought to be last so ~/bin is first in path
 
 export PATH
 
