@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 # assumes this directory is ~/dotfiles
-cd ~/dotfiles/
+pushd ~/dotfiles/ > /dev/null
 for fn in [a-z]*; do
     case "$fn" in
         *.sh)
@@ -41,3 +41,4 @@ if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ]; then
     echo "reloading .inputrc"
     bind -f ~/.inputrc
 fi
+popd > /dev/null
