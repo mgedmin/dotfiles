@@ -27,7 +27,7 @@ for fn in [a-z]*; do
         *.local.$HOSTNAME|mailcheckrc.$HOSTNAME)
             dotfile=$HOME/.${fn%.$HOSTNAME}
             ;;
-        *.sh|*.local.*|mailcheckrc.*)
+        *.sh|*.local.*|mailcheckrc.*|core|core.*)
             debug "skipping $fn"
             continue # ignore
             ;;
