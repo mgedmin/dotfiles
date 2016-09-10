@@ -1,0 +1,5 @@
+# this file is ignored on ubuntu 12.04 because git is too old :(
+[user]
+	email = marius@pov.lt
+[alias "all"]
+	dirs = /etc /root /usr/local/bin /usr/local/sbin /var/www/*
