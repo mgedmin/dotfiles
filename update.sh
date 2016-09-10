@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # assumes this directory is ~/dotfiles
 cd ~/dotfiles/
 git pull -q -r
