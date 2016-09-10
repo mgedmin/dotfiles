@@ -1,5 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 # assumes this directory is ~/dotfiles
+
+local=0
+while getopts l OPT; do
+    case "$OPT" in
+        l)
+            local=1
+            ;;
+        *)
+            printf "%s: unknown option %s\n" "$0" "$OPT" 1>&2
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
 cd ~/dotfiles/
 rc=0
 for arg; do
@@ -10,17 +25,20 @@ for arg; do
         rc=1
         continue
     fi
-    if [ -L "$HOME/.$fn" ] && [ "`readlink $HOME/.$fn`" = "dotfiles/$fn" ]; then
+    dotfile=$HOME/.$fn
+    [ $local -ne 0 ] && fn=$fn.$HOSTNAME
+    target=dotfiles/$fn
+    if [ -L "$dotfile" ] && [ "$(readlink $dotfile)" = "$target" ]; then
         continue # already a symlink to the right place
     fi
-    if [ -e "$HOME/dotfiles/$fn" ]; then
-        echo "$arg: ~/dotfiles/$fn already exists" 1>&2
+    if [ -e "$HOME/$target" ]; then
+        echo "$arg: ~/$target already exists" 1>&2
         rc=1
         continue
     fi
-    mv -i $HOME/.$fn $HOME/dotfiles/$fn
-    ln -s dotfiles/$fn $HOME/.$fn
-    test -d .svn && svn add $HOME/dotfiles/$fn
+    mv -i $dotfile $HOME/$target
+    ln -s $target $dotfile
+    test -d .svn && svn add $HOME/$target
     (cd $HOME/dotfiles && test -d .git && git add $fn)
 done
 exit $rc

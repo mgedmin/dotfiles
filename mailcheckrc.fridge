@@ -1,0 +1,17 @@
+$(HOME)/Mail/INBOX
+$(HOME)/Mail/IN.todo
+$(HOME)/Mail/IN.root
+$(HOME)/Mail/IN.pov
+$(HOME)/Mail/IN.info
+$(HOME)/Mail/IN.other
+$(HOME)/Mail/IN.ubuntu-devel
+##$(HOME)/Mail/IN.activity
+##$(HOME)/Mail/IN.eversheds
+##$(HOME)/Mail/IN.ivija
+##$(HOME)/Mail/IN.ivija-errors
+##$(HOME)/Mail/IN.labtarna
+##$(HOME)/Mail/IN.labtarna-errors
+##$(HOME)/Mail/IN.nousea
+##$(HOME)/Mail/IN.nousea-errors
+##$(HOME)/Mail/IN.tradeideas
+##$(HOME)/Mail/IN.yplan

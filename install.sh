@@ -24,10 +24,10 @@ for fn in [a-z]*; do
     target=dotfiles/$fn
     skeleton=/etc/skel/.$fn
     case "$fn" in
-        *.local.$HOSTNAME)
+        *.local.$HOSTNAME|mailcheckrc.$HOSTNAME)
             dotfile=$HOME/.${fn%.$HOSTNAME}
             ;;
-        *.sh|*.local.*)
+        *.sh|*.local.*|mailcheckrc.*)
             debug "skipping $fn"
             continue # ignore
             ;;
