@@ -1,0 +1,5 @@
+#[user]
+#	email = marius@pov.lt
+
+[alias "all"]
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/sigs ~/blog /root /etc
