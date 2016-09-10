@@ -9,9 +9,14 @@
 # so /etc/profile.d is not executed for each tab.  And while the X session
 # does source the profile, it doesn't do that in a terminal, so the "are
 # we running under VTE" check in vte.sh fails and it bails early.
+#
+# This script is shipped by libvte<version>-common and it might be called
+# e.g. /etc/profile.d/vte-2.91.sh.  For that specific vte version everything
+# Just Works if I don't explicitly source it, so I'm baffled but happy to
+# ignore.
 
 if ! declare -f __vte_osc7 > /dev/null; then
-    if [ "${VTE_VERSION:-0}" -ge 3405 ]; then
+    if [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte.sh ]; then
         . /etc/profile.d/vte.sh
     else
         __vte_osc7() { :; }
