@@ -1,0 +1,26 @@
+export MSYS=winsymlinks:nativestrict
+CDPATH=/c/buildslave/workspace
+export JAVA_HOME="c:/program files/java/jre1.8.0_101"
+export PATH=$PATH:/c/python27:/c/python27/scripts
+export PATH=$PATH:/c/graphviz2.36/bin
+export PATH=$PATH:/c/pypy-2.6.0-win32
+export PATH=$PATH:/c/pypy3-2.4.0-win32
+alias cdworkspace='cd /c/buildslave/workspace'
+alias python26=/c/python26/python.exe
+alias python27=/c/python27/python.exe
+alias python32=/c/python32/python.exe
+alias python33=/c/python33/python.exe
+alias python34=/c/python34/python.exe
+alias python35=/c/python35/python.exe
+alias python26-64=/c/python26-64/python.exe
+alias python27-64=/c/python27-64/python.exe
+alias python32-64=/c/python32-64/python.exe
+alias python33-64=/c/python33-64/python.exe
+alias python34-64=/c/python34-64/python.exe
+alias python35-64=/c/python35-64/python.exe
+alias pypy=/c/pypy-2.6.0-win32/pypy.exe
+alias pypy3=/c/pypy3-2.4.0-win32/pypy.exe
+
+if [ -n "$PS1" -a -e ~/.motd.local -a "$SHLVL" -eq 1 ]; then
+  cat ~/.motd.local
+fi

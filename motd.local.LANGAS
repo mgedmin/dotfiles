@@ -1,0 +1,2 @@
+Jenkins logs live in /c/buildslave/jenkins-slave.wrapper.log
+Job workspaces live in /c/buildslave/workspace/

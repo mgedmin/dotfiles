@@ -25,8 +25,17 @@ for arg; do
         rc=1
         continue
     fi
+    case "$s" in
+        *.local)
+	    printf "%s: forcing -l (local)\n" "$arg"
+	    force_local=1
+	    ;;
+	*)
+	    force_local=0
+	    ;;
+    esac
     dotfile=$HOME/.$fn
-    [ $local -ne 0 ] && fn=$fn.$HOSTNAME
+    [ $local -ne 0 -o $force_local -ne 0 ] && fn=$fn.$HOSTNAME
     target=dotfiles/$fn
     if [ -L "$dotfile" ] && [ "$(readlink $dotfile)" = "$target" ]; then
         continue # already a symlink to the right place

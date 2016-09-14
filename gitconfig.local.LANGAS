@@ -1,0 +1,3 @@
+[url "https://github.com/mgedmin/"]
+	pushInsteadOf = git@github.com:mgedmin/
+	pushInsteadOf = https://github.com/mgedmin/
