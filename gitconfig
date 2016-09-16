@@ -115,10 +115,11 @@
 	unreleased-changelog = !git diff $(git describe --tags --abbrev=0) -- CHANGES.rst
 
 # managing many git checkouts (these are great!)
-# configure with git config alias.all.dirs '/foo /bar ~/baz'
+# configure with git config alias.all.dirs '/foo /bar ~/baz*'
 	all = "!f() { unset GIT_WORK_TREE; c='\\033[0;35m'; r='\\033[0m'; rc=0; for d in $(eval \"echo $(git config alias.all.dirs)\"); do if [ -e $d/.git ]; then printf \"$c+ $d$r\\n\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
-	whatsmodified = !git all st -su
-	wm = !git all st -su
+	whatsmodified = !git all short-status-with-branch-info
+	wm = !git all short-status-with-branch-info
+	short-status-with-branch-info = "!git -c color.status=always status -bsu | grep -v '## [^ ]*$'"
 
 # fetch pull requests from github so you can 'git checkout pull/123' and test it locally
 	fetch-pull-requests = fetch origin '+refs/pull/*/head:refs/remotes/origin/pull/*'
