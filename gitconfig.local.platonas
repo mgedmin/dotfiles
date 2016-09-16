@@ -8,9 +8,10 @@
 		~/.ssh ~/.local/share/applications \
 		~/sigs ~/blog ~/www \
 		~/Private/gnupg ~/Private/pwsafe \
-		~/projects/* \
 		~/src/* \
 		/root /etc
 # huh, what about ~/Mail/Home or ~/books?
 # also maybe I should git-ify ~/Private/ssh and ~/Private/pypi
-# also maybe ~/src/*?
+# hmm ~/src/* vs ~/projects/*?
+# I can 'git all push' ~/projects but not most things in ~/src
+# ~/.vim/bundle/* is also mixed between things I can and things I can't
