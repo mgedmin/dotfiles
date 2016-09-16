@@ -9,6 +9,7 @@
 		~/sigs ~/blog ~/www \
 		~/Private/gnupg ~/Private/pwsafe \
 		~/src/* \
+		~/src/zopefoundation/* \
 		/root /etc
 # huh, what about ~/Mail/Home or ~/books?
 # also maybe I should git-ify ~/Private/ssh and ~/Private/pypi
