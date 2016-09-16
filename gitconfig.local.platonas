@@ -2,4 +2,15 @@
 #	email = marius@pov.lt
 
 [alias "all"]
-	dirs = ~/bin ~/bin/local ~/dotfiles ~/sigs ~/blog /root /etc
+	dirs = ~/bin ~/bin/local ~/dotfiles \
+		~/.vim \
+		~/.vim/bundle/* \
+		~/.ssh ~/.local/share/applications \
+		~/sigs ~/blog ~/www \
+		~/Private/gnupg ~/Private/pwsafe \
+		~/projects/* \
+		~/src/* \
+		/root /etc
+# huh, what about ~/Mail/Home or ~/books?
+# also maybe I should git-ify ~/Private/ssh and ~/Private/pypi
+# also maybe ~/src/*?
