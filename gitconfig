@@ -175,6 +175,9 @@
 
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
+[diff]
+# this needs git 2.9 which I don't have yet :/
+	compactionHeuristic = true
 [merge]
 	tool = gvimdiff
 	conflictStyle = diff3
