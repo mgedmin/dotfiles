@@ -116,9 +116,9 @@
 
 # managing many git checkouts (these are great!)
 # configure with git config alias.all.dirs '/foo /bar ~/baz*'
-	all = "!f() { unset GIT_WORK_TREE; c='\\033[0;35m'; r='\\033[0m'; rc=0; for d in $(eval \"echo $(git config alias.all.dirs)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
-	whatsmodified = !git all short-status-with-branch-info
-	wm = !git all short-status-with-branch-info
+	all = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c='\\033[0;35m'; r='\\033[0m'; rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
+	whatsmodified = !git wm
+	wm = "!f() { git all \"$@\" short-status-with-branch-info; }; f"
 	short-status-with-branch-info = "!git -c color.status=always status -bsu --ignore-submodules=none | grep -v '## [^ ]*$'"
 
 # fetch pull requests from github so you can 'git checkout pull/123' and test it locally

@@ -2,15 +2,21 @@
 #	email = marius@pov.lt
 
 [alias "all"]
-	dirs = ~/bin ~/bin/local ~/dotfiles \
-		~/.vim \
-		~/.vim/bundle/* \
-		~/.ssh ~/.local/share/applications \
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh \
+		~/.local/share/applications \
 		~/sigs ~/blog ~/www \
-		~/Private/gnupg ~/Private/pwsafe \
-		~/src/* \
-		~/src/zopefoundation/* \
-		/root /etc
+		~/Private/gnupg ~/Private/pwsafe
+	vim = ~/.vim/bundle/*
+	src = ~/src/*
+	zope = ~/src/zopefoundation/*
+	root = /root /etc
+	all = \
+		$(eval "echo $(git config alias.all.dirs)") \
+		$(eval "echo $(git config alias.all.vim)") \
+		$(eval "echo $(git config alias.all.src)") \
+		$(eval "echo $(git config alias.all.zope)") \
+		$(eval "echo $(git config alias.all.root)")
+
 # huh, what about ~/Mail/Home or ~/books?
 # also maybe I should git-ify ~/Private/ssh and ~/Private/pypi
 # hmm ~/src/* vs ~/projects/*?
