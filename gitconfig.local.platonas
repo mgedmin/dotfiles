@@ -8,6 +8,7 @@
 		~/Private/gnupg ~/Private/pwsafe
 	vim = ~/.vim/bundle/*
 	src = ~/src/*
+	projects = ~/projects/*
 	zope = ~/src/zopefoundation/*
 	root = /root /etc
 	all = \
