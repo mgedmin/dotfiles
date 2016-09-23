@@ -128,13 +128,12 @@
 # NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash
 
-# I'm not sure about what 'git amend' should do.  Currently you have to git add
-# bits in advance OR use git amend -a OR -p OR maybe FILENAME.  It reuses the
-# existing commit message.  Is it a footgun?  Dunno.  I generally use git ci
-# --amend -a/-p, but then I found that git commit --amend -a -C HEAD was a bit
-# too much typing then decided to leave off the -a for some reason (to make the
-# footgun smaller?).  You can see I'm undecided :)
-	amend = commit --amend -C HEAD
+# git amend [-a|-p|FILE] to just add something to the last commit
+# (lately I've mostly been using git add [-p]; git show --staged; git amend)
+	amend = commit --amend --no-edit
+
+# git reword -- edit the last commit message
+	reword = commit --amend --only
 
 # 'bzr uncommit' wasn't bad, really, sometimes.  You can undo the uncommit with
 # git commit -C ORIG_HEAD.
