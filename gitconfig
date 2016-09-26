@@ -133,7 +133,7 @@
 	amend = commit --amend --no-edit
 
 # git reword -- edit the last commit message
-	reword = commit --amend --only
+	reword = commit --amend --only -v
 
 # 'bzr uncommit' wasn't bad, really, sometimes.  You can undo the uncommit with
 # git commit -C ORIG_HEAD.
