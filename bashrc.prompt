@@ -89,7 +89,10 @@ __hg_ps1()
 # because http://martin-ueding.de/computer_stuff/vcs_prompt/de.html is too long
 __bzr_ps1()
 {
-    if [ -x /usr/bin/bzr ] && [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
+    # Every 'bzr root' invocation that finds no bzr root spews tracebacks
+    # into into ~/.bzr.log, so we're doing this only if a dir has a .bzr
+    # (and this is wrong and buggy but meh)
+    if [ -d .bzr ] && [ -x /usr/bin/bzr ] && [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
         printf -- "$1" "$(bzr --no-plugins nick)"
     fi
 }
