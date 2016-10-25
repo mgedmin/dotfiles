@@ -104,34 +104,36 @@ complete -F _fab fab bin/fab pov-fab
 #
 # Bugfix for Mutt completion
 # https://bugs.launchpad.net/ubuntu/+source/bash-completion/+bug/1008380
+# this fixes mutt -f +x<tab>, but breaks mutt -f =x<tab>, which works with the
+# stock completion
 #
-if [ -f /usr/share/bash-completion/completions/mutt ]; then
-    . /usr/share/bash-completion/completions/mutt
-fi
-_muttfiledir()
-{
-    local cur=$1 folder muttrc spoolfile muttcmd=${words[0]}
-
-    muttrc=$(_muttrc)
-    if [[ $cur == [=+]* ]]; then
-        folder="$( $muttcmd -F "$muttrc" -Q folder 2>/dev/null | sed -e 's|^folder=\"\(.*\)\"$|\1|' )"
-        : folder:=~/Mail
-
-        # Match any file in $folder beginning with $cur
-        # (minus the leading '=' sign).
-        compopt -o filenames
-        COMPREPLY=( $( compgen -f -- "$folder/${cur:1}" ) )
-        COMPREPLY=( ${COMPREPLY[@]/#$folder\//${cur:0:1}} )
-        return 0
-    elif [[ $cur == !* ]]; then
-        spoolfile="$( $muttcmd -F "$muttrc" -Q spoolfile 2>/dev/null | \
-            sed -e 's|^spoolfile=\"\(.*\)\"$|\1|' )"
-        [[ ! -z $spoolfile ]] && eval cur="${cur/^!/$spoolfile}"
-    fi
-    _filedir
-
-    return 0
-}
+##if [ -f /usr/share/bash-completion/completions/mutt ]; then
+##    . /usr/share/bash-completion/completions/mutt
+##fi
+##_muttfiledir()
+##{
+##    local cur=$1 folder muttrc spoolfile muttcmd=${words[0]}
+##
+##    muttrc=$(_muttrc)
+##    if [[ $cur == [=+]* ]]; then
+##        folder="$( $muttcmd -F "$muttrc" -Q folder 2>/dev/null | sed -e 's|^folder=\"\(.*\)\"$|\1|' )"
+##        : folder:=~/Mail
+##
+##        # Match any file in $folder beginning with $cur
+##        # (minus the leading '=' sign).
+##        compopt -o filenames
+##        COMPREPLY=( $( compgen -f -- "$folder/${cur:1}" ) )
+##        COMPREPLY=( ${COMPREPLY[@]/#$folder\//${cur:0:1}} )
+##        return 0
+##    elif [[ $cur == !* ]]; then
+##        spoolfile="$( $muttcmd -F "$muttrc" -Q spoolfile 2>/dev/null | \
+##            sed -e 's|^spoolfile=\"\(.*\)\"$|\1|' )"
+##        [[ ! -z $spoolfile ]] && eval cur="${cur/^!/$spoolfile}"
+##    fi
+##    _filedir
+##
+##    return 0
+##}
 
 #
 # Source ~/.bash_completion.d/*.bash
