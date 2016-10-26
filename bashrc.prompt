@@ -201,6 +201,7 @@ case "$BASH_VERSION" in
 esac
 
 chroot='${debian_chroot:+($debian_chroot) }'
+jhbuild='${UNDER_JHBUILD:+(jhbuild) }'
 virtualenv='$(__virtualenv_name "(%s) ")'
 svn='$(__svn_ps1 " [svn:%s]")'
 git='$(__git_ps1 " [git:%s]")'
@@ -209,7 +210,7 @@ bzr='$(__bzr_ps1 " [bzr:%s]")'
 njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
 restart_required='$(test -f /var/run/reboot-required && echo "!")'
 no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
-PS1="${cr}${chroot}${cyan}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+PS1="${cr}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 
 # tell virtualenv not to overwrite PS1, my prompt already includes virtualenv name
 export VIRTUAL_ENV_DISABLE_PROMPT=1
