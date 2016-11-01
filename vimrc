@@ -43,7 +43,7 @@ else
   augroup END
   com! -range Quote <line1>,<line2> call s:quote()
   fun! s:quote()
-    let saved = getcurpos()
+    let saved = exists('*getcurpos') ? getcurpos() : getpos('.')
     let previous = getline(prevnonblank(line('.') - 1))
     let indent = matchstr(previous, '^\s*')
     if previous !~ '^\s*\([#|]\|\.\{3}\)'
