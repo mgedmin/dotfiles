@@ -16,7 +16,7 @@ maxsyncaccounts = 2
 maxconnections = 1
 
 [mbnames]
-enabled = yes
+enabled = no
 filename = ~/.mutt/muttrc.mailboxes
 header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
