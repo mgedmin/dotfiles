@@ -2,7 +2,7 @@
 #	email = marius@pov.lt
 
 [alias "all"]
-	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh \
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh ~/.mutt \
 		~/.local/share/applications \
 		~/sigs ~/blog ~/www \
 		~/Private/gnupg ~/Private/pwsafe
