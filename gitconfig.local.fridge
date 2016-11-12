@@ -2,4 +2,11 @@
 [user]
 	email = marius@pov.lt
 [alias "all"]
-	dirs = /etc /root /usr/local/bin /usr/local/sbin /var/www/*
+	dirs = ~/bin ~/dotfiles ~/.vim ~/.mutt ~/.gtimelog \
+		~/sigs ~/blog ~/www
+	vim = ~/.vim/bundle/*
+	root = /etc /root /usr/local/bin /usr/local/sbin /var/www/*
+	all = \
+		$(eval "echo $(git config alias.all.dirs)") \
+		$(eval "echo $(git config alias.all.vim)") \
+		$(eval "echo $(git config alias.all.root)") \
