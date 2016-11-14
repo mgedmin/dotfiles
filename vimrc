@@ -5,8 +5,8 @@
 if filereadable($HOME . "/.vim/vimrc")
   source $HOME/.vim/vimrc
 else
-  set nocp ai et sts=4 sw=4 bs=2
-  set ls=2 ch=2 sc ru
+  set nocp ai et sts=4 sw=4 bs=2 pt=<f11>
+  set ls=2 ch=2 sc ru is
   if v:version >= 704
     set fo+=j
   endif
