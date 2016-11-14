@@ -1,3 +1,7 @@
+# tell dovecot where my INBOX is
+export MAIL=$HOME/Maildir
+
+# disable git slowness
 GIT_PS1_SHOWDIRTYSTATE=
 GIT_PS1_SHOWSTASHSTATE=
 GIT_PS1_SHOWUNTRACKEDFILES=
