@@ -160,7 +160,7 @@
 	update = !git checkout $(git master-branch) && git pull --ff-only && git clean-merged-branches
 
 # splitting the last commit interactively
-	split-commit = !git tag ORIG_MESSAGE && git reset HEAD^ && echo "Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE"
+	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
 	ci-split = !git ci -c ORIG_MESSAGE
 
 # ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
