@@ -159,6 +159,13 @@
 	up = !git update
 	update = !git checkout $(git master-branch) && git pull --ff-only && git clean-merged-branches
 
+# git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
+# used by other aliases such as 'git sync'
+	sync-target = "!f() { git config alias.sync.target \"$@\" || echo mgedmin; }; f"
+
+# git sync synchronizes origin with some other remote
+	sync = !git fetch origin && git push $(git sync-target) origin/$(git master-branch):$(git master-branch)
+
 # splitting the last commit interactively
 	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
 	ci-split = !git ci -c ORIG_MESSAGE
