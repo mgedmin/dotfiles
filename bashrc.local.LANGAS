@@ -21,6 +21,9 @@ alias python35-64=/c/python35-64/python.exe
 alias pypy=/c/pypy-2.6.0-win32/pypy.exe
 alias pypy3=/c/pypy3-2.4.0-win32/pypy.exe
 
+export PIP_FIND_LINKS=https://debesis.gedmin.as/wheels/
+export PIP_ONLY_BINARY=lxml
+
 if [ -n "$PS1" -a -e ~/.motd.local -a "$SHLVL" -eq 1 ]; then
   cat ~/.motd.local
 fi
