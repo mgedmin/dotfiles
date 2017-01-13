@@ -69,6 +69,7 @@
 # I'm used to this
 	st = status
 	ci = commit -v
+	co = checkout
 
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
