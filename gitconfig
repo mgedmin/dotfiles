@@ -71,6 +71,9 @@
 	ci = commit -v
 	co = checkout
 
+# A safer git push --force
+	fpush = push --force-with-lease
+
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
 	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> \"$(git rev-parse --git-dir)/info/exclude\"; done; }; f"
@@ -106,7 +109,7 @@
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
 
-# show commits after the last release (but now that I have projects.gedmin.as I never use this)
+# show commits after the last release (but now that I have projects.gedmin.as I rarely use this)
 	unreleased = !git shortlog $(git describe --tags --abbrev=0)..
 
 # show diff since the last release
@@ -117,6 +120,7 @@
 
 # managing many git checkouts (these are great!)
 # configure with git config alias.all.dirs '/foo /bar ~/baz*'
+# extra sets configured with git config alias.all.FOO '...' and used with git all --FOO ...
 	all = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c='\\033[0;35m'; r='\\033[0m'; rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
 	whatsmodified = !git wm
 	wm = "!f() { git all \"$@\" short-status-with-branch-info; }; f"
@@ -140,17 +144,18 @@
 # git commit -C ORIG_HEAD.
 	uncommit = reset HEAD^
 
-# git archive-branch branchname renames it to archive/branchname
+# git archive-branch branchname renames it to archived/branchname
+# alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
 
-# git branches lists all interesting branches
+# git branches lists all interesting local branches
 	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
 
 # git master-branch [name] -- get or set the name of the default branch (usually 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
 	master-branch = "!f() { git config alias.master-branch.name \"$@\" || echo master; }; f"
 
-# git list-merged-branches
+# git list-merged-branches shows branches that have been merged to master
 	list-merged-branches = "!f() { git branch --merged $(git master-branch) | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
 
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
@@ -164,10 +169,10 @@
 # used by other aliases such as 'git sync'
 	sync-target = "!f() { git config alias.sync.target \"$@\" || echo mgedmin; }; f"
 
-# git sync synchronizes origin with some other remote
+# git sync synchronizes master from origin to some other remote
 	sync = !git fetch origin && git push $(git sync-target) origin/$(git master-branch):$(git master-branch)
 
-# splitting the last commit interactively
+# splitting the last commit interactively (cumbersome; I rarely use it)
 	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
 	ci-split = !git ci -c ORIG_MESSAGE
 
@@ -184,7 +189,7 @@
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
 [diff]
-# this needs git 2.9 which I don't have yet :/
+# this needs git 2.9
 	compactionHeuristic = true
 [merge]
 	tool = gvimdiff
