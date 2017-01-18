@@ -192,6 +192,8 @@
 [diff]
 # this needs git 2.9
 	compactionHeuristic = true
+# this needs git 2.12 and replaces the above
+	indentHeuristic = true
 [merge]
 	tool = gvimdiff
 	conflictStyle = diff3
