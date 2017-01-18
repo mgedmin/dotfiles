@@ -85,8 +85,9 @@
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
 # see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
+# NB: starting with git 2.5.0 I can use @{push} to support triangular workflows (thanks Seveas from #git for the tip!)
 	outgoing = log --oneline @{u}..
-	incoming = !git fetch && git log --oneline ..origin
+	incoming = !git fetch && git log --oneline ..@{u}
 
 # From https://git.wiki.kernel.org/index.php/Aliases
 # (I had to fix alias by adding "" so the # wouldn't truncate the command)
