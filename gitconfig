@@ -190,9 +190,9 @@
 [alias "all"]
 	dirs = /etc /root /usr/local/bin /usr/local/sbin
 [diff]
-# this needs git 2.9
+# this needs git 2.9, but goes away in git 2.12
 	compactionHeuristic = true
-# this needs git 2.12 and replaces the above
+# this needs git 2.11 and is said to be better than the above
 	indentHeuristic = true
 [merge]
 	tool = gvimdiff
