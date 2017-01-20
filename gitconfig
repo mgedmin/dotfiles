@@ -169,9 +169,13 @@
 # git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
 # used by other aliases such as 'git sync'
 	sync-target = "!f() { git config alias.sync.target \"$@\" || echo mgedmin; }; f"
+#
+# git sync-source [name] -- get or set the name of the sync master remote (default 'origin')
+# used by other aliases such as 'git sync'
+	sync-source = "!f() { git config alias.sync.source \"$@\" || echo origin; }; f"
 
 # git sync synchronizes master from origin to some other remote
-	sync = !git fetch origin && git push $(git sync-target) origin/$(git master-branch):$(git master-branch)
+	sync = !git fetch $(git sync-source) && git push $(git sync-target) $(git sync-source)/$(git master-branch):$(git master-branch)
 
 # splitting the last commit interactively (cumbersome; I rarely use it)
 	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
