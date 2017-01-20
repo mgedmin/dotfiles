@@ -149,8 +149,8 @@
 # alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
 
-# git branches lists all interesting local branches
-	branches = !git branch --color=always | grep -v -e applied/ -e archived/ -e abandoned/
+# git branches lists all interesting branches
+	branches = "!f() { git branch --color=always \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
 
 # git master-branch [name] -- get or set the name of the default branch (usually 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
