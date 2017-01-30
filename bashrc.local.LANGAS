@@ -25,6 +25,9 @@ alias python36-64=winpty\ /c/python36-64/python.exe
 alias pypy=winpty\ /c/pypy-2.6.0-win32/pypy.exe
 alias pypy3=winpty\ /c/pypy3-2.4.0-win32/pypy.exe
 
+# python doesn't understand msys paths
+export PYTHONSTARTUP=$USERPROFILE\\.python
+
 export PIP_FIND_LINKS=https://debesis.gedmin.as/wheels/
 export PIP_ONLY_BINARY=lxml
 
