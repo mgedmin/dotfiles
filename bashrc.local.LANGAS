@@ -14,12 +14,14 @@ alias python32=winpty\ /c/python32/python.exe
 alias python33=winpty\ /c/python33/python.exe
 alias python34=winpty\ /c/python34/python.exe
 alias python35=winpty\ /c/python35/python.exe
+alias python36=winpty\ /c/python36/python.exe
 alias python26-64=winpty\ /c/python26-64/python.exe
 alias python27-64=winpty\ /c/python27-64/python.exe
 alias python32-64=winpty\ /c/python32-64/python.exe
 alias python33-64=winpty\ /c/python33-64/python.exe
 alias python34-64=winpty\ /c/python34-64/python.exe
 alias python35-64=winpty\ /c/python35-64/python.exe
+alias python36-64=winpty\ /c/python36-64/python.exe
 alias pypy=winpty\ /c/pypy-2.6.0-win32/pypy.exe
 alias pypy3=winpty\ /c/pypy3-2.4.0-win32/pypy.exe
 
