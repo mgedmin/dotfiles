@@ -164,7 +164,10 @@
 
 # git update pulls latest stuff from upstream and cleans merged branches
 	up = !git update
-	update = !git checkout $(git master-branch) && git pull --ff-only && git clean-merged-branches
+	update = !git checkout-if-not-already-on $(git master-branch) && git pull --ff-only && git clean-merged-branches
+
+# git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
+	checkout-if-not-already-on = "!f() { branch=$1; if [ $(git symbolic-ref --short HEAD) != $branch ]; then git checkout $branch; fi; }; f"
 
 # git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
 # used by other aliases such as 'git sync'
