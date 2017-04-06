@@ -30,8 +30,17 @@ if ! declare -f __git_ps1 > /dev/null; then
         . /usr/share/git-core/contrib/completion/git-prompt.sh
     elif [ -e /etc/bash_completion.d/git ]; then
         . /etc/bash_completion.d/git
+    elif [ -e $PREFIX/usr/etc/bash_completion.d/git-completion.bash/data/data/com.termux/files/usr/etc/bash_completion.d/git-completion.bash ]; then
+        # Termux
+        . $PREFIX/usr/etc/bash_completion.d/git-completion.bash/data/data/com.termux/files/usr/etc/bash_completion.d/git-completion.bash
+    else
+        __git_ps1()
+        {
+            if [ -e .git ]; then
+                printf "(not supported)"
+            fi
+        }
     fi
-    # otherwise let's hope 
 fi
 
 turn_on_git_details() {
