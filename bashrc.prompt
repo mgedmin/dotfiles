@@ -37,7 +37,7 @@ if ! declare -f __git_ps1 > /dev/null; then
         __git_ps1()
         {
             if [ -e .git ]; then
-                printf "(not supported)"
+                printf -- "$1" "(not supported)"
             fi
         }
     fi
