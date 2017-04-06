@@ -21,7 +21,11 @@ export QUILT_PATCHES=debian/patches
 export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
 
 # my environment choices
-export LC_CTYPE=lt_LT.UTF-8
+if locale -a 2>/dev/null | grep -q lt_LT.utf8; then
+  export LC_CTYPE=lt_LT.UTF-8
+else
+  export LC_CTYPE=C.UTF-8
+fi
 export EDITOR=vim
 export VISUAL=vim
 
