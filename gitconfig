@@ -152,6 +152,9 @@
 # git branches lists all interesting branches
 	branches = "!f() { git branch --color=always \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
 
+# git rename-current-branch NAME renames the current branch
+	rename-current-branch = branch -m
+
 # git master-branch [name] -- get or set the name of the default branch (usually 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
 	master-branch = "!f() { git config alias.master-branch.name \"$@\" || echo master; }; f"
