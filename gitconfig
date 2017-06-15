@@ -134,6 +134,10 @@
 # NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash
 
+# show me the commit I'm rebasing
+# (the other v. useful command is git diff :{1,2}path/to/file-I'm-editing)
+	show-original-commit = !git show $(cat .git/rebase-apply/original-commit .git/rebase-merge/orig-head 2>/dev/null)
+
 # git amend [-a|-p|FILE] to just add something to the last commit
 # (lately I've mostly been using git add [-p]; git show --staged; git amend)
 	amend = commit --amend --no-edit
