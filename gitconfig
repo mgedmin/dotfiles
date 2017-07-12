@@ -107,6 +107,9 @@
 # creating new projects on fridge: git push-to-fridge [path/repo.git]
 	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge.pov.lt git init --bare $repo && git remote add origin fridge.pov.lt:$repo && git push -u origin HEAD; }; f"
 
+# creating new projects on plato: git push-to-plato [path/repo.git]
+	push-to-plato = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh plato git init --bare $repo && git remote add origin plato:$repo && git push -u origin HEAD; }; f"
+
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
 
