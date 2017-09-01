@@ -1,6 +1,6 @@
 export MSYS=winsymlinks:nativestrict
 CDPATH=/c/buildslave/workspace
-export JAVA_HOME="c:/program files/java/jre1.8.0_111"
+export JAVA_HOME="c:/program files/java/jre1.8.0_144"
 export PATH=$PATH:/c/python27:/c/python27/scripts
 export PATH=$PATH:/c/graphviz2.36/bin
 export PATH=$PATH:/c/pypy-2.6.0-win32
