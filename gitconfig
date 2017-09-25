@@ -177,7 +177,7 @@
 	update = !git checkout-if-not-already-on $(git master-branch) && git pull --ff-only && git clean-merged-branches
 
 # git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
-	checkout-if-not-already-on = "!f() { branch=$1; if [ $(git symbolic-ref --short HEAD) != $branch ]; then git checkout $branch; fi; }; f"
+	checkout-if-not-already-on = "!f() { branch=$1; if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" != $branch ]; then git checkout $branch; fi; }; f"
 
 # git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
 # used by other aliases such as 'git sync'
