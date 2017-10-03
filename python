@@ -12,7 +12,8 @@ import os
 import sys
 
 # Coloured prompt
-if os.getenv('TERM') in ('xterm', 'xterm-256color', 'screen', 'screen-256color', 'vt100', 'rxvt', 'Eterm', 'putty'):
+if os.getenv('TERM') in ('xterm', 'xterm-256color', 'putty', 'rxvt',
+                         'screen', 'screen-256color', 'Eterm', 'vt100'):
     try:
         import readline
     except ImportError:
@@ -33,25 +34,22 @@ else:
         readline.read_history_file(histfile)
     except IOError:
         pass
-    import atexit
+
     def write_history(readline=readline, histfile=histfile):
         try:
             readline.write_history_file(histfile)
         except IOError:
             # root, nfs-mounted home with root_squash -> permission denied
             pass
+
+    import atexit
     atexit.register(write_history)
     del histfile, atexit, write_history
+
     # Tab completion
-    try:
-        sys.path.append(os.path.join(os.getenv('HOME'), 'src', 'rlcompleter2'))
-        import rlcompleter2
-        rlcompleter2.setup()
-        del rlcompleter2
-    except ImportError:
-        import rlcompleter
-        readline.parse_and_bind("tab: complete")
-        del rlcompleter
+    import rlcompleter
+    readline.parse_and_bind("tab: complete")
+    del rlcompleter
     del readline
 
 # reload() on Python 3
@@ -63,7 +61,7 @@ except NameError:
         from importlib import reload
     except ImportError:
         # Python 3.3
-        from imp import reload
+        from imp import reload  # noqa
 
 # Cleanup
 del sys
