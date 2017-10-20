@@ -13,11 +13,15 @@
 # This script is shipped by libvte<version>-common and it might be called
 # e.g. /etc/profile.d/vte-2.91.sh.  For that specific vte version everything
 # Just Works if I don't explicitly source it, so I'm baffled but happy to
-# ignore.
+# ignore.  Well, was happy when I though it works, but then I looked at
+# https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/263637
+# and experimented and realised that nope, it does *not* work.
 
 if ! declare -f __vte_osc7 > /dev/null; then
     if [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte.sh ]; then
         . /etc/profile.d/vte.sh
+    elif [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte-2.91.sh ]; then
+        . /etc/profile.d/vte-2.91.sh
     else
         __vte_osc7() { :; }
     fi

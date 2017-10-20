@@ -38,7 +38,7 @@ if [ $xterm_title -ne 0 ]; then
     # And __vte_osc7
     PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; __tilde="~"; printf "\e]0;%s%s%s@%s: %s%s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"; history -a; __exit_line $__rc'
 
-    # Since we overwrite the magic of /etc/profile.d/vte.sh that's
+    # Since we overwrite the magic of /etc/profile.d/vte*.sh that's
     # needed for gnome-terminal's $PWD detection, add it back here if
     # necessary
     if declare -f __vte_osc7 > /dev/null; then
