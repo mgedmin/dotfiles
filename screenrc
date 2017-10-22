@@ -23,4 +23,5 @@ nethack on
 
 # select panes with the mouse
 # NB: screen in Ubuntu 12.04 LTS is too old to support this :(
-mousetrack on
+# I turned this off because then I can't scroll or copy/paste, which is annoying
+##mousetrack on
