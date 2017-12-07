@@ -22,12 +22,15 @@ export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
 
 # my environment choices
 if locale -a 2>/dev/null | grep -q lt_LT.utf8; then
-  export LC_CTYPE=lt_LT.UTF-8
+    export LC_CTYPE=lt_LT.UTF-8
 else
-  export LC_CTYPE=C.UTF-8
+    export LC_CTYPE=C.UTF-8
 fi
 export EDITOR=vim
 export VISUAL=vim
+
+# my terminals are black on white
+export DSTAT_OPTS="--bw"
 
 # my custom Python stuff
 # export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip -- not needed with pip 6
@@ -51,6 +54,6 @@ test -d "$HOME/Mail/Home/INBOX/" && export MAIL="$HOME/Mail/Home/INBOX/"
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        . "$HOME/.bashrc"
     fi
 fi
