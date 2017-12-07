@@ -56,12 +56,14 @@ if [ -n "$PS1" ]; then
     # GNOME Terminal support
     [ -f ~/.bashrc.vte ] && . ~/.bashrc.vte
 
-    # Set xterm title (should be the last thing in this file)
-    [ -f ~/.bashrc.title ] && . ~/.bashrc.title
-
 fi
 
 # Load local stuff, if any (do this last so it can override any of the above)
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
+fi
+
+# Set xterm title (should be the last thing in this file)
+if [ -n "$PS1" ] && [ -f ~/.bashrc.title ]; then
+    . ~/.bashrc.title
 fi
