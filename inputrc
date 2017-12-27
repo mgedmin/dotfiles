@@ -1,6 +1,12 @@
 # readline config file
 # in bash, use 'bind -f ~/.inputrc' to reload
 
+# add trailing slash when completing symlinks to directories
+set mark-symlinked-directories on
+
+# make completion in the middle of a word delete the rest
+set skip-completed-text on
+
 # make PgUp/PgDn search history for a given prefix
 # http://linuxart.com/log/archives/2005/10/13/search-history-in-bash/
 "\e[5~": history-search-backward
