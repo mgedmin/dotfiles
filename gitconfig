@@ -80,6 +80,10 @@
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
 	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> \"$(git rev-parse --git-dir)/info/exclude\"; done; }; f"
 
+# The incantation to list ignored files is terrible
+# (but maybe I should use git status --ignored?)
+	ignored = ls-files --others -i --exclude-standard
+
 # I like bzr whoami
 # NB: a better implementation is at https://github.com/petere/git-whoami/blob/master/git-whoami
 	whoami = !git var GIT_COMMITTER_IDENT | sed 's/ [0-9]\\+ [-+0-9]\\+$//'
