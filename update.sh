@@ -1,5 +1,7 @@
 #!/bin/bash
 # assumes this directory is ~/dotfiles
-cd ~/dotfiles/
+
+pushd ~/dotfiles/ > /dev/null || exit 1
 git pull -q -r
 . ./install.sh "$@"
+popd > /dev/null
