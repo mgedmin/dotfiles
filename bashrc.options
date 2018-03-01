@@ -5,12 +5,17 @@ set +H
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-if [ $BASH_VERSION '>' 4 ]; then
+# shellcheck disable=SC2071
+if [ "$BASH_VERSION" '>' 4 ]; then
     shopt -s globstar
 fi
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# Do not complete remote branch names in `git checkout`
+# shellcheck disable=SC2034
+GIT_COMPLETION_CHECKOUT_NO_GUESS=1
 
 # vim: ft=sh
