@@ -76,6 +76,10 @@
 # A safer git push --force
 	fpush = push --force-with-lease
 
+# Push a new branch
+	do-push-branch = push -u origin HEAD
+	push-branch = "!master=$(git master-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
+
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
 	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> \"$(git rev-parse --git-dir)/info/exclude\"; done; }; f"
