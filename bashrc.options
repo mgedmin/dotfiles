@@ -14,8 +14,4 @@ fi
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Do not complete remote branch names in `git checkout`
-# shellcheck disable=SC2034
-GIT_COMPLETION_CHECKOUT_NO_GUESS=1
-
 # vim: ft=sh
