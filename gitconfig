@@ -52,6 +52,8 @@
 	insteadof = gist:
 	pushInsteadOf = https://gist.github.com/
 	pushInsteadOf = git://gist.github.com/
+[url "git@gitlab.com:"]
+	pushInsteadOf = https://gitlab.com/
 # I don't really use these
 [url "git://github.com/"]
 	insteadof = github-ro:
