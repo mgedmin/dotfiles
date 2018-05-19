@@ -238,3 +238,5 @@
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
+[url "ssh://git@git.vaultit.org:23/"]
+	insteadOf = https://git.vaultit.org/
