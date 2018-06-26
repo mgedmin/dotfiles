@@ -12,7 +12,7 @@ To start using on a new machine::
 
 To pull in new updates::
 
-    ~/dotfiles/update.sh
+    . dotfiles/update.sh
 
 To add a new dotfile to version control::
 
