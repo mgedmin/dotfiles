@@ -125,14 +125,17 @@
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
 
+# show tag name of the last release tag on current branch
+	last-release = describe --tags --abbrev=0
+
 # show commits after the last release (but now that I have projects.gedmin.as I rarely use this)
-	unreleased = !git shortlog $(git describe --tags --abbrev=0)..
+	unreleased = !git shortlog $(git last-release)..
 
 # show diff since the last release
-	unreleased-diff = !git diff $(git describe --tags --abbrev=0)
+	unreleased-diff = !git diff $(git last-release)
 
 # show changelog since the last release
-	unreleased-changelog = !git diff $(git describe --tags --abbrev=0) -- CHANGES.rst
+	unreleased-changelog = !git diff $(git last-release) -- CHANGES.rst
 
 # managing many git checkouts (these are great!)
 # configure with git config alias.all.dirs '/foo /bar ~/baz*'
@@ -143,7 +146,14 @@
 	short-status-with-branch-info = "!f() { o=$(git -c color.status=always status -bsu --ignore-submodules=none \"$@\"); rc=$?; printf \"%s\" \"$o\" | grep -v '## [^ ]*$'; exit $rc; }; f"
 
 # fetch pull requests from github so you can 'git checkout pull/123' and test it locally
+# you can pass a number to fetch just one
 	fetch-pull-requests = "!f() { a=${1:-*}; git fetch origin \"+refs/pull/$a/head:refs/remotes/origin/pull/$a\"; }; f"
+
+# fetch and check out one pull request
+	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout pull/$a; }; f"
+
+# clean pull request branches
+	clean-pull-requests = "!f() { git for-each-ref \"refs/heads/pull/*\" --format \"%(refname:short)\" | xargs -r git branch -D; }; f"
 
 # use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
 # NB: --autosquash doesn't work without -i :/
