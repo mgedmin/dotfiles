@@ -18,6 +18,9 @@ else
   " make ^W/^U undoable separately, see :h ins-special-special
   inoremap <C-W> <C-G>u<C-W>
   inoremap <C-U> <C-G>u<C-U>
+  " <C-Del> is so convenient
+  inoremap <C-Del> <C-O>dw
+  inoremap <C-Backspace> <C-O>db
   " editing ~/.vimrc
   map ,e :e ~/.vimrc<CR>
   map ,s :source ~/.vimrc<CR>
@@ -40,6 +43,7 @@ else
     " /root/Changelog
     au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Quote<cr>
+    au BufRead,BufNewFile /root/Changelog* map <buffer> ,t put ='    # ['.strftime('%H:%M').'] '<cr>A
   augroup END
   com! -range Quote <line1>,<line2> call s:quote()
   fun! s:quote()
