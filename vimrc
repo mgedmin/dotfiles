@@ -43,7 +43,7 @@ else
     " /root/Changelog
     au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Quote<cr>
-    au BufRead,BufNewFile /root/Changelog* map <buffer> ,t put ='    # ['.strftime('%H:%M').'] '<cr>A
+    au BufRead,BufNewFile /root/Changelog* map <buffer> ,t :put ='    # ['.strftime('%H:%M').'] '<cr>A
   augroup END
   com! -range Quote <line1>,<line2> call s:quote()
   fun! s:quote()
