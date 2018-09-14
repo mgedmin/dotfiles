@@ -21,6 +21,9 @@ else
   " <C-Del> is so convenient
   inoremap <C-Del> <C-O>dw
   inoremap <C-Backspace> <C-O>db
+  " <F2> means save is built into my muscle memory
+  noremap <F2> :update<CR>
+  imap <F2> <C-O><F2>
   " editing ~/.vimrc
   map ,e :e ~/.vimrc<CR>
   map ,s :source ~/.vimrc<CR>
