@@ -238,7 +238,8 @@
 # other
 
 [alias "all"]
-	dirs = /etc /root /usr/local/bin /usr/local/sbin
+	dirs = ~/bin ~/bin/local ~/dotfiles /etc /root /usr/local/bin /usr/local/sbin
+	root = /etc /root /usr/local/bin /usr/local/sbin
 [diff]
 # this needs git 2.9, but goes away in git 2.12
 	compactionHeuristic = true
