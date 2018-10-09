@@ -148,6 +148,7 @@
 # fetch pull requests from github so you can 'git checkout pull/123' and test it locally
 # you can pass a number to fetch just one
 	fetch-pull-requests = "!f() { a=${1:-*}; git fetch origin \"+refs/pull/$a/head:refs/remotes/origin/pull/$a\"; }; f"
+# NB: do NOT 'git push' these, they'll create new branches called "pull/*".
 
 # fetch and check out one pull request
 	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout pull/$a; }; f"
