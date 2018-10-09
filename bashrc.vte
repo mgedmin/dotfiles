@@ -26,3 +26,11 @@ if ! declare -f __vte_osc7 > /dev/null; then
         __vte_osc7() { :; }
     fi
 fi
+
+# Inform VTE about directory changes as soon as they happen
+# so I can do things like 'cd foo && long-running-command'
+if declare -f __vte_osc7 > /dev/null; then
+    cd() {
+        command cd "$@" && __vte_osc7
+    }
+fi
