@@ -2,4 +2,8 @@
 
 test -f ~/.python && export PYTHONSTARTUP=~/.python
 
+# Don't create root-owned pyc files in my home directory if I run sudo python ...
+
+test "$UID" = 0 && export PYTHONDONTWRITEBYTECODE=1
+
 # vim: ft=sh
