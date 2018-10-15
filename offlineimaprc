@@ -59,9 +59,9 @@ foldersort = mycmp
 [Repository Musmire]
 type = IMAP
 ssl = yes
-remotehost = musmire.gedmin.as
+remotehost = plato.gedmin.as
 remoteuser = mg
-preauthtunnel = ssh -q musmire /usr/lib/dovecot/imap
+preauthtunnel = ssh -q plato /usr/lib/dovecot/imap
 #folderfilter = lambda foldername: foldername not in ['IN.root']
 foldersort = mycmp
 
