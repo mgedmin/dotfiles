@@ -1,0 +1,2 @@
+# Ingore minified javascript/CSS
+--max-columns=300

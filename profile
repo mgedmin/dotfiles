@@ -32,6 +32,9 @@ export VISUAL=vim
 # my terminals are black on white
 export DSTAT_OPTS="--bw"
 
+# ripgrep needs an envvar to use a config file
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 # my custom Python stuff
 # export PIP_DOWNLOAD_CACHE=$HOME/.cache/pip -- not needed with pip 6
 # export PIP_WHEEL_DIR=$HOME/.cache/wheels -- not needed with pip 7
@@ -48,12 +51,14 @@ test -d "$HOME/Mail/Home/INBOX/" && export MAIL="$HOME/Mail/Home/INBOX/"
 # ~/bin is added to PATH in ~/.bashrc.path, but GUI sessions don't parse
 # .bashrc.  Ubuntu's X sessions, however, do parse ~/.profile, so if I
 # want to launch apps using Alt-F2, I need to add ~/bin to $PATH here
+# shellcheck source=.bashrc.path
 [ -f "$HOME/.bashrc.path" ] && . "$HOME/.bashrc.path"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
+        # shellcheck source=.bashrc
         . "$HOME/.bashrc"
     fi
 fi
