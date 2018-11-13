@@ -173,6 +173,8 @@
 
 # 'bzr uncommit' wasn't bad, really, sometimes.  You can undo the uncommit with
 # git commit -C ORIG_HEAD.
+# XXX I can't pre-populate COMMIT_EDITMSG this way :(
+##	uncommit = "!git log -1 --format=format:\"%s%n%n%b\" > .git/COMMIT_EDITMSG; git reset HEAD^"
 	uncommit = reset HEAD^
 
 # git archive-branch branchname renames it to archived/branchname
