@@ -1,0 +1,2 @@
+[alias "all"]
+        irc = ~/.znc/users/mg/networks/default/moddata/log/ ~/.znc/users/mg/networks/gimpnet/moddata/log/
