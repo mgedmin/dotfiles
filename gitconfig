@@ -2,7 +2,7 @@
 [user]
 	name = Marius Gedminas
 	email = marius@gedmin.as
-	signingkey = E7A6D78F
+	signingkey = 9157445DE7A6D78F
 [color]
 	ui = auto
 	diff = auto
@@ -17,6 +17,8 @@
 	httpd = apache2 -f
 [web]
 	browser = chromium
+[cola]
+	spellcheck = false
 
 [bz]
 # git-bz plugin
@@ -68,6 +70,8 @@
 # http://felipec.wordpress.com/2012/11/13/git-remote-hg-bzr-2/
 # anyway it doesn't work well
 	insteadof = lp:
+[url "ssh://git@git.vaultit.org:23/"]
+	insteadOf = https://git.vaultit.org/
 
 [alias]
 # I'm used to this
@@ -106,8 +110,8 @@
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || [ $# = 1 ] && git config --global alias.\"$1\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-# I don't think I ever use this
-# also from https://git.wiki.kernel.org/index.php/Aliases
+# When you git pull and want to see what you've just pulled in
+# from https://git.wiki.kernel.org/index.php/Aliases
 # BTW git new doesn't appear to accept any command-line arguments??
 	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
@@ -222,7 +226,7 @@
 # ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
 	serve = daemon --reuseaddr --base-path=. --export-all --verbose
 
-# testing merges
+# testing merges (I rarely use these)
 	preview-merge = "!f() { b=origin/$1; git log --oneline master..$b && git merge --no-commit --no-ff $b; }; f"
 	branch-changes = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git diff $m^...$m^2 \"$@\"; }; f"
 	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
@@ -243,6 +247,7 @@
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles /etc /root /usr/local/bin /usr/local/sbin
 	root = /etc /root /usr/local/bin /usr/local/sbin
+
 [diff]
 # this needs git 2.9, but goes away in git 2.12
 	compactionHeuristic = true
@@ -263,7 +268,3 @@
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
-[url "ssh://git@git.vaultit.org:23/"]
-	insteadOf = https://git.vaultit.org/
-[cola]
-	spellcheck = false
