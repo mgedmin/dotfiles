@@ -110,10 +110,9 @@
 	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || [ $# = 1 ] && git config --global alias.\"$1\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-# When you git pull and want to see what you've just pulled in
-# from https://git.wiki.kernel.org/index.php/Aliases
-# BTW git new doesn't appear to accept any command-line arguments??
-	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+# When you git pull and want to see what you've just pulled in, do git new [branch] [git log options]
+# inspired by https://git.wiki.kernel.org/index.php/Aliases
+	new = "!f() { case \"$1\" in -*|\"\") b=;; *) b=$1; shift;; esac; git log $b@{1}..$b@{0} \"$@\"; }; f"
 
 # cd'ing to the right directory is sometimes a pain, but these are cumbersome to use so I generally don't
 	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
