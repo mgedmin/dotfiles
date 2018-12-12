@@ -225,13 +225,15 @@
 # ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
 	serve = daemon --reuseaddr --base-path=. --export-all --verbose
 
-# testing merges (I rarely use these)
+# testing merges (I rarely use these; I don't even remember how to use them!)
 	preview-merge = "!f() { b=origin/$1; git log --oneline master..$b && git merge --no-commit --no-ff $b; }; f"
 	branch-changes = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git diff $m^...$m^2 \"$@\"; }; f"
-	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
+#	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
 
 # show me a diff of all the changes made on this branch (useful after git pr)
+# SOMEBODY EXPLAIN TO ME WHY I HAVE TO USE ... FOR DIFF BUT .. FOR LOG
 	branch-diff = !git diff $(git master-branch)...
+	branch-log = !git log $(git master-branch)..
 
 # show current commit SHA; try also git sha --short and git sha [--short] somebranch
 	sha = "!f() { rev=HEAD; for a; do case \"$a\" in -*) ;; *) rev=;; esac; done; git rev-parse \"$@\" $rev; }; f"
@@ -243,6 +245,12 @@
 
 # make a second clone using the first one as a reference
 	reclone = "!f() { a=$1; b=${2:?usage: git reclone dir1 dir2}; url=$(cd $a && git remote get-url origin); git clone $url --reference $a $b; }; f"
+
+# gitlab merge requests!
+# some setup is needed like pip3 install python-gitlab and a ~/.python-gitlab.cfg and a
+# git config gitlab.projectId 30
+	gitlab-project-id = config gitlab.projectId
+	mr-list = !gitlab -o yaml -f iid,title,source_branch project-merge-request list --state opened --project-id $(git gitlab-project-id)
 
 # other
 
