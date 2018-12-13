@@ -251,6 +251,8 @@
 # git config gitlab.projectId 30
 	gitlab-project-id = config gitlab.projectId
 	mr-list = !gitlab -o yaml -f iid,title,source_branch project-merge-request list --state opened --project-id $(git gitlab-project-id)
+	mr-branch = "!f() { id=${1:?usage: git mr-branch NNN}; gitlab -o yaml -f source_branch project-merge-request get --iid $id --project-id $(git gitlab-project-id) | cut -d' ' -f 2; }; f"
+	mr = "!f() { id=${1:?usage git mr NNN}; git checkout $(git mr-branch $id); }; f"
 
 # other
 
