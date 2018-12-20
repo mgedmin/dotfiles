@@ -44,7 +44,7 @@ else
     " chmod +x on save
     au BufWritePost * if getline(1) =~ "^#!" && expand("<afile>:t") !~ "test.*py" && expand("<afile>") !~ "://" | silent exec '!chmod +x <afile>' | endif
     " /root/Changelog
-    au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl
+    au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl et sw=2
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Quote<cr>
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,t :put ='    # ['.strftime('%H:%M').'] '<cr>A
   augroup END
