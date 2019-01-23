@@ -254,7 +254,7 @@
 	gitlab-project-id = "!f() { git config gitlab.projectId \"$@\" || { echo \"you need to configure the gitlab project ID with git gitlab-project-id NNN; use git gitlab-project-list to see the IDs\" 1>&2; exit 1; }; }; f"
 	gitlab-project-list = !gitlab -o yaml -f id,name_with_namespace project list
 	gitlab-project-list-starred = !git gitlab-project-list --starred yes
-	mr-list = "!red=$(tput setaf 1); blue=$(tput setaf 4); reset=$(tput sgr0); gitlab -o json -f iid,title,source_branch project-merge-request list --state opened --project-id $(git gitlab-project-id) | jq '.[] | \"'$blue'\\(.iid)'$reset': \\(.title) ('$red'\\(.source_branch)'$reset')\"' -r"
+	mr-list = "!red=$(tput setaf 1); blue=$(tput setaf 4); reset=$(tput sgr0); gitlab -o json -f iid,title,source_branch,author project-merge-request list --state opened --project-id $(git gitlab-project-id) | jq '.[] | \"'$blue'\\(.iid)'$reset': \\(.title) ('$red'\\(.source_branch)'$reset') by '$blue'\\(.author.name)'$reset'\"' -r"
 	mr-branch = "!f() { id=${1:?usage: git mr-branch NNN}; gitlab -o yaml -f source_branch project-merge-request get --iid $id --project-id $(git gitlab-project-id) | cut -d' ' -f 2; }; f"
 	mr = "!f() { id=${1:?usage git mr NNN}; git fetch; git checkout $(git mr-branch $id); }; f"
 
