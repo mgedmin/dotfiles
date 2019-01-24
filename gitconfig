@@ -232,10 +232,9 @@
 	branch-changes = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git diff $m^...$m^2 \"$@\"; }; f"
 #	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
 
-# show me a diff of all the changes made on this branch (useful after git pr)
-# SOMEBODY EXPLAIN TO ME WHY I HAVE TO USE ... FOR DIFF BUT .. FOR LOG
-	branch-diff = !git diff $(git master-branch)...
-	branch-log = !git log $(git master-branch)..
+# show me a diff of all the changes made on this branch (useful after git pr or git mr)
+	branch-diff = !git diff $(git master-branch)@{u}..
+	branch-log = !git log $(git master-branch)@{u}..
 
 # show current commit SHA; try also git sha --short and git sha [--short] somebranch
 	sha = "!f() { rev=HEAD; for a; do case \"$a\" in -*) ;; *) rev=;; esac; done; git rev-parse \"$@\" $rev; }; f"
