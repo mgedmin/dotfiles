@@ -257,6 +257,7 @@
 	mr-list = "!red=$(tput setaf 1); blue=$(tput setaf 4); reset=$(tput sgr0); gitlab -o json -f iid,title,source_branch,author project-merge-request list --state opened --project-id $(git gitlab-project-id) | jq '.[] | \"'$blue'\\(.iid)'$reset': \\(.title) ('$red'\\(.source_branch)'$reset') by '$blue'\\(.author.name)'$reset'\"' -r"
 	mr-branch = "!f() { id=${1:?usage: git mr-branch NNN}; gitlab -o yaml -f source_branch project-merge-request get --iid $id --project-id $(git gitlab-project-id) | cut -d' ' -f 2; }; f"
 	mr = "!f() { id=${1:?usage git mr NNN}; git fetch; git checkout $(git mr-branch $id); }; f"
+	open-mr = "!f() { id=${1:?usage git open-mr NNN}; url=$(gitlab -o json project-merge-request get --iid $id --project-id $(git gitlab-project-id) | jq -r '.web_url'); printf '%s\n' $url; xdg-open $url; }; f"
 
 # other
 
