@@ -237,8 +237,11 @@
 	branch-diff = !git diff $(git master-branch)@{u}...
 	branch-log = !git log $(git master-branch)@{u}..
 
+# print the name of the current branch
+	branch-name = symbolic-ref --short HEAD
+
 # let's do code review!
-	review = "!vim +'set ft=diff bt=nofile|exe \"0r !git branch-diff -p --stat\"|1'"
+	review = "!vim +'set ft=diff bt=nofile|exe \"0r !git branch-diff -p --stat\"|1|exe \"silent file\" escape(printf(\"git diff of the %s branch\", systemlist(\"git branch-name\")[0]), \" |\\\\\")'"
 
 # show current commit SHA; try also git sha --short and git sha [--short] somebranch
 	sha = "!f() { rev=HEAD; for a; do case \"$a\" in -*) ;; *) rev=;; esac; done; git rev-parse \"$@\" $rev; }; f"
