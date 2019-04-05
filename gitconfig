@@ -137,8 +137,12 @@
 # show diff since the last release
 	unreleased-diff = !git diff $(git last-release)
 
+# git changelog-filename [name] -- get or set the filename of the changelog file (default: CHANGES.rst)
+# used by other aliases such as 'git unreleased-changelog'
+	changelog-filename = "!f() { git config alias.changelog.filename \"$@\" || echo CHANGES.rst; }; f"
+
 # show changelog since the last release
-	unreleased-changelog = !git diff $(git last-release) -- CHANGES.rst
+	unreleased-changelog = !git diff $(git last-release) -- $(git changelog-filename)
 
 # managing many git checkouts (these are great!)
 # configure with git config alias.all.dirs '/foo /bar ~/baz*'
