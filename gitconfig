@@ -268,6 +268,7 @@
 	mr-branch = "!f() { id=${1:?usage: git mr-branch NNN}; gitlab -o yaml -f source_branch project-merge-request get --iid $id --project-id $(git gitlab-project-id) | cut -d' ' -f 2; }; f"
 	mr = "!f() { id=${1:?usage git mr NNN}; git fetch; git checkout $(git mr-branch $id); }; f"
 	open-mr = "!f() { id=${1:?usage git open-mr NNN}; url=$(gitlab -o json project-merge-request get --iid $id --project-id $(git gitlab-project-id) | jq -r '.web_url'); printf '%s\n' $url; xdg-open $url; }; f"
+	review-mr = "!f() { git mr \"$@\" && git review; }; f"
 
 # other
 
