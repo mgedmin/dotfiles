@@ -12,4 +12,7 @@ alias wow='git status'
 alias such=git
 alias very=git
 
+# no config file/environment for this
+alias exa='exa --group-directories-first'
+
 # vim: ft=sh
