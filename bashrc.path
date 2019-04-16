@@ -26,6 +26,7 @@ _addpath_if_exists /usr/lib/ccache
 _addpath_if_exists "$HOME"/android/tools
 _addpath_if_exists "$HOME"/android/platform-tools
 _addpath_if_exists "$HOME"/gocode/bin
+_addpath_if_exists "$HOME"/.cargo/bin
 _addpath "$HOME"/.local/bin
 _addpath "$HOME"/.venv/bin
 _addpath "$HOME"/bin/local

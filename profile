@@ -31,6 +31,7 @@ export VISUAL=vim
 
 # my terminals are black on white
 export DSTAT_OPTS="--bw"
+export BAT_THEME=OneHalfLight
 
 # ripgrep needs an envvar to use a config file
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
