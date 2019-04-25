@@ -26,4 +26,8 @@ alias egrep='egrep --color=auto'
 # The default color scheme of exa is very piercing
 export EXA_COLORS="ur=33:uw=38;5;210:ux=32:gw=38;5;210:uu=33:README*=38;5;208:Makefile=33:Cargo.toml=33"
 
+# gcc can do colors too!  the magic string is copied from
+# https://gcc.gnu.org/onlinedocs/gcc-8.3.0/gcc/Diagnostic-Message-Formatting-Options.html#Diagnostic-Message-Formatting-Options
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
+
 # vim: ft=sh
