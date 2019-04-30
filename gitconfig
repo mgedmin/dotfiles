@@ -131,8 +131,9 @@
 # show tag name of the last release tag on current branch
 	last-release = describe --tags --abbrev=0
 
-# show commits after the last release (but now that I have projects.gedmin.as I rarely use this)
+# show commits after the last release
 	unreleased = !git shortlog $(git last-release)..
+	unreleased-log = !git log $(git last-release)..
 
 # show diff since the last release
 	unreleased-diff = !git diff $(git last-release)
