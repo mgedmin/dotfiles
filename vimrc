@@ -46,10 +46,12 @@ else
     " /root/Changelog
     au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl et sw=2
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Quote<cr>
+    au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Comment<cr>
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,t :put ='    # ['.strftime('%H:%M').'] '<cr>A
   augroup END
-  com! -range Quote <line1>,<line2> call s:quote()
-  fun! s:quote()
+  com! -range Quote <line1>,<line2> call s:quote("| ")
+  com! -range Comment <line1>,<line2> call s:quote("# ")
+  fun! s:quote(prefix)
     let saved = exists('*getcurpos') ? getcurpos() : getpos('.')
     let previous = getline(prevnonblank(line('.') - 1))
     let indent = matchstr(previous, '^\s*')
@@ -57,7 +59,7 @@ else
       let indent .= "  "
     endif
     let line = getline('.')
-    let new_line = indent . '| ' . line
+    let new_line = indent . a:prefix . line
     call setline('.', substitute(new_line, '\s\+$', '', ''))
     call setpos('.', saved)
   endfun
