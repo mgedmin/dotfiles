@@ -16,4 +16,4 @@
 --regex-Rust=/macro_rules! +([a-zA-Z0-9_]+) *[{]/\1/d,macros,macro definitions/
 --regex-Rust=/impl([ \t\n]*<[^>]*>)?[ \t]+(([a-zA-Z0-9_:]+)[ \t]*(<[^>]*>)?[ \t]+(for)[ \t]+)?([a-zA-Z0-9_]+)/\6/i,impls,trait implementations/
 
---languages=Rust
+--languages=+Rust
