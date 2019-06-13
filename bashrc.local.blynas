@@ -1,3 +1,3 @@
-if [ -n "$PS1" ]; then
+if [ -n "$PS1" -a -x /usr/bin/mailq ]; then
     mailq | { grep -v "^Mail queue is empty" || true; }
 fi
