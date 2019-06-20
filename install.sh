@@ -8,13 +8,13 @@ while getopts v OPT; do
             verbose=$((verbose + 1))
             ;;
         *)
-            printf "%s: unknown option %s\n" "$0" "$OPT" 1>&2
+            printf '%s: unknown option %s\n' "$0" "$OPT" 1>&2
             exit 1
             ;;
     esac
 done
 
-emit() { local lvl=$1; shift; [ $verbose -ge $lvl ] && printf "%s\n" "$*"; }
+emit() { local lvl=$1; shift; [ $verbose -ge "$lvl" ] && printf '%s\n' "$*"; }
 info() { emit 1 "$*"; }
 debug() { emit 2 "$*"; }
 
@@ -34,17 +34,17 @@ for fn in [a-z]*; do
         *)
             ;;
     esac
-    if [ -L "$dotfile" ] && [ "$(readlink $dotfile)" = "$target" ]; then
+    if [ -L "$dotfile" ] && [ "$(readlink "$dotfile")" = "$target" ]; then
         debug "already exists: $dotfile -> $target"
         continue # already a symlink to the right place
     fi
     if [ -f "$dotfile" ]; then
         if cmp "$dotfile" "$HOME/$target" > /dev/null; then
             echo "contents identical, replacing $dotfile with symlink"
-            rm $dotfile
+            rm "$dotfile"
         elif [ -f "$skeleton" ] && cmp "$dotfile" "$skeleton" > /dev/null; then
             echo "identical to /etc/skel/ version, replacing $dotfile with symlink"
-            rm $dotfile
+            rm "$dotfile"
         else
             # print both files with a space so I can easily copy them
             # together and paste as arguments to vimdiff
@@ -54,7 +54,7 @@ for fn in [a-z]*; do
     else
         info "$dotfile -> $target"
     fi
-    ln -s $target $dotfile
+    ln -s "$target" "$dotfile"
 done
 if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ]; then
     # this looks like an interactive session, i.e. the user did
@@ -63,8 +63,9 @@ if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ]; then
     #   ~/dotfiles/install.sh
     # so let's reload their .profile and .inputrc for convenience
     echo "reloading .profile"
+    # shellcheck source=/dev/null
     . ~/.profile
     echo "reloading .inputrc"
     bind -f ~/.inputrc
 fi
-popd > /dev/null
+popd > /dev/null || exit 1
