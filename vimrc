@@ -49,8 +49,8 @@ else
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,c :Comment<cr>
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,t :put ='    # ['.strftime('%H:%M').'] '<cr>A
   augroup END
-  com! -range Quote <line1>,<line2> call s:quote("| ")
-  com! -range Comment <line1>,<line2> call s:quote("# ")
+  com! -range Quote setlocal et | <line1>,<line2> retab | <line1>,<line2> call s:quote("| ")
+  com! -range Comment setlocal et | <line1>,<line2> retab | <line1>,<line2> call s:quote("# ")
   fun! s:quote(prefix)
     let saved = exists('*getcurpos') ? getcurpos() : getpos('.')
     let previous = getline(prevnonblank(line('.') - 1))
