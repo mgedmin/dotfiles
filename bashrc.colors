@@ -30,4 +30,14 @@ export EXA_COLORS="ur=33:uw=38;5;210:ux=32:gw=38;5;210:uu=33:README*=38;5;208:Ma
 # https://gcc.gnu.org/onlinedocs/gcc-8.3.0/gcc/Diagnostic-Message-Formatting-Options.html#Diagnostic-Message-Formatting-Options
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
 
+# my terminals used to be black on white
+if false; then
+    export DSTAT_OPTS="--bw"
+    export BAT_THEME=OneHalfLight
+else
+    # now they're dark
+    export DSTAT_OPTS=
+    export BAT_THEME=OneHalfDark
+fi
+
 # vim: ft=sh
