@@ -1,3 +1,5 @@
+export MAIL=$HOME/Maildir
+
 if [ -n "$PS1" ]; then
     mailq | { grep -v "^Mail queue is empty" || true; }
 fi
