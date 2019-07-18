@@ -1,17 +1,22 @@
 #!/bin/bash
 # assumes this directory is ~/dotfiles
 
-usage="usage: $0 [-l]
+usage="usage: $0 [-l] [-n]
 options:
   -l    this is a local config file, for this hostname only
+  -n    don't make any changes
 "
 
 local=0
-while getopts hl OPT; do
+dry_run=0
+while getopts hnl OPT; do
     case "$OPT" in
         h)
             printf "%s" "$usage"
             exit 0
+            ;;
+        n)
+            dry_run=1
             ;;
         l)
             local=1
@@ -22,6 +27,14 @@ while getopts hl OPT; do
     esac
 done
 shift $((OPTIND-1))
+
+run() {
+    if [ $dry_run -eq 0 ]; then
+        "$@"
+    else
+        printf '%s\n' "$*"
+    fi
+}
 
 cd ~/dotfiles/ || exit 1
 rc=0
@@ -45,7 +58,7 @@ for arg; do
     dotfile=$HOME/.$fn
     [[ $local -ne 0 || $force_local -ne 0 ]] && fn=$fn.$HOSTNAME
     target=dotfiles/$fn
-    if [ -L "$dotfile" ] && [ "$(readlink "$dotfile")" = "$target" ]; then
+    if [ -L "$dotfile" ] && [ "$dotfile" -ef "$HOME/$target" ]; then
         continue # already a symlink to the right place
     fi
     if [ -e "$HOME/$target" ]; then
@@ -53,8 +66,12 @@ for arg; do
         rc=1
         continue
     fi
-    mv -i "$dotfile" "$HOME/$target" || rc=1
-    ln -s "$target" "$dotfile" || rc=1
-    git add "$fn" || rc=1
+    dir=$(dirname "$HOME/$target")
+    if ! [ -d "$dir" ]; then
+        run mkdir -p "$dir" || rc=1
+    fi
+    run mv -i "$dotfile" "$HOME/$target" || rc=1
+    run ln -sr "$HOME/$target" "$dotfile" || rc=1
+    run git add "$fn" || rc=1
 done
 exit $rc
