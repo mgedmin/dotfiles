@@ -45,6 +45,9 @@ for arg; do
         continue
     fi
     dotfile=$HOME/.$fn
+    if ! [ -e "$fn" ] && [ -e "$fn.$HOSTNAME" ]; then
+        fn=$fn.$HOSTNAME
+    fi
     target=dotfiles/$fn
     if [ -L "$dotfile" ] && [ "$dotfile" -ef "$HOME/$target" ]; then
         # a symlink to the right place
