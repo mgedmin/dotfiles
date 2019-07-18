@@ -1,6 +1,6 @@
 #!/bin/sh
 # assumes this directory is ~/dotfiles
-cd ~/dotfiles/
+cd ~/dotfiles/ || exit 1
 rc=0
 for arg; do
     s=${arg#$HOME/}

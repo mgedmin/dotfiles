@@ -4,4 +4,4 @@
 pushd ~/dotfiles/ > /dev/null || exit 1
 git pull -q -r
 . ./install.sh "$@"
-popd > /dev/null
+popd > /dev/null || exit 1
