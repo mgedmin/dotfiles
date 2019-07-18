@@ -47,7 +47,7 @@ process() {
     local dir
     dir=$(dirname "$dotfile")
 
-    if [ -L "$dotfile" ] && [ "$(readlink "$dotfile")" = "$target" ]; then
+    if [ -L "$dotfile" ] && [ "$dotfile" -ef "$HOME/$target" ]; then
         debug "already exists: $dotfile -> $target"
         return # already a symlink to the right place
     fi
