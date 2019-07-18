@@ -1,7 +1,10 @@
 #!/bin/bash
 # assumes this directory is ~/dotfiles
 
-usage="usage: $0 [-l] [-n]
+usage="usage: $0 [-l] [-n] ~/.dotfile [...]
+
+moves specified dotfiles into ~/dotfiles/ and replaces them with symlinks
+
 options:
   -l    this is a local config file, for this hostname only
   -n    don't make any changes
