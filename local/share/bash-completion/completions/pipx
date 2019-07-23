@@ -1,0 +1,158 @@
+_pipx_venvs() {
+    ls "${PIPX_HOME:-$HOME/.local/pipx}"/venvs 2>/dev/null
+}
+_pipx() {
+    local i cur prev cmd opts
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    cmd=""
+    for i in "${COMP_WORDS[@]}"; do
+        case "$i" in
+            pipx)
+                cmd="pipx"
+                ;;
+            install|inject|upgrade|upgrade-all|uninstall|uninstall-all|reinstall-all|list|run|runpip|ensurepath)
+                cmd+="__$i"
+                ;;
+            *)
+                ;;
+        esac
+    done
+
+    case "$cmd" in
+        pipx)
+            opts="-h --help --version install inject upgrade upgrade-all uninstall uninstall-all reinstall-all list run runpip ensurepath"
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__install)
+            opts="-h --help --spec --include-deps --verbose --force --python --system-site-packages -i --index-url -e --editable --pip-args"
+            case "$prev" in
+                --spec)
+                    # no completion for pip specs
+                    COMPREPLY=()
+                    return 0
+                    ;;
+                -i|--index-url)
+                    # no completion for URLs
+                    COMPREPLY=()
+                    return 0
+                    ;;
+                --pip-args)
+                    # a subset of pip arguments
+                    opts="--log --proxy --retries --timeout --exists-action --trusted-host --cert --client-cert --cache-dir --no-cache-dir --disable-pip-version-check --no-deps --pre -U --upgrade --upgrade-strategy --force-reinstall -I --ignore-installed --ignore-requires-python --no-build-isolation --use-pep517 --install-option --no-binary --only-binary -f --find-links --extra-index-url"
+                    ;;
+                -p|--python)
+                    COMPREPLY=( $(compgen -f "${cur}") )
+                    return 0
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__inject)
+            opts="-h --help --include-binaries --include-deps --system-site-packages -i --index-url -e --editable --pip-args --verbose"
+            case "$prev" in
+                inject)
+                    opts="$opts $(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__upgrade)
+            opts="-h --help --spec --include-deps --system-site-packages -i --index-url -e --editable --pip-args --verbose"
+            case "$prev" in
+                upgrade)
+                    opts="$opts $(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__upgrade-all)
+            opts="-h --help --include-deps --system-site-packages -i --index-url -e --editable --pip-args --skip --verbose"
+            case "$prev" in
+                --skip)
+                    opts="$(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__uninstall)
+            opts="-h --help --verbose"
+            case "$prev" in
+                uninstall)
+                    opts="$opts $(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__uninstall-all)
+            opts="-h --help --verbose"
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__reinstall-all)
+            opts="-h --help --include-deps --system-site-packages -i --index-url -e --editable --pip-args --skip --verbose"
+            case "$prev" in
+                --skip)
+                    opts="$(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__list)
+            opts="-h --help --verbose"
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__run)
+            opts="-h --help --no-cache --pypackages --spec --verbose --python --system-site-packages -i --index-url -e --editable --pip-args"
+            case "$prev" in
+                --spec)
+                    # no completion for pip specs
+                    COMPREPLY=()
+                    return 0
+                    ;;
+                -i|--index-url)
+                    # no completion for URLs
+                    COMPREPLY=()
+                    return 0
+                    ;;
+                --pip-args)
+                    # a subset of pip arguments
+                    opts="--log --proxy --retries --timeout --exists-action --trusted-host --cert --client-cert --cache-dir --no-cache-dir --disable-pip-version-check --no-deps --pre -U --upgrade --upgrade-strategy --force-reinstall -I --ignore-installed --ignore-requires-python --no-build-isolation --use-pep517 --install-option --no-binary --only-binary -f --find-links --extra-index-url"
+                    ;;
+                -p|--python)
+                    COMPREPLY=( $(compgen -f "${cur}") )
+                    return 0
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__runpip)
+            opts="-h --help --verbose"
+            case "$prev" in
+                runpip)
+                    opts="$opts $(_pipx_venvs)"
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pipx__ensurepath)
+            opts="-h --help --force"
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+    esac
+}
+complete -F _pipx pipx
+
+# vim:ft=bash:
