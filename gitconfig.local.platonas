@@ -13,7 +13,7 @@
 	src = ~/src/*
 	projects = ~/projects/*
 	zope = ~/src/zopefoundation/*
-	root = /root /etc
+	root = /root /etc /usr/local/sbin
 	all = \
 		$(eval "echo $(git config alias.all.dirs)") \
 		$(eval "echo $(git config alias.all.vim)") \
