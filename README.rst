@@ -50,10 +50,25 @@ to be managing my dotfiles.  And the best way to understand code is to write
 it.
 
 
+Features
+--------
+
+Files in dot directories are supported now (e.g.
+``dotfiles/grab.sh ~/.config/yamllint/config``).
+
+You can have dotfiles specific to one machine, distinguished by the hostname.
+This is automatic: when a dotfile is named ``~/.something.local``, it'll be
+symlinked to ``~/dotfiles/something.local.$HOSTNAME``.  Usually this requires
+you to have a shared ``~/.something`` that includes ``~/.something.local``.
+There's one exception, ``~/.mailcheckrc``, which is treated as local even if it
+doesn't have the ``.local`` suffix (because mailcheck doesn't support
+includes).
+
+
 Shortcomings
 ------------
 
 - The location of ``~/dotfiles`` is hardcoded in the scripts.
 
-- The scripts cannot manage dot directories such as ``~/.vim``, or dotfiles
-  that live in a subdirectory such as ``~/.config/flake8``.
+- You cannot version entire dot directories, just individual files inside
+  them.
