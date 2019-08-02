@@ -6,6 +6,7 @@
 --exclude=*.pyx
 --exclude=*.min.js
 --exclude=build
+--exclude=obj-x86_64-pc-linux-gnu
 
 --langdef=Rust
 --langmap=Rust:.rs
