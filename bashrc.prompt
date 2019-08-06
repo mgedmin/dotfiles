@@ -162,64 +162,68 @@ if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-reset='\[\033[0m\]'
-cr='\[\015\]'
-red='\[\033[0;31m\]'
-green='\[\033[0;32m\]'
-brown='\[\033[0;33m\]'
-blue='\[\033[0;34m\]'
-purple='\[\033[0;35m\]'
-cyan='\[\033[0;36m\]'
-grey='\[\033[0;37m\]'
-darkgrey='\[\033[1;30m\]'
-
 # This is configurable: set it to any key found in the colors array
-case "$BASH_VERSION" in
-    [0-3]*)
-        # no configurability, hardcoded to brown
-        _prompt_color='\[$(printf "\033[0;33m")\]'
-        ;;
-    *)
-        # configurable, default to green
-        # you can specify color name or color number (30..37)
-        # you can specify 256-color numbers too with "38;5;nnn", e.g.
-        #    prompt_color="38;5;197"
-        prompt_color=green
+# you can specify color name or color number (30..37)
+# you can specify 256-color numbers too with "38;5;nnn", e.g.
+#    prompt_color="38;5;197"
+prompt_color=green
 
-        declare -A colors
-        colors[reset]=0
-        colors[black]=30
-        colors[red]=31
-        colors[green]=32
-        colors[brown]=33
-        colors[blue]=34
-        colors[purple]=35
-        colors[cyan]=36
-        colors[grey]=37
-        colors[darkgrey]="1;30"
-        colors[brightred]="1;31"
-        colors[brightgreen]="1;32"
-        colors[yellow]="1;33"
-        colors[brightblue]="1;34"
-        colors[brightpurple]="1;35"
-        colors[brightcyan]="1;36"
-        colors[white]="1;37"
+declare -A colors
+colors[reset]=0
+colors[black]=30
+colors[red]=31
+colors[green]=32
+colors[brown]=33
+colors[blue]=34
+colors[purple]=35
+colors[cyan]=36
+colors[grey]=37
+colors[darkgrey]="1;30"
+colors[brightred]="1;31"
+colors[brightgreen]="1;32"
+colors[yellow]="1;33"
+colors[brightblue]="1;34"
+colors[brightpurple]="1;35"
+colors[brightcyan]="1;36"
+colors[white]="1;37"
 
-        _prompt_color='\[$(printf "\033[0;%sm" ${colors[$prompt_color]:-$prompt_color})\]'
-        ;;
-esac
+__set_ps1() {
+    local reset='\[\033[0m\]'
+    local cr='\[\015\]'
+    local red='\[\033[0;31m\]'
+    local green='\[\033[0;32m\]'
+    local brown='\[\033[0;33m\]'
+    local blue='\[\033[0;34m\]'
+    local purple='\[\033[0;35m\]'
+    local cyan='\[\033[0;36m\]'
+    local grey='\[\033[0;37m\]'
+    local darkgrey='\[\033[1;30m\]'
+    local _prompt_color
 
-chroot='${debian_chroot:+($debian_chroot) }'
-jhbuild='${UNDER_JHBUILD:+(jhbuild) }'
-virtualenv='$(__virtualenv_name "(%s) ")'
-svn='$(__svn_ps1 " [svn:%s]")'
-git='$(__git_ps1 " [git:%s]")'
-hg='$(__hg_ps1 " [hg:%s]")'
-bzr='$(__bzr_ps1 " [bzr:%s]")'
-njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
-restart_required='$(test -f /var/run/reboot-required && echo "!")'
-no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
-PS1="${cr}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+    case "$BASH_VERSION" in
+        [0-3]*)
+            # no configurability, hardcoded to brown
+            _prompt_color='\[$(printf "\033[0;33m")\]'
+            ;;
+        *)
+            _prompt_color='\[$(printf "\033[0;%sm" ${colors[$prompt_color]:-$prompt_color})\]'
+            ;;
+    esac
+
+    local chroot='${debian_chroot:+($debian_chroot) }'
+    local jhbuild='${UNDER_JHBUILD:+(jhbuild) }'
+    local virtualenv='$(__virtualenv_name "(%s) ")'
+    local svn='$(__svn_ps1 " [svn:%s]")'
+    local git='$(__git_ps1 " [git:%s]")'
+    local hg='$(__hg_ps1 " [hg:%s]")'
+    local bzr='$(__bzr_ps1 " [bzr:%s]")'
+    local njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
+    local restart_required='$(test -f /var/run/reboot-required && echo "!")'
+    local no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
+    PS1="${cr}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
+}
+
+__set_ps1
 
 # tell virtualenv not to overwrite PS1, my prompt already includes virtualenv name
 export VIRTUAL_ENV_DISABLE_PROMPT=1
