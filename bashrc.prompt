@@ -168,6 +168,7 @@ fi
 #    prompt_color="38;5;197"
 prompt_color=green
 
+unset colors
 declare -A colors
 colors[reset]=0
 colors[black]=30

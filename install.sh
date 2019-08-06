@@ -99,22 +99,18 @@ process_dir() {
     done
 }
 
-main() {
-    pushd ~/dotfiles/ > /dev/null || exit 1
-    process_dir ""
-    if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ] && [ $dry_run -eq 0 ]; then
-        # this looks like an interactive session, i.e. the user did
-        #   . ~/dotfiles/install.sh
-        # instead of
-        #   ~/dotfiles/install.sh
-        # so let's reload their .profile and .inputrc for convenience
-        echo "reloading .profile"
-        # shellcheck source=/dev/null
-        . ~/.profile
-        echo "reloading .inputrc"
-        bind -f ~/.inputrc
-    fi
-    popd > /dev/null || exit 1
-}
-
-main
+pushd ~/dotfiles/ > /dev/null || exit 1
+process_dir ""
+if [ -n "$BASH_VERSION" ] && [ -n "$PS1" ] && [ $dry_run -eq 0 ]; then
+    # this looks like an interactive session, i.e. the user did
+    #   . ~/dotfiles/install.sh
+    # instead of
+    #   ~/dotfiles/install.sh
+    # so let's reload their .profile and .inputrc for convenience
+    echo "reloading .profile"
+    # shellcheck source=/dev/null
+    . ~/.profile
+    echo "reloading .inputrc"
+    bind -f ~/.inputrc
+fi
+popd > /dev/null || exit 1
