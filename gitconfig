@@ -56,6 +56,8 @@
 	pushInsteadOf = git://gist.github.com/
 [url "git@gitlab.com:"]
 	pushInsteadOf = https://gitlab.com/
+[url "git@gitlab.gnome.org:"]
+	pushInsteadOf = https://gitlab.gnome.org/
 # I don't really use these
 [url "git://github.com/"]
 	insteadof = github-ro:
@@ -190,6 +192,9 @@
 # git archive-branch branchname renames it to archived/branchname
 # alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
+
+# git tags lists all tags
+	tags = tag -l
 
 # git branches lists all interesting branches
 	branches = "!f() { git branch --color=always \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
