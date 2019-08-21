@@ -1,0 +1,23 @@
+# http://jonas.nitro.dk/tig/tigrc.5.html
+
+set vertical-split = false
+
+set main-view-id = true
+
+# https://github.com/jonas/tig/wiki/Bindings
+
+# Reload ~/.tigrc when 'S' is pressed
+bind generic S :source ~/.tigrc
+
+# Interactive rebase
+bind main B !git rebase -i %(commit)
+
+# Add verbose flag to git-commit
+bind generic C !git commit -v
+
+# Tag the selected commit
+bind main T !@git tag "%(prompt New tag name: )" %(commit)
+bind diff T !@git tag "%(prompt New tag name: )" %(commit)
+
+# Open the commit on Github
+bind generic B @sh -c "xdg-open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"

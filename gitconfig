@@ -30,13 +30,6 @@
 # I'm not sure anything uses this any more, now that basic token auth is gone
 	user = mgedmin
 
-[tig]
-	vertical-split = false
-
-[tig "bind"]
-# override the default C binding which calls git commit without -v
-	status = C !git commit -v
-
 #
 # URL shortcuts
 #
