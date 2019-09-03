@@ -1,9 +1,25 @@
 [ui]
 username = Marius Gedminas <marius@gedmin.as>
 
+# The rollback command is dangerous. As a rule, don't use it.
+rollback = False
 
-[tortoisehg]
-vdiff = gvimdiff
+[commands]
+# This unbreaks hg grep AFAIU??
+# Grep working directory by default.
+grep.all-files = True
+
+# Refuse to perform an `hg update` that would cause a file content merge
+update.check = noconflict
+
+# Show conflicts information in `hg status`
+status.verbose = True
+
+[diff]
+# I've no idea what it does, but git is generally good
+git = 1
+showfunc = 1
+word-diff = 1
 
 [extensions]
 ##hgsubversion =
@@ -16,3 +32,6 @@ mq =
 
 [pager]
 pager = less -FRSX
+
+[tortoisehg]
+vdiff = gvimdiff
