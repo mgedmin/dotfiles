@@ -3,3 +3,6 @@
 
 # Skip the Firefox build tree
 --glob=!obj-x86_64-pc-linux-gnu/*
+
+# Skip tags files, they often have matches
+--glob=!tags
