@@ -13,6 +13,9 @@ fi
 # Add directories to $PATH if they're not there already
 [ -f ~/.bashrc.path ] && . ~/.bashrc.path
 
+# Set up environment variables
+[ -f ~/.bashrc.vars ] && . ~/.bashrc.vars
+
 # Do this only if running interactively
 if [ -n "$PS1" ]; then
 
