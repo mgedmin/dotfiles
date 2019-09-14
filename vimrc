@@ -10,6 +10,13 @@ else
   if v:version >= 704
     set fo+=j
   endif
+  if exists("$LC_VIM_BACKGROUND")
+    " vim has terminal background color detection, but it's unreliable
+    " and also causes flashing, so I set a custom env var in my .bashrc to
+    " force a specific vim background color.  The variable is called LC_xxx
+    " so that ssh will forward it to remove machines.
+    let &background = $LC_VIM_BACKGROUND
+  endif
   syn enable
   filetype plugin indent on
   com! -range=% NukeTrailingWhitespace <line1>,<line2>s/\s\+$//
