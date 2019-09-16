@@ -18,12 +18,12 @@ termcapinfo xterm|xterm-256color ti=\E7\E[?47l:te=\E[H\E[2J\E[?47l
 # 256-color for all xterms
 # termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
-# supposedly fun, but actually ugh, 'screen mutt' doesn't show mutt, it shows a
-# silly message and requires a keystroke to dismiss, and then it passes that
-# keystroke on to mutt!
-# nethack on
+# supposedly fun
+nethack on
+
+# get rid of the hated "new screen..." message
+msgwait 0
 
 # select panes with the mouse
-# NB: screen in Ubuntu 12.04 LTS is too old to support this :(
 # I turned this off because then I can't scroll or copy/paste, which is annoying
 ##mousetrack on
