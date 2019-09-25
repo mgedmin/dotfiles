@@ -218,7 +218,7 @@ __set_ps1() {
     local git='$(__git_ps1 " [git:%s]")'
     local hg='$(__hg_ps1 " [hg:%s]")'
     local bzr='$(__bzr_ps1 " [bzr:%s]")'
-    if type jobs 2>/dev/null; then
+    if type jobs >&/dev/null; then
         local njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
     else
         local njobs=''
