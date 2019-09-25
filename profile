@@ -11,7 +11,7 @@
 # my locale please
 if locale -a 2>/dev/null | grep -q lt_LT.utf8; then
     export LC_CTYPE=lt_LT.UTF-8
-else
+elif locale -a 2>/dev/null | grep -q C.UTF-8; then
     export LC_CTYPE=C.UTF-8
 fi
 
