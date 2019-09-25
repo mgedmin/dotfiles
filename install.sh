@@ -28,6 +28,12 @@ while getopts hvn OPT; do
     esac
 done
 
+# busybox ln doesn't support -r and we'll have to use absolute symlinks
+ln_dash_r=
+if ln --help |& grep -q -e '-r'; then
+    ln_dash_r=-r
+fi
+
 emit() { local lvl=$1; shift; [ $verbose -ge "$lvl" ] && printf '%s\n' "$*"; }
 info() { emit 1 "$*"; }
 debug() { emit 2 "$*"; }
@@ -70,7 +76,7 @@ process() {
     if ! [ -d "$dir" ]; then
         run mkdir -p "$dir"
     fi
-    run ln -sr "$HOME/$target" "$dotfile"
+    run ln -s $ln_dash_r "$HOME/$target" "$dotfile"
 }
 
 process_dir() {

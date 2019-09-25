@@ -68,7 +68,7 @@ __svn_ps1()
 {
     # XXX: svn 1.7 no longer has .svn in every directory
     if [ -d .svn ]; then
-        local svn_info="$(svn info 2> /dev/null | egrep '^URL: ')"
+        local svn_info="$(svn info 2> /dev/null | command egrep '^URL: ')"
         local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
         local trunk_pattern="^URL: .*/trunk(/.*)?$"
         local branch=""
@@ -218,7 +218,11 @@ __set_ps1() {
     local git='$(__git_ps1 " [git:%s]")'
     local hg='$(__hg_ps1 " [hg:%s]")'
     local bzr='$(__bzr_ps1 " [bzr:%s]")'
-    local njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
+    if type jobs 2>/dev/null; then
+        local njobs='$(n=$(jobs -p); echo "${n:+ \j&}")'
+    else
+        local njobs=''
+    fi
     local restart_required='$(test -f /var/run/reboot-required && echo "!")'
     local no_restart_required='$(test -f /var/run/reboot-required || echo ":")'
     local shell=''

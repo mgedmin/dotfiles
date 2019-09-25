@@ -19,9 +19,12 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
 fi
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# NB: busybox grep does not support --color
+if comman grep --help |& command grep -q -e --color; then
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # The default color scheme of exa is very piercing
 export EXA_COLORS="ur=33:uw=38;5;210:ux=32:gw=38;5;210:uu=33:README*=38;5;208:Makefile=33:Cargo.toml=33"

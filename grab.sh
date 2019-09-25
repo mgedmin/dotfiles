@@ -31,6 +31,12 @@ while getopts hnl OPT; do
 done
 shift $((OPTIND-1))
 
+# busybox ln doesn't support -r and we'll have to use absolute symlinks
+ln_dash_r=
+if ln --help |& grep -q -e '-r'; then
+    ln_dash_r=-r
+fi
+
 run() {
     if [ $dry_run -eq 0 ]; then
         "$@"
@@ -74,7 +80,7 @@ for arg; do
         run mkdir -p "$dir" || rc=1
     fi
     run mv -i "$dotfile" "$HOME/$target" || rc=1
-    run ln -sr "$HOME/$target" "$dotfile" || rc=1
+    run ln -s $ln_dash_r "$HOME/$target" "$dotfile" || rc=1
     run git add "$fn" || rc=1
 done
 exit $rc
