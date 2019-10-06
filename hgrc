@@ -34,10 +34,8 @@ histedit =
 blackbox = 
 evolve = /home/mg/.mozbuild/evolve/hgext3rd/evolve
 push-to-try = /home/mg/.mozbuild/version-control-tools/hgext/push-to-try
-## these break hg commit!  you can see the breakage by running tox in check-manifest
-## See https://bugzilla.mozilla.org/show_bug.cgi?id=1584954
-##clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
-##js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
+clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
+js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
 
 [pager]
 pager = less -FRSX
