@@ -117,7 +117,6 @@ __exit_line()
     local blue='\033[0;34m'
     local purple='\033[0;35m'
     local grey='\033[0;37m'
-    local darkgrey='\033[1;30m'
 
     local cmdtime=0
     if [ -n "$__cmdstart" -a "$__cmdstart" != "go" ]; then
@@ -198,7 +197,7 @@ __set_ps1() {
     local purple='\[\033[0;35m\]'
     local cyan='\[\033[0;36m\]'
     local grey='\[\033[0;37m\]'
-    local darkgrey='\[\033[1;30m\]'
+    local darkgrey='\[\033[90m\]'
     local _prompt_color
 
     case "$BASH_VERSION" in
