@@ -34,8 +34,10 @@ histedit =
 blackbox = 
 evolve = /home/mg/.mozbuild/evolve/hgext3rd/evolve
 push-to-try = /home/mg/.mozbuild/version-control-tools/hgext/push-to-try
-clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
-js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
+# buggy pieces of shit extensions for an annoying version control system
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1588475
+##clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
+##js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
 
 [pager]
 pager = less -FRSX
