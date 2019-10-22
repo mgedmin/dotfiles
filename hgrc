@@ -28,6 +28,8 @@ record =
 schemes = 
 rebase = 
 mq = 
+shelve =
+purge =
 # extensions enabled by 'mach bootstrap'
 absorb = 
 histedit = 
