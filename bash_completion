@@ -102,6 +102,12 @@ _fab()
 complete -F _fab fab bin/fab pov-fab
 
 #
+# for-all-projects is
+# https://github.com/mgedmin/scripts/blob/master/for-all-projects
+#
+complete -F _command for-all-projects
+
+#
 # Bugfix for Mutt completion
 # https://bugs.launchpad.net/ubuntu/+source/bash-completion/+bug/1008380
 # this fixes mutt -f +x<tab>, but breaks mutt -f =x<tab>, which works with the
