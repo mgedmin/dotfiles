@@ -148,6 +148,7 @@
 	whatsmodified = !git wm
 	wm = "!f() { git all \"$@\" short-status-with-branch-info; }; f"
 	wmq = "!f() { git all-quiet \"$@\" short-status-with-branch-info; }; f"
+	wmqa = !git wmq --all
 	short-status-with-branch-info = "!f() { o=$(git -c color.status=always status -bsu --ignore-submodules=none \"$@\"); rc=$?; printf \"%s\" \"$o\" | grep -v '## [^ ]*$'; exit $rc; }; f"
 
 # fetch pull requests from github so you can 'git checkout pull/123' and test it locally
