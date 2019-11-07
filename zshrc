@@ -29,13 +29,9 @@ if [ "$TERM" != "dumb" ]; then
     alias grep='grep --color=auto'
 fi
 
-# from http://www.zsh.org/mla/users/2000/msg00685.html
-##WORDCHARS=${WORDCHARS:s,/,,}
-##WORDCHARS=
-
-# from http://ubuntu.stackexchange.com/questions/1577/moving-from-bash-to-zsh
-autoload select-word-style
-##select-word-style shell
+# Make Alt-Backspace delete one word, while having Ctrl-W delete one WORD
+# (using vim's definitions of word/WORD: alphanumerics vs non-blank)
+bindkey "^[^?" vi-backward-kill-word
 
 REPORTTIME=10
 
