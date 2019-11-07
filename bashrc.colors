@@ -20,7 +20,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # NB: busybox grep does not support --color
-if comman grep --help |& command grep -q -e --color; then
+if command grep --help |& command grep -q -e --color; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
