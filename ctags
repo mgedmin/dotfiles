@@ -1,4 +1,5 @@
 --extra=+f
+--fields=+n
 --python-kinds=-i
 --langmap=html:+.mako
 --exclude=.tox
