@@ -1,0 +1,9 @@
+__import_kindle_book()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    _filedir '@(azw|azw3)'
+}
+
+complete -F __import_kindle_book import-kindle-book
