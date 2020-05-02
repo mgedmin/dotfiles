@@ -1,0 +1,15 @@
+# use symlinks yay!  but I don't rememeber if I have to do something to make
+# non-admin users be able to create symlinks on this godforsaken OS that is
+# Windows 10
+# https://www.joshkel.com/2018/01/18/symlinks-in-windows/ says I have to open
+# Settings, find For developers and enable Developer mode and then I have to
+# fuck with group policy settings:
+# Local Group Policy Editor -> Computer Configuration -> Windows Settings ->
+# Security Settings -> Local Policies -> User Rights Assignment -> Create symbolic links -> add user mg
+export MSYS=winsymlinks:nativestrict
+# prevent hangs with no output
+alias python='winpty python'
+alias python3='winpty python3'
+alias python3.8='winpty python3.8'
+# python doesn't support mingw paths
+export PYTHONSTARTUP=$USERPROFILE\\.python
