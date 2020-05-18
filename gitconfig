@@ -255,6 +255,9 @@
 	find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
 	show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
 
+# print the remote URL
+	url = remote get-url origin
+
 # make a second clone using the first one as a reference
 	reclone = "!f() { a=$1; b=${2:?usage: git reclone dir1 dir2}; url=$(cd $a && git remote get-url origin); git clone $url --reference $a $b; }; f"
 
