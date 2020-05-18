@@ -1,6 +1,13 @@
 # readline config file
 # in bash, use 'bind -f ~/.inputrc' to reload
 
+# colors are good yes
+set colored-completion-prefix on
+set colored-stats on
+
+# enable bracketed paste
+set enable-bracketed-paste on
+
 # add trailing slash when completing symlinks to directories
 set mark-symlinked-directories on
 
