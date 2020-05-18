@@ -1,0 +1,14 @@
+#!/bin/sh
+# https://superuser.com/questions/423620/the-less-command-can-list-directory-contents-in-gentoo-linux-but-not-in-ubuntu
+# also see /usr/share/doc/less/LESSOPEN
+
+# show directory as listing
+if test -d "$1"; then
+  /bin/ls -alF -- "$1"
+
+  # we handled this one ourself
+  exit 0
+fi
+
+# handle by regular lesspipe
+exit 1
