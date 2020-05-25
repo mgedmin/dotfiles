@@ -29,3 +29,6 @@ set skip-completed-text on
 
 # Ctrl-Del in gnome-terminal
 "\e[3;5~": kill-word
+
+# Ctrl-L redraw current line instead of clearing the screen
+"\C-l": redraw-current-line
