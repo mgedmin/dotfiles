@@ -20,7 +20,7 @@ complete -F _apt_packages inst apt-changelog dpkg-changelog
 # mtr is a better traceroute
 # multiping.py is a better ping
 #
-complete -F _known_hosts mtr multiping.py
+complete -F _known_hosts mtr multiping
 
 #
 # 'scp': default scp completion expands 'host:pat' -> 'host:host\:path/'
