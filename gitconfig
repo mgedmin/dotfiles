@@ -79,7 +79,7 @@
 
 # Push a new branch
 	do-push-branch = push -u origin HEAD
-	push-branch = "!master=$(git master-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
+	push-branch = "!master=$(git main-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
 
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
@@ -196,19 +196,19 @@
 # git rename-current-branch NAME renames the current branch
 	rename-current-branch = branch -m
 
-# git master-branch [name] -- get or set the name of the default branch (usually 'master')
+# git main-branch [name] -- get or set the name of the default branch (usually 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
-	master-branch = "!f() { git config alias.master-branch.name \"$@\" || echo master; }; f"
+	main-branch = "!f() { git config alias.main-branch.name \"$@\" || echo master; }; f"
 
 # git list-merged-branches shows branches that have been merged to master
-	list-merged-branches = "!f() { git branch --merged $(git master-branch) | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
+	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
 
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
 
 # git update pulls latest stuff from upstream and cleans merged branches
 	up = !git update
-	update = !git checkout-if-not-already-on $(git master-branch) && git pull --ff-only && git clean-merged-branches
+	update = !git checkout-if-not-already-on $(git main-branch) && git pull --ff-only && git clean-merged-branches
 
 # git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
 	checkout-if-not-already-on = "!f() { branch=$1; if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" != $branch ]; then git checkout $branch; fi; }; f"
@@ -222,7 +222,7 @@
 	sync-source = "!f() { git config alias.sync.source \"$@\" || echo origin; }; f"
 
 # git sync synchronizes master from origin to some other remote
-	sync = !git fetch $(git sync-source) && git push $(git sync-target) $(git sync-source)/$(git master-branch):$(git master-branch)
+	sync = !git fetch $(git sync-source) && git push $(git sync-target) $(git sync-source)/$(git main-branch):$(git main-branch)
 
 # splitting the last commit interactively (cumbersome; I rarely use it)
 	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
@@ -238,8 +238,8 @@
 
 # show me a diff of all the changes made on this branch (useful after git pr or git mr)
 # (I do not understand why diff needs the third dot and log absolutely cannot accept the third dot)
-	branch-diff = !git diff $(git master-branch)@{u}...
-	branch-log = !git log $(git master-branch)@{u}..
+	branch-diff = !git diff $(git main-branch)@{u}...
+	branch-log = !git log $(git main-branch)@{u}..
 
 # print the name of the current branch
 	branch-name = symbolic-ref --short HEAD
@@ -259,6 +259,7 @@
 	url = remote get-url origin
 
 # make a second clone using the first one as a reference
+# (you will regret this, use git worktree add instead)
 	reclone = "!f() { a=$1; b=${2:?usage: git reclone dir1 dir2}; url=$(cd $a && git remote get-url origin); git clone $url --reference $a $b; }; f"
 
 # gitlab merge requests!
