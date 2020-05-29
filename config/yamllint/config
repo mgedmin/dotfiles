@@ -1,4 +1,4 @@
 extends: relaxed
-rules: {}
-line-length:
-  max: 200
+rules:
+  line-length:
+    max: 200
