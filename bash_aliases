@@ -15,6 +15,9 @@ alias very=git
 # no config file/environment for this
 alias exa='exa --group-directories-first'
 
+# hide squashfs mounts please, my ubuntu has so many
+alias lsblk='lsblk -e 7'
+
 # pipx install thefuck
 function fuck () {
     TF_PYTHONIOENCODING=$PYTHONIOENCODING;
