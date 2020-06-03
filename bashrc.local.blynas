@@ -1,4 +1,11 @@
 export LC_VIM_BACKGROUND=dark
-if [ -n "$PS1" -a -x /usr/bin/mailq ]; then
-    mailq | { grep -v "^Mail queue is empty" || true; }
+if [ -n "$PS1" ]; then
+    # only for interactive sessions please
+    if [ -x /usr/bin/mailq ]; then
+        mailq | { grep -v "^Mail queue is empty" || true; }
+    fi
+    if [ -f /var/cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-7 ]; then
+       echo "color emoji will be broken in Chromium again (LP: #1858636) unless you"
+       echo "sudo rm /var/cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-7"
+    fi
 fi
