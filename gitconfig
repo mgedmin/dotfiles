@@ -124,7 +124,7 @@
 	roots = log --all --oneline --decorate --max-parents=0
 
 # show tag name of the last release tag on current branch
-	last-release = describe --tags --abbrev=0
+	last-release = describe --tags --abbrev=0 --exclude=last*
 
 # show commits after the last release
 	unreleased = !git shortlog $(git last-release)..
