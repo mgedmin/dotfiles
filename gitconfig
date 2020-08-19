@@ -201,7 +201,7 @@
 	main-branch = "!f() { git config alias.main-branch.name \"$@\" || echo master; }; f"
 
 # git list-merged-branches shows branches that have been merged to master
-	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[*]|^  (master|staging|live)$'; }; f"
+	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[^ ]|^  (master|staging|live)$'; true; }; f"
 
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
