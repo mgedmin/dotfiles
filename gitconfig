@@ -256,7 +256,9 @@
 	show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
 
 # print the remote URL
-	url = remote get-url origin
+# NB: I don't want to use git remote get-url origin because I don't want insteadOf expansion that
+# converts password-protected https:// links I can click on to ssh:// links that I can't.
+	url = config remote.origin.url
 
 # make a second clone using the first one as a reference
 # (you will regret this, use git worktree add instead)
