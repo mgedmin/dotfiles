@@ -260,6 +260,9 @@
 # converts password-protected https:// links I can click on to ssh:// links that I can't.
 	url = config remote.origin.url
 
+# open the repository in a browser
+	open-url = !xdg-open $(git url)
+
 # make a second clone using the first one as a reference
 # (you will regret this, use git worktree add instead)
 	reclone = "!f() { a=$1; b=${2:?usage: git reclone dir1 dir2}; url=$(cd $a && git remote get-url origin); git clone $url --reference $a $b; }; f"
