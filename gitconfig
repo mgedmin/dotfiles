@@ -164,7 +164,7 @@
 
 # use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
 # NB: --autosquash doesn't work without -i :/
-	autosquash = rebase -i --autosquash
+	autosquash = rebase -i --autosquash -r
 
 # show me the commit I'm rebasing
 # (the other v. useful command is git diff :{1,2}path/to/file-I'm-editing)
