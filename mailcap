@@ -26,3 +26,6 @@ application/zip; unzip -l %s; copiousoutput
 
 # RAR
 application/rar; rar l %s; copiousoutput
+
+# gzipped log files attached to emails
+application/gzip; zcat %s; copiousoutput
