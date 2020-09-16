@@ -110,9 +110,15 @@
 	new = "!f() { case \"$1\" in -*|\"\") b=;; *) b=$1; shift;; esac; git log $b@{1}..$b@{0} \"$@\"; }; f"
 
 # cd'ing to the right directory is sometimes a pain, but these are cumbersome to use so I generally don't
-	ladd = "!f() { for file; do (cd $(dirname $file) && git add $(basename $file)); done; }; f"
-	lcommit = "!f() { dir=$1; shift; cd $dir && git commit -v \"$@\"; }; f"
-	ldiff = "!f() { file=$1; cd $(dirname $file) && git diff \"$@\"; }; f"
+# but anyway these should make things like `git ladd /root/Changelog && git lcommit /root` work
+	ladd = local add
+	lci = local ci
+	lcommit = local commit
+	ldiff = local diff
+	lst = local st
+	lstatus = local status
+	lpush = local push
+	local = "!f() { command=$1; shift; file=$1; if [ -d $file ]; then dir=$file; shift; else dir=$(dirname $file); fi; echo + cd $dir; cd $dir && git $command \"$@\"; }; f"
 
 # creating new projects on fridge: git push-to-fridge [path/repo.git]
 	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh fridge.pov.lt git init --bare $repo && git remote add origin fridge.pov.lt:$repo && git push -u origin HEAD; }; f"
