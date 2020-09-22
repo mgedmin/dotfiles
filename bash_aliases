@@ -1,5 +1,8 @@
 # Bash aliases
 
+# I don't have a pip, but I have a ~/bin/python that runs python3
+alias pip='python -m pip'
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -18,7 +21,7 @@ alias exa='exa --group-directories-first'
 # hide squashfs mounts please, my ubuntu has so many
 alias lsblk='lsblk -e 7'
 
-# pipx install thefuck
+# pipx install thefuck, and I already forgot what it does.
 function fuck () {
     TF_PYTHONIOENCODING=$PYTHONIOENCODING;
     export TF_SHELL=bash;
