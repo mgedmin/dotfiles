@@ -2,6 +2,7 @@
 
 # I don't have a pip, but I have a ~/bin/python that runs python3
 alias pip='python -m pip'
+alias pydoc='python -m pydoc'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

@@ -131,6 +131,7 @@
 
 # show tag name of the last release tag on current branch
 	last-release = describe --tags --abbrev=0 --exclude=last*
+	penultimate-release = !git describe --tags --abbrev=0 --exclude=last* --exclude=$(git last-release)
 
 # show commits after the last release
 	unreleased = !git shortlog $(git last-release)..
