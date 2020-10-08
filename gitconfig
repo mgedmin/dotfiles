@@ -164,7 +164,7 @@
 # NB: do NOT 'git push' these, they'll create new branches called "pull/*".
 
 # fetch and check out one pull request
-	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout pull/$a; }; f"
+	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout origin/pull/$a; }; f"
 
 # clean pull request branches
 	clean-pull-requests = "!f() { git for-each-ref \"refs/heads/pull/*\" --format \"%(refname:short)\" | xargs -r git branch -D; }; f"
