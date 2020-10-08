@@ -1,0 +1,28 @@
+#[user]
+#	email = marius@pov.lt
+
+[url "ssh://git@git.vaultit.org:23/"]
+	insteadOf = https://git.vaultit.org/
+
+[alias "all"]
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh ~/.mutt ~/.gtimelog \
+		~/.local/share/applications \
+		~/sigs ~/blog ~/www \
+		~/Private/gnupg ~/Private/pwsafe
+	vim = ~/.vim/bundle/*
+	src = ~/src/*
+	projects = ~/projects/*
+	zope = ~/src/zopefoundation/*
+	root = /root /etc
+	all = \
+		$(eval "echo $(git config alias.all.dirs)") \
+		$(eval "echo $(git config alias.all.vim)") \
+		$(eval "echo $(git config alias.all.src)") \
+		$(eval "echo $(git config alias.all.zope)") \
+		$(eval "echo $(git config alias.all.root)")
+
+# huh, what about ~/Mail/Home or ~/books?
+# also maybe I should git-ify ~/Private/ssh and ~/Private/pypi
+# hmm ~/src/* vs ~/projects/*?
+# I can 'git all push' ~/projects but not most things in ~/src
+# ~/.vim/bundle/* is also mixed between things I can and things I can't
