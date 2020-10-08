@@ -61,6 +61,7 @@
 	pushInsteadOf = https://gedmin.as/
 [url "git@github.com:ProgrammersOfVilnius/"]
 	insteadof = pov:
+	insteadof = https://github.com/ProgrammersOfVilnius/
 [url "bzr::lp:"]
 # http://felipec.wordpress.com/2012/11/13/git-remote-hg-bzr-2/
 # anyway it doesn't work well
