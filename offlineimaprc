@@ -2,12 +2,8 @@
 # suit to get started fast.
 
 [general]
-##accounts = Work, Home, Vartai
-##accounts = Work, Home
+##accounts = Home, Work
 accounts = Home
-##ui = Curses.Blinkenlights
-##ui = TTY.TTYUI
-# "WARNING:root:Using old interface name, consider using one of machineui, blinkenlights, quiet, ttyui, basic"
 ui = ttyui
 
 pythonfile = ~/.offlineimap.py
@@ -31,10 +27,6 @@ remoterepository = Fridge
 localrepository = Home
 remoterepository = Musmire
 
-##[Account Vartai]
-##localrepository = Vartai
-##remoterepository = VartaiB4netLt
-
 [Repository Work]
 type = Maildir
 localfolders = ~/Mail/Work
@@ -42,10 +34,6 @@ localfolders = ~/Mail/Work
 [Repository Home]
 type = Maildir
 localfolders = ~/Mail/Home
-
-##[Repository Vartai]
-##type = Maildir
-##localfolders = ~/Mail/Vartai
 
 [Repository Fridge]
 type = IMAP
@@ -62,12 +50,4 @@ ssl = yes
 remotehost = plato.gedmin.as
 remoteuser = mg
 preauthtunnel = ssh -q plato /usr/lib/dovecot/imap
-#folderfilter = lambda foldername: foldername not in ['IN.root']
 foldersort = mycmp
-
-##[Repository VartaiB4netLt]
-##type = IMAP
-##ssl = yes
-##remotehost = vartai.b4net.lt
-##remoteuser = mgedmin
-##preauthtunnel = ssh -q vartai.b4net.lt /usr/lib/dovecot/imap

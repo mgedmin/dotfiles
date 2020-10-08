@@ -5,8 +5,10 @@ priority = {
     'INBOX': -10,
     'IN.root': -9,
     'postponed': -7,
+    # default priority for IN.*: -5
     'mbox': -1,
     'sent-mail': -1,
+    # default priority: 0
     'IN.b4net': 5,
     'SPAM': 10,
     'IN.SPAM': 10,
