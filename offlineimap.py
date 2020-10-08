@@ -6,6 +6,11 @@ priority = {
     'IN.root': -9,
     'postponed': -7,
     # default priority for IN.*: -5
+    'IN.github': -4,
+    'IN.vim': -4,
+    'IN.pylons': -2,
+    'IN.zope-dev': -2,
+    'IN.bujold': -2,
     'mbox': -1,
     'sent-mail': -1,
     # default priority: 0
