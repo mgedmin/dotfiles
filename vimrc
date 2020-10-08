@@ -6,7 +6,7 @@ if filereadable($HOME . "/.vim/vimrc")
   source $HOME/.vim/vimrc
 else
   set nocp ai et sts=4 sw=4 bs=2 pt=<f11>
-  set ls=2 ch=2 sc ru is
+  set ls=2 ch=2 sc ru is fdls=99
   if v:version >= 704
     set fo+=j
   endif
@@ -52,6 +52,7 @@ else
     au BufWritePost * if getline(1) =~ "^#!" && expand("<afile>:t") !~ "test.*py" && expand("<afile>") !~ "://" | silent exec '!chmod +x <afile>' | endif
     " /root/Changelog
     au BufRead,BufNewFile /root/Changelog* setlocal fo-=t fo+=rl et sw=2 com=b:#,fb:-
+    au BufRead,BufNewFile /root/Changelog* setlocal fdm=indent fdi=
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,p :s/^\S\+@\S\+ \S\+ $\( sudo\)\= /  /<cr>
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,q :Quote<cr>
     au BufRead,BufNewFile /root/Changelog* map <buffer> ,c :Comment<cr>
