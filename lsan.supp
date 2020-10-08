@@ -1,0 +1,3 @@
+# https://github.com/google/sanitizers/wiki/AddressSanitizerLeakSanitizer#suppressions
+
+leak:getaddrinfo
