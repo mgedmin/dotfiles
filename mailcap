@@ -6,8 +6,8 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.documen; docx2txt
 application/vnd.oasis.opendocument.text; odt2txt '%s'; copiousoutput
 
 # pdf -- mutt always uses the first one for <enter> in attachment list; and copiousoutput for auto_view
-application/pdf; evince '%s'; test=test -n "$DISPLAY"
-application/pdf; pdftotext -layout '%s' -; copiousoutput; print=evince %s
+application/pdf; evince '%s'; print=evince '%s'; test=test -n "$DISPLAY"
+application/pdf; pdftotext -layout '%s' -; print=print-attachment '%s'; copiousoutput
 
 # Images
 image/*; eog '%s'; test=test -n "$DISPLAY" && test -x /usr/bin/eog
