@@ -191,6 +191,9 @@
 ##	uncommit = "!git log -1 --format=format:\"%s%n%n%b\" > .git/COMMIT_EDITMSG; git reset HEAD^"
 	uncommit = reset HEAD^
 
+# git undo, for unding an accidental git amend/reword/commit; use with care
+	undo = reset HEAD@{1}
+
 # git archive-branch branchname renames it to archived/branchname
 # alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
