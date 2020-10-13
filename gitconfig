@@ -281,7 +281,7 @@
 # gitlab merge requests!
 # some setup is needed like pip3 install python-gitlab and a ~/.python-gitlab.cfg and a
 # git config gitlab.projectId 30
-	gitlab-project-id = "!f() { git config gitlab.projectId \"$@\" || { echo \"you need to configure the gitlab project ID with git gitlab-project-id NNN; use git gitlab-project-list --search=$(basename $PWD) to find the ID\" 1>&2; exit 1; }; }; f"
+	gitlab-project-id = "!f() { git config gitlab.projectId \"$@\" || { git config remote.origin.url | cut -d/ -f4- | sed 's|/|%2f|' ; }; }; f"
 	gitlab-project-list = "!f() { blue=$(tput setaf 4); reset=$(tput sgr0); gitlab -o json -f id,path_with_namespace project list --sort=asc \"$@\" | jq '.[] | \"'$blue'\\(.id)'$reset': \\(.path_with_namespace)\"' -r; }; f"
 	gitlab-project-list-starred = !git gitlab-project-list --starred yes
 	mr-list = "!red=$(tput setaf 1); blue=$(tput setaf 4); reset=$(tput sgr0); urlstart=$(printf '\\033]8;;'); urlmid=$(printf '\\a'); urlend=$urlstart$urlmid; gitlab -o json -f iid,title,source_branch,author,web_url project-merge-request list --state opened --project-id $(git gitlab-project-id) | jq '.[] | \"'$blue$urlstart'\\(.web_url)'$urlmid'\\(.iid)'$urlend$reset': \\(.title) ('$red'\\(.source_branch)'$reset') by '$blue'\\(.author.name)'$reset'\"' -r"
