@@ -60,6 +60,16 @@ turn_off_git_details() {
 
 turn_on_git_details
 
+__git_ps1_fancy()
+{
+    # override some aspects of __git_ps1 in certain locations
+    if [[ $PWD = /home/mg/Mail/Home ]]; then
+        GIT_PS1_SHOWDIRTYSTATE= GIT_PS1_SHOWUNTRACKEDFILES= __git_ps1 "$@"
+    else
+        __git_ps1 "$@"
+    fi
+}
+
 # svn branch name in shell prompt
 # based on /etc/bash_completion.d/git and https://gist.github.com/657287
 # (the latter is from http://edgar.tumblr.com/post/1449437754/show-ruby-version-and-svn-git-branch-in-prompt)
@@ -214,7 +224,7 @@ __set_ps1() {
     local jhbuild='${UNDER_JHBUILD:+(jhbuild) }'
     local virtualenv='$(__virtualenv_name "(%s) ")'
     local svn='$(__svn_ps1 " [svn:%s]")'
-    local git='$(__git_ps1 " [git:%s]")'
+    local git='$(__git_ps1_fancy " [git:%s]")'
     local hg='$(__hg_ps1 " [hg:%s]")'
     local bzr='$(__bzr_ps1 " [bzr:%s]")'
     if type jobs >&/dev/null; then
