@@ -1,15 +1,17 @@
 #!/bin/bash
 # assumes this directory is ~/dotfiles
 
-usage="usage: $0 [-n] [-v]
+usage="usage: $0 [-n] [-v] [-f]
 options:
   -n    don't make any changes
   -v    be more verbose (repeat for extra verbosity)
+  -f    force install even if files already exist (will rename to .old)
 "
 
 verbose=0
 dry_run=0
-while getopts hvn OPT; do
+force=0
+while getopts hvnf OPT; do
     case "$OPT" in
         h)
             printf "%s" "$usage"
@@ -20,6 +22,9 @@ while getopts hvn OPT; do
             ;;
         v)
             verbose=$((verbose + 1))
+            ;;
+        f)
+            force=$((force + 1))
             ;;
         *)
             printf '%s: unknown option %s\n' "$0" "$OPT" 1>&2
@@ -64,6 +69,14 @@ process() {
         elif [ -f "$skeleton" ] && cmp "$dotfile" "$skeleton" > /dev/null; then
             echo "identical to /etc/skel/ version, replacing $dotfile with symlink"
             run rm "$dotfile"
+        elif [ $force -ge 1 ]; then
+            if ! [ -e "$dotfile.old" ]; then
+                echo "forcefully replacing $dotfile, old version saved as $dotfile.old"
+                run mv "$dotfile" "$dotfile.old"
+            else
+                echo "contents differ, skipping: $dotfile $HOME/$target (ignoring -f because $dotfile.old exists)" 1>&2
+                return
+            fi
         else
             # print both files with a space so I can easily copy them
             # together and paste as arguments to vimdiff
