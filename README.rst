@@ -64,6 +64,23 @@ There's one exception, ``~/.mailcheckrc``, which is treated as local even if it
 doesn't have the ``.local`` suffix (because mailcheck doesn't support
 includes).
 
+You can source the install and update scripts instead of running, and that will
+automaticall refresh your current bash session (source the updated .profile and
+reload the updated .inputrc)::
+
+  . ~/dotfiles/install.sh
+  . ~/dotfiles/update.sh
+
+You can preview what the scripts will do by passing command-line options ::
+
+  -n    don't update anything, just say what would be done
+  -v    be verbose
+  -vv   be very verbose
+
+You can force overwriting of existing dotfiles if you know they're worthless ::
+
+  -f    force install even if files already exist (will rename to .old)
+
 
 Shortcomings
 ------------
