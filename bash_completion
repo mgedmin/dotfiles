@@ -7,11 +7,17 @@ _apt_packages()
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
     if [ $prev = -t ]; then
-        COMPREPLY=( $( apt-cache policy | grep "release.o=Debian,a=$cur" | \
-                       sed -e "s/.*a=\(\w*\).*/\1/" | uniq ) )
+        COMPREPLY=( $( compgen -W "$(apt-cache policy | egrep -o 'a=[^,]*|n=[^,]*' | cut -f2- -d= | sort -u)" -- "$cur" ) )
         return 0
     fi
-    COMPREPLY=( $( apt-cache pkgnames $cur 2> /dev/null ) )
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $( compgen -W "--purge --autoremove --download --reinstall --changelog{,-append}{,-only}" -- "$cur" ) )
+        return 0
+    fi
+    COMPREPLY=( $( apt-cache --no-generate pkgnames "$cur" 2> /dev/null ) )
+    if [[ "$cur" == ./* || "$cur" == /* ]]; then
+        _filedir "deb"
+    fi
     return 0
 }
 complete -F _apt_packages inst apt-changelog dpkg-changelog
