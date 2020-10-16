@@ -9,6 +9,9 @@ application/vnd.oasis.opendocument.text; odt2txt '%s'; copiousoutput
 application/pdf; evince '%s'; print=evince '%s'; test=test -n "$DISPLAY"
 application/pdf; pdftotext -layout '%s' -; print=print-attachment '%s'; copiousoutput
 
+# PNG images: sometimes people send them named *.jpg and eog complains
+image/png; eog '%s'; nametemplate=%s.png; test=test -n "$DISPLAY" && test -x /usr/bin/eog
+
 # Images
 image/*; eog '%s'; test=test -n "$DISPLAY" && test -x /usr/bin/eog
 image/*; gqview %s; test=test -n "$DISPLAY" && test -x /usr/bin/gqview
