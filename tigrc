@@ -1,10 +1,17 @@
 # http://jonas.nitro.dk/tig/tigrc.5.html
 
+# I don't like vertical splits
 set vertical-split = false
 
+# show git commit hash by default, which I want because then I can *search* for a git commit by id
 set main-view-id = true
 
+
 # https://github.com/jonas/tig/wiki/Bindings
+
+# Scroll with arrow keys (or mouse wheel in gnome-terminal)
+bind diff <Up> move-up
+bind diff <Down> move-down
 
 # Reload ~/.tigrc when 'S' is pressed
 bind generic S :source ~/.tigrc
