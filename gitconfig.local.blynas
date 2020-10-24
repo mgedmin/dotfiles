@@ -4,6 +4,9 @@
 [url "ssh://git@git.vaultit.org:23/"]
 	insteadOf = https://git.vaultit.org/
 
+[includeIf "gitdir:~/src/tilaajavastuu/"]
+	path = ~/.gitconfig.work
+
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh ~/.mutt ~/.gtimelog \
 		~/.local/share/applications \
