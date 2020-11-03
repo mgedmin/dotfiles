@@ -13,6 +13,14 @@ set main-view-id = true
 bind diff <Up> move-up
 bind diff <Down> move-down
 
+# but I want some way to move to next/previous commit
+# (these don't work: https://github.com/jonas/tig/issues/1046, but I can use ^U/^D or ^N/^P)
+bind generic <Ctrl-Up> previous
+bind generic <Ctrl-Down> next
+# would this work instead?  no, it would not (but at least this shows up in the help page)
+bind generic <Esc>[1;5A previous
+bind generic <Esc>[1;5B next
+
 # Reload ~/.tigrc when 'S' is pressed
 bind generic S :source ~/.tigrc
 
