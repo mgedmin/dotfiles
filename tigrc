@@ -14,6 +14,9 @@ bind diff <Up> move-up
 bind diff <Down> move-down
 
 # but I want some way to move to next/previous commit
+bind diff k previous
+bind diff j next
+
 # (these don't work: https://github.com/jonas/tig/issues/1046, but I can use ^U/^D or ^N/^P)
 bind generic <Ctrl-Up> previous
 bind generic <Ctrl-Down> next
