@@ -124,6 +124,7 @@ _muttfiledir()
         compopt -o filenames
         COMPREPLY=($(compgen -f -- "$folder/${cur:1}"))
         COMPREPLY=(${COMPREPLY[@]#$folder/})
+        [[ $cur == [+]* ]] && COMPREPLY=(${COMPREPLY[@]/#/+})
         return
     elif [[ $cur == !* ]]; then
         spoolfile="$(_muttconfvar spoolfile)"
