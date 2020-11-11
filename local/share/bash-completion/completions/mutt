@@ -106,7 +106,7 @@ _muttfiledir()
 
     muttrc=$(_muttrc)
     if [[ $cur == [=+]* ]]; then
-        folder="$($muttcmd -F "$muttrc" -Q folder 2>/dev/null | command sed -e 's|^folder=\"\(.*\)\"$|\1|')"
+        folder="$($muttcmd -F "$muttrc" -Q folder 2>/dev/null | command sed -e 's|^\(set \)\?folder *= *\"\(.*\)\"$|\2|')"
         : folder:=~/Mail
 
         # Match any file in $folder beginning with $cur
