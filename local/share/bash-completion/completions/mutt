@@ -73,7 +73,7 @@ _muttconfvar()
     local varname=$1 muttrc
 
     muttrc=$(_muttrc)
-    $muttcmd -Q $varname 2>/dev/null | command sed -e 's|^\(set \)\?'"$varname"' \?= \?\"\(.*\)\"$|\2|'
+    $muttcmd -F "$muttrc" -Q $varname 2>/dev/null | command sed -e 's|^\(set[[:space:]]\{1,\}\)\{0,1\}'"$varname"'[[:space:]]*=[[:space:]]*\"\(.*\)\"$|\2|'
 }
 
 # @param $1 (cur) Current word to complete
@@ -124,7 +124,8 @@ _muttfiledir()
         compopt -o filenames
         COMPREPLY=($(compgen -f -- "$folder/${cur:1}"))
         COMPREPLY=(${COMPREPLY[@]#$folder/})
-        [[ $cur == "${COMP_WORDS[$COMP_CWORD]}" ]] && COMPREPLY=(${COMPREPLY[@]/#/${cur:0:1}})
+        # Add the leading '=' or '+' sign when necessary.
+        [[ $cur == "${COMP_WORDS[COMP_CWORD]}" && ${#cur} -gt 1 ]] && COMPREPLY=(${COMPREPLY[@]/#/${cur:0:1}})
         return
     elif [[ $cur == !* ]]; then
         spoolfile="$(_muttconfvar spoolfile)"
