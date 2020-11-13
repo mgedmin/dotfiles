@@ -12,7 +12,8 @@
 		~/.local/share/applications \
 		~/sigs ~/blog ~/www \
 		~/Private/gnupg ~/Private/pwsafe
-	vim = ~/.vim/bundle/*
+	vim = ~/src/vim-plugins/*
+	all-vim = ~/.vim/bundle/*
 	src = ~/src/*
 	projects = ~/projects/*
 	zope = ~/src/zopefoundation/*
