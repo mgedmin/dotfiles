@@ -18,9 +18,7 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=50000
-HISTFILESIZE=50000
-# note: big ~/.bash_history costs in startup time
-# (stupid readline O(N**2) "append to end of singly-linked list" algorithm)
+HISTFILESIZE=500000
 
 # Save the history after every command
 # (note: PROMPT_COMMAND is overwritten by bashrc.title)
