@@ -41,7 +41,7 @@ _checkscreen() {
     if [[ -z $user ]] || ! [[ -d /var/run/screen/S-$user/ ]]; then
         return
     fi
-    local n=$(find "/var/run/screen/S-$user/" -type p|wc -l)
+    local n=$(find "/var/run/screen/S-$user/" -type p -o -type s|wc -l)
     _report "$n" screen "$user" "$WINDOW"
 }
 
