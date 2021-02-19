@@ -33,40 +33,18 @@
 #
 # URL shortcuts
 #
-[url "git://git.gnome.org/"]
-	insteadof = gnome:
-[url "https://github.com/"]
-	insteadof = github:
 [url "git@github.com:"]
-	pushInsteadOf = github:
 	pushInsteadOf = https://github.com/
-	pushInsteadOf = git://github.com/
-[url "git@gist.github.com:"]
-# e.g. git clone gist:1234.git
-# these work only if you git clone with the .git suffix :/
-	insteadof = gist:
-	pushInsteadOf = https://gist.github.com/
-	pushInsteadOf = git://gist.github.com/
 [url "git@gitlab.com:"]
 	pushInsteadOf = https://gitlab.com/
 [url "git@gitlab.gnome.org:"]
 	pushInsteadOf = https://gitlab.gnome.org/
-# I don't really use these
-[url "git://github.com/"]
-	insteadof = github-ro:
-[url "git@github.com:zopefoundation/"]
-	insteadof = zf:
 [url "git@github.com:mgedmin/"]
-	insteadof = my-github:
+	# there are really only two repos, https://gedmin.as/dotfiles and
+	# https://gedmin.as/scripts
 	pushInsteadOf = https://gedmin.as/
-[url "git@github.com:ProgrammersOfVilnius/"]
-	insteadof = pov:
-	insteadof = https://github.com/ProgrammersOfVilnius/
-[url "bzr::lp:"]
-# http://felipec.wordpress.com/2012/11/13/git-remote-hg-bzr-2/
-# anyway it doesn't work well
-	insteadof = lp:
 [url "ssh://git@git.vaultit.org:23/"]
+	# work stuff
 	insteadOf = https://git.vaultit.org/
 
 [alias]
