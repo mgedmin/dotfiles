@@ -46,6 +46,9 @@
 [url "ssh://git@git.vaultit.org:23/"]
 	# work stuff
 	insteadOf = https://git.vaultit.org/
+[url "ssh://git@gitlab.tilaajavastuu.fi:2222/"]
+	# work stuff
+	insteadOf = https://gitlab.tilaajavastuu.fi/
 
 [alias]
 # I'm used to this
