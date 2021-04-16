@@ -200,7 +200,7 @@
 
 # git update pulls latest stuff from upstream and cleans merged branches
 	up = !git update
-	update = !git checkout-if-not-already-on $(git main-branch) && git pull --ff-only && git clean-merged-branches
+	update = "!f() { git checkout-if-not-already-on $(git main-branch) && git pull --ff-only \"$@\" && git clean-merged-branches; }; f"
 
 # git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
 	checkout-if-not-already-on = "!f() { branch=$1; if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" != $branch ]; then git checkout $branch; fi; }; f"
