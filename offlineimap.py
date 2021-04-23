@@ -33,4 +33,10 @@ def prioritize(x):
 
 
 def mycmp(x, y):
-    return cmp(prioritize(x), prioritize(y))
+    a = prioritize(x)
+    b = prioritize(y)
+    if a > b:
+        return 1
+    if a < b:
+        return -1
+    return 0
