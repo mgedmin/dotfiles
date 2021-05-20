@@ -1,0 +1,2 @@
+[alias "all"]
+        irc = ~/.znc/users/mg/networks/*/moddata/log/

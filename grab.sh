@@ -65,7 +65,7 @@ for arg; do
             ;;
     esac
     dotfile=$HOME/.$fn
-    [[ $local -ne 0 || $force_local -ne 0 ]] && fn=$fn.$HOSTNAME
+    [[ $local -ne 0 || $force_local -ne 0 ]] && fn=$fn.${HOSTNAME%%.*}
     target=dotfiles/$fn
     if [ -L "$dotfile" ] && [ "$dotfile" -ef "$HOME/$target" ]; then
         continue # already a symlink to the right place

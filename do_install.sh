@@ -33,6 +33,8 @@ while getopts hvnf OPT; do
     esac
 done
 
+hostname=${HOSTNAME%%.*}
+
 # busybox ln doesn't support -r and we'll have to use absolute symlinks
 ln_dash_r=
 if ln --help |& grep -q -e '-r'; then
@@ -105,6 +107,9 @@ process_dir() {
             case "$fn" in
                 *.local.$HOSTNAME|mailcheckrc.$HOSTNAME)
                     dotfile=$HOME/.${fn%.$HOSTNAME}
+                    ;;
+                *.local.$hostname|mailcheckrc.$hostname)
+                    dotfile=$HOME/.${fn%.$hostname}
                     ;;
                 *.sh|*.local.*|mailcheckrc.*|core|core.*)
                     debug "skipping $fn"
