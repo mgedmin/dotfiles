@@ -1,2 +1,3 @@
-ca = 
-prefix = /home/mg/.local
+ca[]=
+prefix=/home/mg/.local
+cafile=/etc/ssl/certs/ca-certificates.crt
