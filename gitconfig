@@ -2,29 +2,62 @@
 [user]
 	name = Marius Gedminas
 	email = marius@gedmin.as
-	signingkey = 9157445DE7A6D78F
+	signingkey = 8121AD32F00A8094748A6CD09157445DE7A6D78F
 [color]
 	ui = auto
 	diff = auto
 	status = auto
-[commit]
-	verbose = true
-[push]
-	default = upstream
 [core]
 	excludesfile = ~/.gitignore_global
+[commit]
+# I want to see the diff when I'm editing the commit message, so I don't commit
+# debug prints and such
+	verbose = true
+[merge]
+	tool = vimdiff
+	conflictStyle = diff3
+[push]
+# at some point git push complained loudly about upcoming
+# backwards-incompatible policy changes if you didn't explicitly configure
+# push.default in your .gitconfig
+	default = upstream
+[fetch]
+	recurseSubmodules = on-demand
+	prune = true
+[rebase]
+	autosquash = true
+[pull]
+	rebase = true
+[init]
+# needs git 2.28, which means Ubuntu 21.04 or newer
+	defaultBranch = main
+
+#
+# I wonder if I still need anyting in this section
+#
+
+[diff]
+# this needs git 2.9, but goes away in git 2.12
+	compactionHeuristic = true
+# this needs git 2.11 and is said to be better than the above
+	indentHeuristic = true
 [instaweb]
+# TBH I don't like git instaweb, I don't know how to kill the background
+# process it leaves running.
 	httpd = apache2 -f
 [web]
-	browser = chromium
+# What even is this, I don't remember
+	browser = xdg-open
 [cola]
+# What even is this, I don't remember, probably added by some tool
 	spellcheck = false
-
+[gitreview]
+# What even is this?
+	username = mgedmin
 [bz]
 # git-bz plugin
 # http://git.fishsoup.net/man/git-bz.html
-	browser = chromium
-
+	browser = xdg-open
 [github]
 # https://github.com/blog/180-local-github-config
 # I'm not sure anything uses this any more, now that basic token auth is gone
@@ -41,18 +74,18 @@
 [url "git@gitlab.gnome.org:"]
 	pushInsteadOf = https://gitlab.gnome.org/
 [url "git@github.com:mgedmin/"]
-	# there are really only two repos, https://gedmin.as/dotfiles and
-	# https://gedmin.as/scripts
+	# there are really only three repos, https://gedmin.as/dotfiles,
+	# https://gedmin.as/scripts, and https://gedmin.as/dotvim
 	pushInsteadOf = https://gedmin.as/
 [url "ssh://git@git.vaultit.org:23/"]
 	# work stuff
 	insteadOf = https://git.vaultit.org/
 [url "ssh://git@gitlab.tilaajavastuu.fi:2222/"]
-	# work stuff
+	# old work stuff
 	insteadOf = https://gitlab.tilaajavastuu.fi/
 
 [alias]
-# I'm used to this
+# I'm used to these
 	st = status
 	ci = commit -v
 	co = checkout
@@ -273,33 +306,12 @@
 	open-mr = "!f() { id=${1:?usage git open-mr NNN}; url=$(gitlab -o json project-merge-request get --iid $id --project-id $(git gitlab-project-id) | jq -r '.web_url'); printf '%s\n' $url; xdg-open $url; }; f"
 	review-mr = "!f() { git mr \"$@\" && git review; }; f"
 
-# other
-
+# configuration for the `git all` and related `git wm`/`git wmq` aliases
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles /etc /root /usr/local/bin /usr/local/sbin
 	root = /etc /root /usr/local/bin /usr/local/sbin
-
-[diff]
-# this needs git 2.9, but goes away in git 2.12
-	compactionHeuristic = true
-# this needs git 2.11 and is said to be better than the above
-	indentHeuristic = true
-[merge]
-	tool = gvimdiff
-	conflictStyle = diff3
-[fetch]
-	recurseSubmodules = on-demand
-	prune = true
-[rebase]
-	autosquash = true
-[gitreview]
-	username = mgedmin
 
 # allow ~/.gitconfig.local to override anything (works with git 1.7.10+, which
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
-[pull]
-	rebase = true
-[init]
-	defaultBranch = main
