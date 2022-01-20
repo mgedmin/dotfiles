@@ -16,6 +16,9 @@ image/png; eog '%s'; nametemplate=%s.png; test=test -n "$DISPLAY" && test -x /us
 image/*; eog '%s'; test=test -n "$DISPLAY" && test -x /usr/bin/eog
 image/*; gqview %s; test=test -n "$DISPLAY" && test -x /usr/bin/gqview
 
+# pipx install https://github.com/mgedmin/qr2text
+image/svg+xml; qr2text '%s'; test=test -x "$HOME"/.local/bin/qr2text; copiousoutput
+
 # HTML
 text/html; /usr/bin/links -html-assume-codepage %{charset} '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
 # maybe also consider -html-hard-assume 1
