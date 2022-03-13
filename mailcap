@@ -24,7 +24,7 @@ text/html; /usr/bin/links -html-assume-codepage %{charset} '%s'; needsterminal; 
 # maybe also consider -html-hard-assume 1
 
 # from http://wiki.mutt.org/?MuttFaq/Charset
-text/html; /usr/bin/w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
+text/html; /usr/bin/w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset} | sed -e 's/  *$//' | cat -s; copiousoutput; description=HTML Text
 
 # ZIP
 application/x-zip-compressed; unzip -l %s; copiousoutput
