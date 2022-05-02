@@ -26,3 +26,6 @@
 # hmm ~/src/* vs ~/projects/*?
 # I can 'git all push' ~/projects but not most things in ~/src
 # ~/.vim/bundle/* is also mixed between things I can and things I can't
+
+[safe]
+	directory = /media/guest/stuff16/pub
