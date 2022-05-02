@@ -1,2 +1,7 @@
 [alias "all"]
         irc = ~/.znc/users/mg/networks/*/moddata/log/
+[safe]
+	directory = /home/mgedmin/.znc/users/mg/networks/default/moddata/log
+	directory = /home/mgedmin/.znc/users/mg/networks/gimpnet/moddata/log
+	directory = /home/mgedmin/.znc/users/mg/networks/oftc/moddata/log
+	directory = /home/mgedmin/.znc/users/mg/networks/liberachat/moddata/log
