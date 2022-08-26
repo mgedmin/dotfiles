@@ -65,6 +65,8 @@ __git_ps1_fancy()
     # override some aspects of __git_ps1 in certain locations
     if [[ $PWD = /home/mg/Mail/Home ]]; then
         GIT_PS1_SHOWDIRTYSTATE= GIT_PS1_SHOWUNTRACKEDFILES= __git_ps1 "$@"
+    elif [[ $PWD == /run/* ]]; then
+        :
     else
         __git_ps1 "$@"
     fi
