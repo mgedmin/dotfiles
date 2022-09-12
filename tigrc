@@ -6,6 +6,8 @@ set vertical-split = false
 # show git commit hash by default, which I want because then I can *search* for a git commit by id
 set main-view-id = true
 
+# do I want this?
+# set mouse = true
 
 # https://github.com/jonas/tig/wiki/Bindings
 
