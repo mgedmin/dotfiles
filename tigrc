@@ -29,8 +29,8 @@ bind generic <Esc>[1;5B next
 # Reload ~/.tigrc when 'S' is pressed
 bind generic S :source ~/.tigrc
 
-# Interactive rebase
-bind main B !git rebase -i %(commit)
+# Interactive rebase -- conflicts with the github binding
+##bind main B !git rebase -i %(commit)
 
 # Add verbose flag to git-commit
 bind generic C !git commit -v
@@ -39,5 +39,6 @@ bind generic C !git commit -v
 bind main T !@git tag "%(prompt New tag name: )" %(commit)
 bind diff T !@git tag "%(prompt New tag name: )" %(commit)
 
-# Open the commit on Github
-bind generic B @sh -c "xdg-open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+# Open the commit on Github (doesn't work???)
+##bind generic B @sh -c "xdg-open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+bind generic B !sh -c "xdg-open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^. ]+' | head -1 | tr : /)'/commit/%(commit)'"
