@@ -71,7 +71,7 @@
 	pushInsteadOf = https://gist.github.com/mgedmin/
 [url "git@gitlab.com:"]
 	pushInsteadOf = https://gitlab.com/
-[url "git@gitlab.gnome.org:"]
+[url "git@ssh.gitlab.gnome.org:"]
 	pushInsteadOf = https://gitlab.gnome.org/
 [url "git@github.com:mgedmin/"]
 	# there are really only three repos, https://gedmin.as/dotfiles,
