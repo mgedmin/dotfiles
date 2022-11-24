@@ -89,11 +89,13 @@
 	st = status
 	ci = commit -v
 	co = checkout
+# Not used to this one yet, but 'switch' is clearly too long to type
+	sw = switch
 
 # A safer git push --force
 	fpush = push --force-with-lease
 
-# Push a new branch
+# Push a new branch, with some safety checks in case I forgot I'm not on a branch
 	do-push-branch = push -u origin HEAD
 	push-branch = "!master=$(git main-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
 
