@@ -10,3 +10,5 @@
 		$(eval "echo $(git config alias.all.dirs)") \
 		$(eval "echo $(git config alias.all.vim)") \
 		$(eval "echo $(git config alias.all.root)") \
+[safe]
+	directory = /var/cache/git/ivija.git
