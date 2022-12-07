@@ -9,6 +9,8 @@ else
   set ls=2 ch=2 sc ru is fdls=99
   if v:version >= 704
     set fo+=j
+    let &flp='^\s*\d\+[\]:.)}\t ]\s*'  " default value
+    let &flp.='\|^\s*[-*]\s'           " also recognize bulleted lists
   endif
   if exists("$LC_VIM_BACKGROUND")
     " vim has terminal background color detection, but it's unreliable
