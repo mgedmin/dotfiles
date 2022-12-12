@@ -1,0 +1,4 @@
+# https://github.com/Peltoche/lsd#config-file-content
+icons:
+  when: never
+  theme: unicode
