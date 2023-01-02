@@ -168,8 +168,8 @@
 # managing many git checkouts (these are great!)
 # configure with git config alias.all.dirs '/foo /bar ~/baz*'
 # extra sets configured with git config alias.all.FOO '...' and used with git all --FOO ...
-	all = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed /^\\/root/!s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
-	all-quiet = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then prefix=\"$(printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed /^\\/root/!s,^$HOME,~,)\")\"; cd $d && output=\"$(git \"$@\" 2>&1)\" || rc=1; test -z \"$output\" || printf %s \"$prefix\n$output\n\"; fi; done; exit $rc; }; f"
+	all = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed /^\\\\/root/!s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
+	all-quiet = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then prefix=\"$(printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed /^\\\\/root/!s,^$HOME,~,)\")\"; cd $d && output=\"$(git \"$@\" 2>&1)\" || rc=1; test -z \"$output\" || printf %s \"$prefix\n$output\n\"; fi; done; exit $rc; }; f"
 	whatsmodified = !git wm
 	wm = "!f() { git all \"$@\" short-status-with-branch-info; }; f"
 	wmq = "!f() { git all-quiet \"$@\" short-status-with-branch-info; }; f"
