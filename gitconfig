@@ -226,7 +226,7 @@
 
 # git main-branch [name] -- get or set the name of the default branch (usually 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
-	main-branch = "!f() { git config alias.main-branch.name \"$@\" || for c in main master devel; do test -e \"$(git rev-parse --git-path refs/heads/$c)\" && echo $c && break; done || git config init.defaultBranch || echo master; }; f"
+	main-branch = "!f() { git config alias.main-branch.name \"$@\" || for c in main master devel; do git show-ref --quiet --verify refs/heads/$c && echo $c && break; done || git config init.defaultBranch || echo master; }; f"
 
 # git list-merged-branches shows branches that have been merged to master
 	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[^ ]|^  (master|staging|live)$'; true; }; f"
