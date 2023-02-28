@@ -242,7 +242,7 @@ __set_ps1() {
     local restart_required="\\[${restart_required1}\\]${restart_required2}\\[${restart_required3}\\]"
     local no_restart_required='$(test -f /var/run/reboot-required || printf ":")'
     local shell=''
-    [ -n "$SSH_TTY" ] && shell='🐌'
+    [ -n "$SSH_TTY" ] && shell='🐚'
     PS1="${cr}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required}${shell} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ "
 }
 
