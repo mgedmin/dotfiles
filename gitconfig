@@ -83,6 +83,10 @@
 [url "ssh://git@gitlab.tilaajavastuu.fi:2222/"]
 	# old work stuff
 	insteadOf = https://gitlab.tilaajavastuu.fi/
+	insteadOf = https://git.vaultit.org/
+[url "git@ssh.dev.azure.com:v3/vaultit/BOL/"]
+	# work stuff
+	insteadOf = https://dev.azure.com/vaultit/BOL/_git/
 
 [alias]
 # I'm used to these
