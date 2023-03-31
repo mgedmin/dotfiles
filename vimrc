@@ -41,6 +41,9 @@ else
   map <expr> ,R ":e ".expand("%:r")."."
   " insert line under cursor
   cnoremap <C-R><C-L> <C-R>=getline(".")<CR>
+  " search for selected text
+  vnoremap * y/\V<C-R>=substitute(escape(@@,"/\\"),"\n","\\\\n","ge")<CR><CR>
+  vnoremap # y?\V<C-R>=substitute(escape(@@,"?\\"),"\n","\\\\n","ge")<CR><CR>
   set pastetoggle=<F11>
   augroup VIMRC
     au!
