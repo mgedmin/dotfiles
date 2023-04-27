@@ -20,11 +20,16 @@ if [ -z "$MC_SID" ]; then
     xterm*|rxvt*)
         xterm_title=1
         ;;
-    screen*|tmux*)
-        if [ -n "$DISPLAY" ]; then
+    screen*)
+        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_AUTH_SOCK}" ]; then
             xterm_title=1
-        elif [ -n "$SSH_AUTH_SOCK" ]; then
+            TITLE_PREFIX="[screen] "
+        fi
+        ;;
+    tmux*)
+        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_AUTH_SOCK}" ]; then
             xterm_title=1
+            TITLE_PREFIX="[tmux] "
         fi
         ;;
     esac
