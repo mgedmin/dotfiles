@@ -20,7 +20,7 @@ if [ -z "$MC_SID" ]; then
     xterm*|rxvt*)
         xterm_title=1
         ;;
-    screen*)
+    screen*|tmux*)
         if [ -n "$DISPLAY" ]; then
             xterm_title=1
         elif [ -n "$SSH_AUTH_SOCK" ]; then
