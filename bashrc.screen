@@ -17,7 +17,7 @@ _report() {
     if [[ $USER != $user || -n $SUDO_USER ]]; then
         msg="$msg as $user"
     fi
-    if [[ $TERM =~ ^screen ]]; then
+    if [[ $TERM =~ ^$tool ]]; then
         export TITLE_SUFFIX=" {$tool}"
         if [[ -n $active && -z $SUDO_USER ]]; then
             if [[ $n -eq 1 ]]; then
