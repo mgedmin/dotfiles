@@ -293,7 +293,7 @@
 	url = "!f() { remote=${1:-origin}; git config remote.\"$remote\".url; }; f"
 
 # open the repository in a browser
-	open-url = !xdg-open $(git url)
+	open-url = "!f() { xdg-open $(git url \"$@\"); }; f"
 
 # make a second clone using the first one as a reference
 # (you will regret this, use git worktree add instead)
