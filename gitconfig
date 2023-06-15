@@ -290,7 +290,7 @@
 # print the remote URL
 # NB: I don't want to use git remote get-url origin because I don't want insteadOf expansion that
 # converts password-protected https:// links I can click on to ssh:// links that I can't.
-	url = config remote.origin.url
+	url = "!f() { remote=${1:-origin}; git config remote.\"$remote\".url; }; f"
 
 # open the repository in a browser
 	open-url = !xdg-open $(git url)
