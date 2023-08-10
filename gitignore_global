@@ -1,9 +1,18 @@
+# These are droppings I tend to leave all over the place
+##mg.cfg
+##src/profilehooks.py
+
+# vim swap files
 .*.sw[a-p]
 .sw[a-p]
 .s[vuts][a-z]
 
-# These are droppings I tend to leave all over the place
-mg.cfg
+# random cProfile output files
 prof.out
-src/profilehooks.py
+
+# my buildout-tags script
 .tags.new
+
+# vim-gutentags
+tags.lock
+tags.temp
