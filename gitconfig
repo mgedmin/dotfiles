@@ -90,6 +90,9 @@
 [url "git@ssh.dev.azure.com:v3/vaultit/Common/"]
 	# work stuff
 	insteadOf = https://dev.azure.com/vaultit/Common/_git/
+[url "git@ssh.dev.azure.com:v3/vaultit/ServicePortal/"]
+	# work stuff
+	insteadOf = https://dev.azure.com/vaultit/ServicePortal/_git/
 
 [alias]
 # I'm used to these
