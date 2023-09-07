@@ -1,6 +1,9 @@
 # readline config file
 # in bash, use 'bind -f ~/.inputrc' to reload
 
+# Ubuntu's /etc/inputrc contains some bindings for ctrl-left/right etc.
+$include /etc/inputrc
+
 # colors are good yes
 set colored-completion-prefix on
 set colored-stats on
@@ -18,10 +21,6 @@ set skip-completed-text on
 # http://linuxart.com/log/archives/2005/10/13/search-history-in-bash/
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward
-
-# Ctrl+left/right in gnome-terminal
-"\e[1;5D": backward-word
-"\e[1;5C": forward-word
 
 # Alt+left/right in gnome-terminal
 "\e[1;3D": backward-word
