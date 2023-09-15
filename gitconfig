@@ -234,7 +234,7 @@
 # git rename-current-branch NAME renames the current branch
 	rename-current-branch = branch -m
 
-# git main-branch [name] -- get or set the name of the default branch (usually 'master')
+# git main-branch [name] -- get or set the name of the default branch (usually 'main' or 'master')
 # used by other aliases such as 'git list-merged-branches' or 'git up'
 	main-branch = "!f() { git config alias.main-branch.name \"$@\" || for c in main master devel; do git show-ref --quiet --verify refs/heads/$c && echo $c && break; done || git config init.defaultBranch || echo master; }; f"
 
