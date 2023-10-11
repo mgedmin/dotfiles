@@ -21,13 +21,13 @@ if [ -z "$MC_SID" ]; then
         xterm_title=1
         ;;
     screen*)
-        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_AUTH_SOCK}" ]; then
+        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_TTY}${SSH_AUTH_SOCK}" ]; then
             xterm_title=1
             TITLE_PREFIX="[screen] "
         fi
         ;;
     tmux*)
-        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_AUTH_SOCK}" ]; then
+        if [ -n "${DISPLAY}${WAYLAND_DISPLAY}${SSH_TTY}${SSH_AUTH_SOCK}" ]; then
             xterm_title=1
             TITLE_PREFIX="[tmux] "
         fi
