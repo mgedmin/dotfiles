@@ -4,13 +4,6 @@
 alias pip='python -m pip'
 alias pydoc='python -m pydoc'
 
-# detox is dead, but a short spelling for tox -p auto is nice
-alias detox='tox -p auto'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # wow
 # such commit
 # very push
@@ -24,21 +17,5 @@ alias exa='exa --group-directories-first'
 
 # hide squashfs mounts please, my ubuntu has so many
 alias lsblk='lsblk -e 7'
-
-# pipx install thefuck, and I already forgot what it does.
-function fuck () {
-    TF_PYTHONIOENCODING=$PYTHONIOENCODING;
-    export TF_SHELL=bash;
-    export TF_ALIAS=fuck;
-    export TF_SHELL_ALIASES=$(alias);
-    export TF_HISTORY=$(fc -ln -10);
-    export PYTHONIOENCODING=utf-8;
-    TF_CMD=$(
-        thefuck THEFUCK_ARGUMENT_PLACEHOLDER "$@"
-    ) && eval "$TF_CMD";
-    unset TF_HISTORY;
-    export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
-    history -s $TF_CMD;
-}
 
 # vim: ft=sh
