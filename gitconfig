@@ -231,7 +231,7 @@
 	tags = tag -l
 
 # git branches lists all interesting branches
-	branches = "!f() { git branch --color=always \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
+	branches = "!f() { test -t 1 && color=always || color=never; git branch --color=\"$color\" \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
 
 # git rename-current-branch NAME renames the current branch
 	rename-current-branch = branch -m
