@@ -1,4 +1,5 @@
 export LC_VIM_BACKGROUND=dark
+alias docker-compose='docker compose'
 if [ -n "$PS1" ] && [ "$(id -u)" -ne 0 ]; then
     # only for interactive sessions please
     if [ -x /usr/bin/mailq ]; then
