@@ -1,6 +1,6 @@
 # Word
 application/msword; catdoc -d utf-8 %s; copiousoutput
-application/vnd.openxmlformats-officedocument.wordprocessingml.documen; docx2txt '%s' -; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt '%s' -; copiousoutput
 
 # LibreOffice
 application/vnd.oasis.opendocument.text; odt2txt '%s'; copiousoutput
