@@ -23,35 +23,36 @@ if (sys.version_info < (3, 13) and os.getenv('TERM') in ('xterm-256color',
         sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
         sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
 
-# Tab-completion!
-try:
-    import readline  # noqa: imported for side effects only
-except ImportError:
-    print("Module readline not available.")
-else:
-    # Persistent history!
-    histfile = os.path.expanduser('~/.pythonhistory')
+# Tab-completion for older Python versions!
+if sys.version_info < (3, 13):
     try:
-        readline.read_history_file(histfile)
-    except IOError:
-        pass
-
-    def write_history(readline=readline, histfile=histfile):
+        import readline  # noqa: imported for side effects only
+    except ImportError:
+        print("Module readline not available.")
+    else:
+        # Persistent history!
+        histfile = os.path.expanduser('~/.pythonhistory')
         try:
-            readline.write_history_file(histfile)
+            readline.read_history_file(histfile)
         except IOError:
-            # root, nfs-mounted home with root_squash -> permission denied
             pass
 
-    import atexit
-    atexit.register(write_history)
-    del histfile, atexit, write_history
+        def write_history(readline=readline, histfile=histfile):
+            try:
+                readline.write_history_file(histfile)
+            except IOError:
+                # root, nfs-mounted home with root_squash -> permission denied
+                pass
 
-    # Tab completion
-    import rlcompleter
-    readline.parse_and_bind("tab: complete")
-    del rlcompleter
-    del readline
+        import atexit
+        atexit.register(write_history)
+        del histfile, atexit, write_history
+
+        # Tab completion
+        import rlcompleter
+        readline.parse_and_bind("tab: complete")
+        del rlcompleter
+        del readline
 
 # reload() on Python 3
 try:
