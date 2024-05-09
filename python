@@ -11,9 +11,10 @@
 import os
 import sys
 
-# Coloured prompt
-if os.getenv('TERM') in ('xterm', 'xterm-256color', 'putty', 'rxvt',
-                         'screen', 'screen-256color', 'Eterm', 'vt100'):
+# Coloured prompt for older Python versions
+if (sys.version_info < (3, 13) and os.getenv('TERM') in ('xterm-256color',
+    'screen-256color', 'tmux-256color', 'xterm', 'screen', 'tmux', 'rxvt',
+    'putty', 'Eterm', 'vt100')):
     try:
         import readline
     except ImportError:
