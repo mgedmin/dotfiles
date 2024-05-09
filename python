@@ -12,16 +12,23 @@ import os
 import sys
 
 # Coloured prompt for older Python versions
-if (sys.version_info < (3, 13) and os.getenv('TERM') in ('xterm-256color',
-    'screen-256color', 'tmux-256color', 'xterm', 'screen', 'tmux', 'rxvt',
-    'putty', 'Eterm', 'vt100')):
-    try:
-        import readline
-    except ImportError:
-        pass
+if os.getenv('TERM') in (
+    'xterm-256color', 'screen-256color', 'tmux-256color', 'xterm', 'screen',
+    'tmux', 'rxvt', 'putty', 'Eterm', 'vt100',
+):
+    if sys.version_info < (3, 13):
+        try:
+            import readline
+        except ImportError:
+            pass
+        else:
+            sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
+            sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
     else:
-        sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
-        sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
+        # To change the colors for CPython 3.13+ I must not use \001 \002 or
+        # it will crash: https://github.com/python/cpython/issues/118835
+        sys.ps1 = '\033[0;32m>>> '
+        sys.ps2 = '\033[0;32m... '
 
 # Tab-completion for older Python versions!
 if sys.version_info < (3, 13):
