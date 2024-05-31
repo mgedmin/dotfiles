@@ -5,6 +5,7 @@
 (( bashrc_start_time_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 ))
 
 # Load system-wide bashrc
+# (XXX but it's called /etc/bash.bashrc? what is going on here?)
 if [ -f /etc/bashrc ]; then
     # don't let it set PS1 for non-interactive sessions
     saved_PS1="$PS1"
