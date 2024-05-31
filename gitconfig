@@ -66,6 +66,8 @@
 #
 # URL shortcuts
 #
+[url "git@fridge:/git/"]
+	insteadOf = fridge:/git/
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
 	pushInsteadOf = https://gist.github.com/mgedmin/
