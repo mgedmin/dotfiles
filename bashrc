@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+(( bashrc_start_time_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 ))
+
 # Load system-wide bashrc
 if [ -f /etc/bashrc ]; then
     # don't let it set PS1 for non-interactive sessions
@@ -69,4 +71,7 @@ fi
 # Set xterm title (should be the last thing in this file)
 if [ -n "$PS1" ] && [ -f ~/.bashrc.title ]; then
     . ~/.bashrc.title
+    (( bashrc_duration_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 - bashrc_start_time_ms ))
+    echo "bashrc took ${bashrc_duration_ms}ms"
+    enable_title
 fi

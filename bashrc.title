@@ -84,12 +84,18 @@ if [ $xterm_title -ne 0 ]; then
     }
     # show_command_in_title_bar ignores arguments, so by passing $_ we
     # can avoid bash destroying the original $_ value
-    trap 'show_command_in_title_bar "$_"' DEBUG
+    enable_title() {
+        trap 'show_command_in_title_bar "$_"' DEBUG
+    }
 else
     # Do some work for bashrc.prompt
-    trap 'update_cmdstart "$_"' DEBUG
+    enable_title() {
+        trap 'update_cmdstart "$_"' DEBUG
+    }
 fi
 # the debug trap installation should be the last thing in this file: it'll
 # be executed for everything now, and you don't every .bashrc statement to
-# show up in your xterm title, do you?
+# show up in your xterm title, do you?  in fact, let's not install the trap
+# here in case ~/.bashrc wants to do something after .bashrc.title, let's
+# let it call enable_title itself
 # vim: ft=sh

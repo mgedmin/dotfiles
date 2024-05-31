@@ -5,11 +5,11 @@ if [ -n "$PS1" ] && [ "$(id -u)" -ne 0 ]; then
     if [ -x /usr/bin/mailq ]; then
         mailq | { grep -v "^Mail queue is empty" || true; }
     fi
-    # is my bluetooth stuck on ON again??? -- hangs on 24.04 LTS, do not run
+    # is my bluetooth stuck on ON again??? -- slow?
     ## bluetoothctl show | grep -E '(Discoverable|Pairable): yes' || true
 fi
 
 # added by NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm, slow (+300ms)!
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
