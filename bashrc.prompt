@@ -62,7 +62,7 @@ turn_on_git_details
 
 __git_ps1_fancy()
 {
-    # override some aspects of __git_ps1 in certain locations
+    # override some aspects of __git_ps1 in certain locations because slooooow
     if [[ $PWD = /home/mg/Mail/Home ]]; then
         GIT_PS1_SHOWDIRTYSTATE= GIT_PS1_SHOWUNTRACKEDFILES= __git_ps1 "$@"
     elif [[ $PWD == /run/* ]]; then
@@ -72,14 +72,19 @@ __git_ps1_fancy()
     fi
 }
 
+__has_dot_dir()
+{
+    # this is a hack
+    test -d $1 || test -d ../$1 || test -d ../../$1 || test -d ../../../$1 || test -d ../../../../$1
+}
+
 # svn branch name in shell prompt
 # based on /etc/bash_completion.d/git and https://gist.github.com/657287
 # (the latter is from http://edgar.tumblr.com/post/1449437754/show-ruby-version-and-svn-git-branch-in-prompt)
 # oh and also http://hocuspokus.net/2009/07/add-git-and-svn-branch-to-bash-prompt/
 __svn_ps1()
 {
-    # XXX: svn 1.7 no longer has .svn in every directory
-    if [ -d .svn ]; then
+    if __has_dot_dir .svn; then
         local svn_info="$(svn info 2> /dev/null | command egrep '^URL: ')"
         local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
         local trunk_pattern="^URL: .*/trunk(/.*)?$"
@@ -100,7 +105,7 @@ __svn_ps1()
 # in the core?
 __hg_ps1()
 {
-    if [ -x /usr/bin/hg ] && [ -n "$(hg root 2> /dev/null)" ]; then
+    if __has_dot_dir .hg && [ -x /usr/bin/hg ] && [ -n "$(hg root 2> /dev/null)" ]; then
         printf -- "$1" "$(hg branch)"
     fi
 }
@@ -113,7 +118,7 @@ __bzr_ps1()
     # Every 'bzr root' invocation that finds no bzr root spews tracebacks
     # into into ~/.bzr.log, so we're doing this only if a dir has a .bzr
     # (and this is wrong and buggy but meh)
-    if [ -d .bzr ] && [ -x /usr/bin/bzr ] && [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
+    if __has_dot_dir .bzr && [ -x /usr/bin/bzr ] && [ -n "$(bzr --no-plugins root 2> /dev/null)" ]; then
         printf -- "$1" "$(bzr --no-plugins nick)"
     fi
 }
