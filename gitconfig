@@ -203,6 +203,9 @@
 # clean pull request branches
 	clean-pull-requests = "!f() { git for-each-ref \"refs/heads/pull/*\" --format \"%(refname:short)\" | xargs -r git branch -D; }; f"
 
+# 'hub fork' was nice, when it worked.  This kind of works, except it adds the git@github.com URL for the new remote instead of the https:// URL that I'd prefer.
+	fork = !gh repo fork --remote --remote-name mgedmin
+
 # use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
 # NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash -r
