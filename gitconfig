@@ -97,6 +97,8 @@
 	insteadOf = https://dev.azure.com/vaultit/ServicePortal/_git/
 [url "git@ssh.dev.azure.com:v3/vaultit/Company/"]
 	insteadOf = https://dev.azure.com/vaultit/Company/_git/
+[url "git@ssh.dev.azure.com:v3/vaultit/Core/"]
+	insteadOf = https://dev.azure.com/vaultit/Core/_git/
 
 [alias]
 # I'm used to these
