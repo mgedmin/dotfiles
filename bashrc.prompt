@@ -241,11 +241,11 @@ __set_ps1() {
     fi
     # I want a tooltip listing the packages, but terminals don't support tooltips
     # but they do support hyperlinks and display the target as a tooltip
-    local restart_required1='$(test -f /var/run/reboot-required && printf "\\033]8;;%s\\033\\\\" "$(cat /var/run/reboot-required.pkgs|tr \\\\n " ")")'
-    local restart_required2='$(test -f /var/run/reboot-required && printf "!")'
-    local restart_required3='$(test -f /var/run/reboot-required && printf "\\033]8;;\\033\\\\")'
+    local restart_required1='$(test -f /run/reboot-required && printf "\\033]8;;%s\\033\\\\" "$(cat /run/reboot-required*|tr \\\\n " ")")'
+    local restart_required2='$(test -f /run/reboot-required && printf "!")'
+    local restart_required3='$(test -f /run/reboot-required && printf "\\033]8;;\\033\\\\")'
     local restart_required="\\[${restart_required1}\\]${restart_required2}\\[${restart_required3}\\]"
-    local no_restart_required='$(test -f /var/run/reboot-required || printf ":")'
+    local no_restart_required='$(test -f /run/reboot-required || printf ":")'
     local shell=''
     # ssh
     [ -n "$SSH_TTY" ] && shell='🐚'
