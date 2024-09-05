@@ -208,6 +208,9 @@
 # 'hub fork' was nice, when it worked.  This kind of works, except it adds the git@github.com URL for the new remote instead of the https:// URL that I'd prefer.
 	fork = !gh repo fork --remote --remote-name mgedmin
 
+# monitor github actions please
+	watch-gha = !uvx --from watchgha watch_gha_runs
+
 # use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
 # NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash -r
