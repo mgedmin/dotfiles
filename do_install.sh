@@ -34,10 +34,6 @@ while getopts hvnf OPT; do
 done
 
 hostname=${HOSTNAME%%.*}
-if [ "$hostname" = localhost ] && [ -n "$TERMUX_VERSION" ]; then
-    hostname=termux
-    debug "detected termux, overriding hostname to $hostname"
-fi
 
 # busybox ln doesn't support -r and we'll have to use absolute symlinks
 ln_dash_r=
@@ -126,6 +122,11 @@ process_dir() {
         fi
     done
 }
+
+if [ "$hostname" = localhost ] && [ -n "$TERMUX_VERSION" ]; then
+    hostname=termux
+    debug "detected termux, overriding hostname to $hostname"
+fi
 
 pushd ~/dotfiles/ > /dev/null || exit 1
 process_dir ""
