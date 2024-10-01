@@ -30,9 +30,9 @@ if ! declare -f __git_ps1 > /dev/null; then
         . /usr/share/git-core/contrib/completion/git-prompt.sh
     elif [ -e /etc/bash_completion.d/git ]; then
         . /etc/bash_completion.d/git
-    elif [ -e $PREFIX/usr/etc/bash_completion.d/git-completion.bash/data/data/com.termux/files/usr/etc/bash_completion.d/git-completion.bash ]; then
+    elif [ -e $PREFIX/usr/etc/bash_completion.d/git-prompt.sh ]; then
         # Termux
-        . $PREFIX/usr/etc/bash_completion.d/git-completion.bash/data/data/com.termux/files/usr/etc/bash_completion.d/git-completion.bash
+        . $PREFIX/usr/etc/bash_completion.d/git-prompt.sh
     else
         __git_ps1()
         {
