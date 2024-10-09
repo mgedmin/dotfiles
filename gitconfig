@@ -211,6 +211,9 @@
 # monitor github actions please
 	watch-gha = !uvx --from watchgha watch_gha_runs
 
+# show branch protection rules please
+	branch-protection = !gh api /repos/{owner}/{repo}/branches/$(git main-branch)/protection/required_status_checks/contexts
+
 # use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
 # NB: --autosquash doesn't work without -i :/
 	autosquash = rebase -i --autosquash -r
