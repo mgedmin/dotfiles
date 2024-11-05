@@ -1,0 +1,18 @@
+# Remove inaccessible directories from $PATH
+# See https://github.com/termux-play-store/termux-issues/issues/178
+# based on https://unix.stackexchange.com/a/108933/89841
+
+_removepath() {
+    dir=$1
+
+    _path=:$PATH:
+    _path=${_path//:$dir:/:}
+    _path=${_path#:}
+    PATH=${_path%:}
+}
+
+_removepath /system_ext/bin
+_removepath /system/bin
+_removepath /system/xbin
+_removepath /vendor/bin
+_removepath /vendor/xbin

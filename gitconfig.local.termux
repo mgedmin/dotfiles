@@ -1,3 +1,5 @@
+[alias "all"]
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/pwsafe
+
 [safe]
-	directory = /data/data/com.termux/files/home/pwsafe
 	directory = /storage/emulated/0/pwsafe
