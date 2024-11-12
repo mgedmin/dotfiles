@@ -2,6 +2,8 @@
 --extras=+f
 --fields=+n
 
+--map-Python=+.pyi
+
 --exclude=.tox
 --exclude=*.pxd
 --exclude=*.pyx
