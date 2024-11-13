@@ -14,6 +14,7 @@
 [safe]
 	directory = \
 		/var/cache/git/ivija.git \
+		/var/cache/git/ivija-packaging.git \
 		/var/cache/git/pov-sysadmin-manual.git \
 		/var/cache/git/collectd-zservertracelog.git \
 
