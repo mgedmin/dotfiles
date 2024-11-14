@@ -13,7 +13,7 @@ PS1_SLOW_COMMAND=10
 __virtualenv_name() {
     if [ -n "$VIRTUAL_ENV" ]; then
         name=$(basename "$VIRTUAL_ENV")
-        if [ "$name" = "__" ]; then
+        if [[ $name == "__" || $name == ".venv" ]]; then
             name=$(basename "$(dirname "$VIRTUAL_ENV")")
         fi
         printf -- "$1" "$name"
