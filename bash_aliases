@@ -18,6 +18,40 @@ alias exa='exa --group-directories-first'
 # hide squashfs mounts please, my ubuntu has so many
 alias lsblk='lsblk -e 7'
 
+# work on advent of code, eh
+aoc() {
+  local year=$(date +%Y)
+  local day=
+  local mkdir=no
+  if [ $(date +%m) = 12 ]; then
+    day=day$(date +%d)
+    mkdir=yes
+  fi
+  if [[ $1 == 20[0-9][0-9] ]]; then
+    year=$1
+    day=
+    mkdir=no
+    shift
+  fi
+  if [[ $1 == [0-9] ]]; then
+    day=day0$1
+    mkdir=no
+    shift
+  elif [[ $1 == [0-3][0-9] ]]; then
+    day=day$1
+    mkdir=no
+    shift
+  fi
+  cd ~/src/advent-of-code-$year || return 1
+  if [ -n "$day" ]; then
+    if [ $mkdir = yes ]; then
+      mkdir -p $day
+    fi
+    cd $day || return 1
+  fi
+}
+
+
 #
 # So I have ~/projects with a list of things I sometimes want to work on,
 # and I do a lot of cd ..; ls; cd next-thing-alphabetically
