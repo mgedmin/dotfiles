@@ -31,16 +31,17 @@ mq =
 shelve =
 purge =
 # extensions enabled by 'mach bootstrap'
-absorb = 
-histedit = 
-blackbox = 
-evolve = /home/mg/.mozbuild/evolve/hgext3rd/evolve
-push-to-try = /home/mg/.mozbuild/version-control-tools/hgext/push-to-try
-clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
-js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
+###absorb = 
+###histedit = 
+###blackbox = 
+###evolve = /home/mg/.mozbuild/evolve/hgext3rd/evolve
+###push-to-try = /home/mg/.mozbuild/version-control-tools/hgext/push-to-try
+###clang-format = /home/mg/.mozbuild/version-control-tools/hgext/clang-format
+###js-format = /home/mg/.mozbuild/version-control-tools/hgext/js-format
 
 [pager]
 pager = less -FRSX
+
 [tortoisehg]
 vdiff = gvimdiff
 
