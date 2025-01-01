@@ -26,6 +26,8 @@ aoc() {
   if [ $(date +%m) = 12 ]; then
     day=day$(date +%d)
     mkdir=yes
+  else
+    year=$((year - 1))
   fi
   if [[ $1 == 20[0-9][0-9] ]]; then
     year=$1
