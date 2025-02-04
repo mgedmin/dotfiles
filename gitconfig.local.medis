@@ -1,7 +1,10 @@
 [alias "all"]
         irc = ~/.znc/users/mg/networks/*/moddata/log/
 [safe]
+# so the cron script that checks git status won't complain about directories not being owned by root
+	directory = /home/mgedmin/.znc
 	directory = /home/mgedmin/.znc/users/mg/networks/default/moddata/log
 	directory = /home/mgedmin/.znc/users/mg/networks/gimpnet/moddata/log
 	directory = /home/mgedmin/.znc/users/mg/networks/oftc/moddata/log
+	directory = /home/mgedmin/.znc/users/mg/networks/mozilla/moddata/log
 	directory = /home/mgedmin/.znc/users/mg/networks/liberachat/moddata/log
