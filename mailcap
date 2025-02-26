@@ -3,6 +3,9 @@ application/msword; catdoc -d utf-8 %s; copiousoutput
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; lowriter %s &; test=test -n "$DISPLAY"
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s -; copiousoutput
 
+# Excel
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xlsx2csv --all --ignoreempty --delimiter x09 --outputencoding utf-8 %s | cat --squeeze-blank; nametemplate=%s.xlsx; copiousoutput
+
 # LibreOffice Writer
 application/vnd.oasis.opendocument.text; odt2txt %s; copiousoutput
 
