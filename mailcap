@@ -1,27 +1,27 @@
 # Word
 application/msword; catdoc -d utf-8 %s; copiousoutput
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; lowriter '%s' &; test=test -n "$DISPLAY"
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt '%s' -; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; lowriter %s &; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s -; copiousoutput
 
-# LibreOffice
-application/vnd.oasis.opendocument.text; odt2txt '%s'; copiousoutput
+# LibreOffice Writer
+application/vnd.oasis.opendocument.text; odt2txt %s; copiousoutput
 
 # pdf -- mutt always uses the first one for <enter> in attachment list; and copiousoutput for auto_view
-application/pdf; evince '%s' &; print=evince '%s'; test=test -n "$DISPLAY"
-application/pdf; pdftotext -layout '%s' -; print=print-attachment '%s'; copiousoutput
+application/pdf; evince %s &; print=evince %s; test=test -n "$DISPLAY"
+application/pdf; pdftotext -layout %s -; print=print-attachment %s; copiousoutput
 
 # PNG images: sometimes people send them named *.jpg and eog complains
-image/png; eog '%s' &; nametemplate=%s.png; test=test -n "$DISPLAY" && test -x /usr/bin/eog
+image/png; eog %s &; nametemplate=%s.png; test=test -n "$DISPLAY" && test -x /usr/bin/eog
 
 # Images
-image/*; eog '%s' &; test=test -n "$DISPLAY" && test -x /usr/bin/eog
+image/*; eog %s &; test=test -n "$DISPLAY" && test -x /usr/bin/eog
 image/*; gqview %s &; test=test -n "$DISPLAY" && test -x /usr/bin/gqview
 
 # pipx install qr2text
-image/svg+xml; qr2text '%s'; test=test -x "$HOME"/.local/bin/qr2text; copiousoutput
+image/svg+xml; qr2text %s; test=test -x "$HOME"/.local/bin/qr2text; copiousoutput
 
 # HTML
-text/html; /usr/bin/links -html-assume-codepage %{charset} '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
+text/html; /usr/bin/links -html-assume-codepage %{charset} %s; needsterminal; description=HTML Text; nametemplate=%s.html
 # maybe also consider -html-hard-assume 1
 
 # from http://wiki.mutt.org/?MuttFaq/Charset
