@@ -13,17 +13,28 @@
 # I want to see the diff when I'm editing the commit message, so I don't commit
 # debug prints and such
 	verbose = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	mnemonicPrefix = true
+	colorMoved = plain
 [merge]
 	tool = vimdiff
-	conflictStyle = diff3
+	conflictStyle = zdiff3
 [push]
 # at some point git push complained loudly about upcoming
 # backwards-incompatible policy changes if you didn't explicitly configure
 # push.default in your .gitconfig
 	default = upstream
+# auto-push tags
+	followTags = true
 [fetch]
 	recurseSubmodules = on-demand
 	prune = true
+	pruneTags = true
 [rebase]
 	autosquash = true
 [pull]
