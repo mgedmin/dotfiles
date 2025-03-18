@@ -23,7 +23,7 @@
 	colorMoved = plain
 [merge]
 	tool = vimdiff
-	conflictStyle = zdiff3
+	conflictStyle = diff3
 [push]
 # at some point git push complained loudly about upcoming
 # backwards-incompatible policy changes if you didn't explicitly configure
