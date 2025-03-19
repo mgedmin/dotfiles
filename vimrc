@@ -45,6 +45,16 @@ else
   vnoremap * y/\V<C-R>=substitute(escape(@@,"/\\"),"\n","\\\\n","ge")<CR><CR>
   vnoremap # y?\V<C-R>=substitute(escape(@@,"?\\"),"\n","\\\\n","ge")<CR><CR>
   set pastetoggle=<F11>
+  " :terminal conveniences
+  if has("terminal")
+    tnoremap <C-S-Up>     <C-W><Up>
+    tnoremap <C-S-Down>   <C-W><Down>
+    tnoremap <C-S-Left>   <C-W><Left>
+    tnoremap <C-S-Right>  <C-W><Right>
+    tnoremap <S-PageUp>   <C-W>N<PageUp>
+    tnoremap <S-PageDown> <C-W>N<PageDown>
+    tnoremap <C-W><Space> <C-W>.
+  endif
   augroup VIMRC
     au!
     " :h last-position-jump
