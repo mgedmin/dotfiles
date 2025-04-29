@@ -82,8 +82,12 @@
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
 	pushInsteadOf = https://gist.github.com/mgedmin/
-[url "git@github.com:ProgrammersOfVilnius/"]
-	insteadOf = https://github.com/ProgrammersOfVilnius/
+
+#[url "git@github.com:ProgrammersOfVilnius/"]
+# This semi-breaks Ansible, which tries to clone https:// and then gets back a
+# different remote URL from git ls-remote --get-url.
+#	insteadOf = https://github.com/ProgrammersOfVilnius/
+
 [url "git@gitlab.com:"]
 	pushInsteadOf = https://gitlab.com/
 [url "git@ssh.gitlab.gnome.org:"]
