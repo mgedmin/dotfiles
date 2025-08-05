@@ -45,6 +45,15 @@ else
   vnoremap * y/\V<C-R>=substitute(escape(@@,"/\\"),"\n","\\\\n","ge")<CR><CR>
   vnoremap # y?\V<C-R>=substitute(escape(@@,"?\\"),"\n","\\\\n","ge")<CR><CR>
   set pastetoggle=<F11>
+  " window switching
+  noremap <C-S-Up>     <C-W><Up>
+  noremap <C-S-Down>   <C-W><Down>
+  noremap <C-S-Left>   <C-W><Left>
+  noremap <C-S-Right>  <C-W><Right>
+  noremap! <C-S-Up>     <C-W><Up>
+  noremap! <C-S-Down>   <C-W><Down>
+  noremap! <C-S-Left>   <C-W><Left>
+  noremap! <C-S-Right>  <C-W><Right>
   " :terminal conveniences
   if has("terminal")
     tnoremap <C-S-Up>     <C-W><Up>
