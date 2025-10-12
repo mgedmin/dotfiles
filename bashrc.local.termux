@@ -16,3 +16,11 @@ _removepath /system/bin
 _removepath /system/xbin
 _removepath /vendor/bin
 _removepath /vendor/xbin
+
+# ssh-agent will run automatically if you do
+# 1. pkg install termux-services
+# 2. close and reopen shell to set some env vars from profile.d
+# 3. sv-enable ssh-agent
+# 4. probably close and reopen shell again?
+# but this doesn't set up SSH_AUTH_SOCK
+export SSH_AUTH_SOCK=/data/data/com.termux/files/usr/var/run/ssh-agent.socket
