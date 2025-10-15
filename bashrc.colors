@@ -43,4 +43,10 @@ else
     export BAT_THEME=OneHalfDark
 fi
 
+# ansible uses dark grey by default for these
+# my terminal's default background is dark grey; you do the math
+export ANSIBLE_COLOR_DOC_CONSTANT=white
+export ANSIBLE_COLOR_DEBUG=white
+
+
 # vim: ft=sh
