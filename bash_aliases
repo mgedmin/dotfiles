@@ -44,7 +44,7 @@ aoc() {
     mkdir=no
     shift
   fi
-  local dir=~/src/advent-of-code-$year
+  local dir=~/src/advent-of-code/$year
   if [ -n "$day" ]; then
     dir=$dir/$day
   fi

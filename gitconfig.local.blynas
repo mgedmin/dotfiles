@@ -18,6 +18,7 @@
 	vim = ~/src/vim-plugins/*
 	all-vim = ~/.vim/bundle/*
 	src = ~/src/*
+	aoc = ~/src/advent-of-code/*
 	projects = ~/projects/*
 	zope = ~/src/zopefoundation/*
 	root = /root /etc
