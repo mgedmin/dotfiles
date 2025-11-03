@@ -310,6 +310,8 @@
 # (I do not understand why diff needs the third dot and log absolutely cannot accept the third dot)
 	branch-diff = !git diff $(git main-branch)@{u}...
 	branch-log = !git log $(git main-branch)@{u}..
+# NB: git diff A...B syntax is likely to be removed from git 3.0; the replacement should be
+#	branch-diff = !git diff $(git merge-base $(git main-branch)@{u}) HEAD
 
 # print the name of the current branch
 	branch-name = symbolic-ref --short HEAD
