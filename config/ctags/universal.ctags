@@ -4,6 +4,11 @@
 
 --map-Python=+.pyi
 
+--kinds-python=-i
+--kinds-python=-x
+
+--tag-relative=always
+
 --exclude=.tox
 --exclude=*.pxd
 --exclude=*.pyx
