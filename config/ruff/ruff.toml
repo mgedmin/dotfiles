@@ -1,5 +1,5 @@
 [lint]
-extend-select = ["I"]
+extend-select = ["I", "W", "E"]
 
 [lint.isort]
 lines-after-imports = 2
