@@ -35,6 +35,9 @@ if [ -z "$MC_SID" ]; then
     esac
 fi
 
+[ -n "$SSH_TTY" ] && TITLE_SUFFIX=' 🐚'
+[ -n "$SSH_TTY" ] && [ -n "$SSH_AUTH_SOCK" ] && TITLE_SUFFIX=' 🐚🕵'
+
 if [ $xterm_title -ne 0 ]; then
     # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
     # and this overrides it.  Instead of fancy concatenation logic
