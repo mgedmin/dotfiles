@@ -24,3 +24,6 @@ _removepath /vendor/xbin
 # 4. probably close and reopen shell again?
 # but this doesn't set up SSH_AUTH_SOCK
 export SSH_AUTH_SOCK=/data/data/com.termux/files/usr/var/run/ssh-agent.socket
+
+# uv complains it can't hardlink
+export UV_LINK_MODE=copy
