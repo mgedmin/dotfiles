@@ -8,72 +8,58 @@
 # For more information see http://www.norvig.com/python-iaq.html
 # and also Tarek Ziade's _Expert_Pythom_Programming_ page 19
 #
-import os
-import sys
 
-# Coloured prompt for older Python versions
-if os.getenv('TERM') in (
-    'xterm-256color', 'screen-256color', 'tmux-256color', 'xterm', 'screen',
-    'tmux', 'rxvt', 'putty', 'Eterm', 'vt100',
-):
+def _setup_repl():
+    import os
+    import sys
+
+    # Coloured prompt for older Python versions
+    if os.getenv('TERM') in (
+        'xterm-256color', 'screen-256color', 'tmux-256color', 'xterm', 'screen',
+        'tmux', 'rxvt', 'putty', 'Eterm', 'vt100',
+    ):
+        if sys.version_info < (3, 13):
+            try:
+                import readline
+            except ImportError:
+                pass
+            else:
+                sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
+                sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
+        else:
+            # To change the colors for CPython 3.13+ I must not use \001 \002 or
+            # it will crash: https://github.com/python/cpython/issues/118835
+            sys.ps1 = '\033[0;32m>>> '
+            sys.ps2 = '\033[0;32m... '
+
+    # Tab-completion for older Python versions!
     if sys.version_info < (3, 13):
         try:
-            import readline
+            import readline  # noqa: imported for side effects only
         except ImportError:
-            pass
+            print("Module readline not available.")
         else:
-            sys.ps1 = '\001\033[0;32m\002>>> \001\033[0m\002'
-            sys.ps2 = '\001\033[0;32m\002... \001\033[0m\002'
-    else:
-        # To change the colors for CPython 3.13+ I must not use \001 \002 or
-        # it will crash: https://github.com/python/cpython/issues/118835
-        sys.ps1 = '\033[0;32m>>> '
-        sys.ps2 = '\033[0;32m... '
-
-# Tab-completion for older Python versions!
-if sys.version_info < (3, 13):
-    try:
-        import readline  # noqa: imported for side effects only
-    except ImportError:
-        print("Module readline not available.")
-    else:
-        # Persistent history!
-        histfile = os.path.expanduser('~/.pythonhistory')
-        try:
-            readline.read_history_file(histfile)
-        except IOError:
-            pass
-
-        def write_history(readline=readline, histfile=histfile):
+            # Persistent history!
+            histfile = os.path.expanduser('~/.pythonhistory')
             try:
-                readline.write_history_file(histfile)
+                readline.read_history_file(histfile)
             except IOError:
-                # root, nfs-mounted home with root_squash -> permission denied
                 pass
 
-        import atexit
-        atexit.register(write_history)
-        del histfile, atexit, write_history
+            def write_history(readline=readline, histfile=histfile):
+                try:
+                    readline.write_history_file(histfile)
+                except IOError:
+                    # root, nfs-mounted home with root_squash -> permission denied
+                    pass
 
-        # Tab completion
-        import rlcompleter
-        readline.parse_and_bind("tab: complete")
-        del rlcompleter
-        del readline
+            import atexit
+            atexit.register(write_history)
 
-# reload() on Python 3
-try:
-    reload
-except NameError:
-    try:
-        # Python 3.4
-        from importlib import reload
-    except ImportError:
-        # Python 3.3
-        from imp import reload  # noqa
+            # Tab completion
+            import rlcompleter
+            readline.parse_and_bind("tab: complete")
 
-# Cleanup
-del sys
-del os
 
-# vim: set ft=python :
+_setup_repl()
+del _setup_repl
