@@ -44,14 +44,8 @@ if [ $xterm_title -ne 0 ]; then
     # I just tacked 'history -a' here as well
     # Oh, and same for the __cmdstart=go thing.
     # And __vte_osc7
-    PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; __tilde="~"; printf "\e]0;%s%s%s@%s: %s%s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"; history -a; __exit_line $__rc'
-
-    # Since we overwrite the magic of /etc/profile.d/vte*.sh that's
-    # needed for gnome-terminal's $PWD detection, add it back here if
-    # necessary
-    if declare -f __vte_osc7 > /dev/null; then
-        PROMPT_COMMAND="$PROMPT_COMMAND; __vte_osc7"
-    fi
+    # And __vte_precmd
+    PROMPT_COMMAND='__rc=$?; __msg="rc=$? "; __vte_precmd; __tilde="~"; printf "\e]0;%s%s%s@%s: %s%s\a" "${TITLE_PREFIX}" "${__msg/rc=0 /}" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/$__tilde}" "${TITLE_SUFFIX}"; history -a; __exit_line $__rc; __vte_osc7'
 
     # __do_cmdstart needs to be the last thing in $PROMPT_COMMAND,
     # otherwise we start the command timer too early
@@ -73,7 +67,7 @@ if [ $xterm_title -ne 0 ]; then
             *\033*|*\007*|*\\e*)
                 # actually just avoid escapes of any kind in the title
                 ;;
-            history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7)
+            history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7|__vte_precmd)
                 # this is $PROMPT_COMMAND again, most likely
                 ;;
             *)
