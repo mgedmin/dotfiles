@@ -48,7 +48,7 @@ aoc() {
   if [ -n "$day" ]; then
     dir=$dir/$day
   fi
-  if [ $mkdir = yes ] && ![ -d $dir ]; then
+  if [ $mkdir = yes ] && ! [ -d $dir ]; then
     mkdir -p $dir
   fi
   cd $dir || return 1
