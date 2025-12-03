@@ -17,7 +17,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=50000
+HISTSIZE=500000
 HISTFILESIZE=500000
 
 # Save the history after every command
