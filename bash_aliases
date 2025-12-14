@@ -24,8 +24,11 @@ aoc() {
   local day=
   local mkdir=no
   if [ $(date +%m) = 12 ]; then
-    day=day$(date +%d)
-    mkdir=yes
+    # AOC has 12 days since 2025
+    if [ $(date +%d) -le 12 ]; then
+        day=day$(date +%d)
+        mkdir=yes
+    fi
   else
     year=$((year - 1))
   fi
