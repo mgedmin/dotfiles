@@ -22,9 +22,6 @@ if ! declare -f __vte_osc7 > /dev/null; then
         . /etc/profile.d/vte.sh
     elif [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte-2.91.sh ]; then
         . /etc/profile.d/vte-2.91.sh
-    else
-        __vte_osc7() { :; }
-        __vte_precmd() { :; }
     fi
 fi
 

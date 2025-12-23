@@ -39,6 +39,15 @@ fi
 [ -n "$SSH_TTY" ] && [ -n "$SSH_AUTH_SOCK" ] && TITLE_SUFFIX=' 🐚🕵'
 
 if [ $xterm_title -ne 0 ]; then
+    # bashrc.vte tries to get these declared, but vte.sh doesn't define them
+    # when TERM is not supported (e.g. screen*/tmux*)
+    if ! declare -f __vte_osc7 > /dev/null; then
+        __vte_osc7() { :; }
+    fi
+    if ! declare -f __vte_precmd > /dev/null; then
+        __vte_precmd() { :; }
+    fi
+
     # Note: I set PROMPT_COMMAND='history -a' elsewhere in my bashrc,
     # and this overrides it.  Instead of fancy concatenation logic
     # I just tacked 'history -a' here as well
