@@ -63,6 +63,7 @@ else
     tnoremap <S-PageUp>   <C-W>N<PageUp>
     tnoremap <S-PageDown> <C-W>N<PageDown>
     tnoremap <C-W><Space> <C-W>.
+    tnoremap <C-W><BS>    <C-W>.
   endif
   augroup VIMRC
     au!
