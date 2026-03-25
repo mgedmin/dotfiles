@@ -73,6 +73,8 @@ fi
 if [ -n "$PS1" ] && [ -f ~/.bashrc.title ]; then
     . ~/.bashrc.title
     (( bashrc_duration_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 - bashrc_start_time_ms ))
-    echo "bashrc took ${bashrc_duration_ms}ms"
+    if [ $bashrc_duration_ms -ge 100 ]; then
+        echo "bashrc took ${bashrc_duration_ms}ms"
+    fi
     enable_title
 fi
