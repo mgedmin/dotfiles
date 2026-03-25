@@ -76,7 +76,7 @@ if [ $xterm_title -ne 0 ]; then
             *\033*|*\007*|*\\e*)
                 # actually just avoid escapes of any kind in the title
                 ;;
-            history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7|__vte_precmd)
+            history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7|__vte_precmd|__tilde=*|__rc=*|__msg=*)
                 # this is $PROMPT_COMMAND again, most likely
                 ;;
             *)
