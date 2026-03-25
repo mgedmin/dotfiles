@@ -9,6 +9,8 @@
 	status = auto
 [core]
 	excludesfile = ~/.gitignore_global
+# Git for Windows ships an /etc/gitconfig that sets core.editor = nano.exe!
+	editor = vim
 [commit]
 # I want to see the diff when I'm editing the commit message, so I don't commit
 # debug prints and such

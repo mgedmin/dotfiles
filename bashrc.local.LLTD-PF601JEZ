@@ -1,1 +1,2 @@
 export LC_VIM_BACKGROUND=dark
+export MSYS=winsymlinks:nativestrict
