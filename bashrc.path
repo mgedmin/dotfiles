@@ -23,6 +23,7 @@ _addpath /usr/local/bin
 _addpath /usr/local/sbin
 _addpath /usr/games
 _addpath_if_exists /usr/lib/ccache
+_addpath_if_exists /usr/lib/cargo/bin  # because of fd-find/fdclone name clash
 _addpath_if_exists "$HOME"/android/tools
 _addpath_if_exists "$HOME"/android/platform-tools
 _addpath_if_exists "$HOME"/gocode/bin
