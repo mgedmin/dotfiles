@@ -1,2 +1,7 @@
-export LC_VIM_BACKGROUND=dark
+# for git bash
 export MSYS=winsymlinks:nativestrict
+# for WSL (unnecessary, if you apt install wslu, wslview becomes the default
+# x-www-browser alternative)
+##export BROWSER=wslview
+# for both
+export LC_VIM_BACKGROUND=dark
