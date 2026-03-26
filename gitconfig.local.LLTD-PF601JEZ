@@ -1,3 +1,17 @@
 [user]
 	name = Gedminas, Marius
 	email = marius.gedminas@draeger.com
+	signingkey = ~/.ssh/id_ed25519.pub
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+#[push]
+# "the receiving end does not support --signed push"
+#	gpgSign = true
+[gpg]
+	format = ssh
+[gpg.ssh]
+	allowedSignersFile = ~/.ssh/git-allowed-signers
+	# contents of the file: "marius.gedminas@draeger.com ssh-ed25519 AAA..."
+	# test with git show --show-signature
