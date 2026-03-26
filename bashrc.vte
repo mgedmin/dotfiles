@@ -17,12 +17,25 @@
 # https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/263637
 # and experimented and realised that nope, it does *not* work.
 
+if [ -n "$WT_SESSION" ]; then
+    # Windows Terminal uses OSC 9;9 instead of OSC 7
+    __vte_osc7() {
+        printf '\e]9;9;"%s"\e\\' "$(wslpath -w .)"
+    }
+fi
+
 if ! declare -f __vte_osc7 > /dev/null; then
     if [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte.sh ]; then
         . /etc/profile.d/vte.sh
     elif [ "${VTE_VERSION:-0}" -ge 3405 ] && [ -e /etc/profile.d/vte-2.91.sh ]; then
         . /etc/profile.d/vte-2.91.sh
     fi
+fi
+
+# bashrc.vte tries to get these declared, but vte.sh doesn't define them
+# when TERM is not supported (e.g. screen*/tmux*)
+if ! declare -f __vte_osc7 > /dev/null; then
+    __vte_osc7() { :; }
 fi
 
 # Inform VTE about directory changes as soon as they happen
