@@ -133,7 +133,7 @@
 	push-branch = "!master=$(git main-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
 
 # Select a remote for pushing: pick mgedmin or origin, whichever exists
-	push-remote = "!if [ -n \"$(git config get remote.mgedmin.url)\" ]; then echo mgedmin; else echo origin; fi"
+	push-remote = "!if [ -n \"$(git config --get remote.mgedmin.url)\" ]; then echo mgedmin; else echo origin; fi"
 
 # These are extremely nice
 	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
