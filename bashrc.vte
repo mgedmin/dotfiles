@@ -17,7 +17,7 @@
 # https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/263637
 # and experimented and realised that nope, it does *not* work.
 
-if [ -n "$WT_SESSION" ]; then
+if [ -n "$WT_SESSION" ] && [ -x /usr/bin/wslpath ]; then
     # Windows Terminal uses OSC 9;9 instead of OSC 7
     __vte_osc7() {
         printf '\e]9;9;"%s"\e\\' "$(wslpath -w .)"
