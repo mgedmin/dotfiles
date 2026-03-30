@@ -1,0 +1,3 @@
+" WSL doesn't really have a primary selection, so if I want to paste things
+" from Vim into chat apps or terminals, I need to use the clipboard.
+set clipboard=unnamedplus

@@ -97,4 +97,7 @@ else
     call setline('.', substitute(new_line, '\s\+$', '', ''))
     call setpos('.', saved)
   endfun
+  if filereadable($HOME . "/.vimrc.local")
+    source $HOME/.vimrc.local
+  endif
 endif
