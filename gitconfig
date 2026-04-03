@@ -303,7 +303,7 @@
 # print the name of the current branch
 	branch-name = symbolic-ref --short HEAD
 
-# let's do code review!
+# let's do code review!  check out a branch, then git review will open vim with the unified diff
 	review = "!vim +'set ft=diff bt=nofile|exe \"0r !git branch-diff -p --stat\"|1|exe \"silent file\" escape(printf(\"git diff of the %s branch\", systemlist(\"git branch-name\")[0]), \" |\\\\\")'"
 
 # show current commit SHA; try also git sha --short and git sha [--short] somebranch
