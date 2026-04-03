@@ -98,24 +98,6 @@
 	# there are really only three repos, https://gedmin.as/dotfiles,
 	# https://gedmin.as/scripts, and https://gedmin.as/dotvim
 	pushInsteadOf = https://gedmin.as/
-[url "ssh://git@git.vaultit.org:23/"]
-	# work stuff
-	insteadOf = https://git.vaultit.org/
-[url "ssh://git@gitlab.tilaajavastuu.fi:2222/"]
-	# old work stuff
-	insteadOf = https://gitlab.tilaajavastuu.fi/
-	insteadOf = https://git.vaultit.org/
-# work stuff
-[url "git@ssh.dev.azure.com:v3/vaultit/BOL/"]
-	insteadOf = https://dev.azure.com/vaultit/BOL/_git/
-[url "git@ssh.dev.azure.com:v3/vaultit/Common/"]
-	insteadOf = https://dev.azure.com/vaultit/Common/_git/
-[url "git@ssh.dev.azure.com:v3/vaultit/ServicePortal/"]
-	insteadOf = https://dev.azure.com/vaultit/ServicePortal/_git/
-[url "git@ssh.dev.azure.com:v3/vaultit/Company/"]
-	insteadOf = https://dev.azure.com/vaultit/Company/_git/
-[url "git@ssh.dev.azure.com:v3/vaultit/Core/"]
-	insteadOf = https://dev.azure.com/vaultit/Core/_git/
 
 [alias]
 # I'm used to these
