@@ -75,6 +75,8 @@
 # https://github.com/blog/180-local-github-config
 # I'm not sure anything uses this any more, now that basic token auth is gone
 	user = mgedmin
+[gitubuntu]
+	lpuser = mgedmin
 
 #
 # URL shortcuts
@@ -348,5 +350,3 @@
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
-[gitubuntu]
-	lpuser = mgedmin
