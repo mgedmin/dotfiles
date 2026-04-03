@@ -5,3 +5,5 @@ export MSYS=winsymlinks:nativestrict
 ##export BROWSER=wslview
 # for both
 export LC_VIM_BACKGROUND=dark
+
+export ADM_USER=adm-gedminas
