@@ -320,9 +320,10 @@
 # NB: I don't want to use git remote get-url origin because I don't want insteadOf expansion that
 # converts password-protected https:// links I can click on to ssh:// links that I can't.
 	url = "!f() { remote=${1:-origin}; git config remote.\"$remote\".url; }; f"
+	web-url = "!f() { git url \"$@\" | sed -E -e 's/^ssh:\\/\\/git@(stash.draeger.com):[0-9]+\\/([^/]+)\\/([^/]+)\\.git$/https:\\/\\/\\1\\/projects\\/\\2\\/repos\\/\\3/'; }; f"
 
 # open the repository in a browser
-	open-url = "!f() { xdg-open $(git url \"$@\"); }; f"
+	open-url = "!f() { xdg-open $(git web-url \"$@\"); }; f"
 
 # make a second clone using the first one as a reference
 # (you will regret this, use git worktree add instead)
