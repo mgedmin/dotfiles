@@ -252,6 +252,12 @@
 # git branches lists all interesting branches
 	branches = "!f() { test -t 1 && color=always || color=never; git branch --color=\"$color\" \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
 
+# lists the names of all interesting branches with no * prefixes or colors
+	list-branches = "for-each-ref --format='%(refname:short)' refs/heads refs/remotes/origin"
+
+# does a git grep for file contents in all the branches
+	grep-all-branches = "!f() { git list-branches | xargs git grep \"$@\"; }; f"
+
 # git rename-current-branch NAME renames the current branch
 	rename-current-branch = branch -m
 
