@@ -6,11 +6,12 @@
 
 --kinds-python=-i
 
-# universal-ctags 5.9 generates 'x' kind for "from module import name"
-#--kinds-python=-x
+# universal-ctags 5.9 complains "Warning: Unsupported kind: 'Y' for --kinds-python option"
+# and generates 'x' kind for "from module import name"
+--kinds-python=-x
 # universal-ctags 6.2 complains "Warning: Unsupported kind: 'x' for --kinds-python option"
 # and generates 'Y' kind for those imports
---kinds-python=-Y
+#--kinds-python=-Y
 
 --tag-relative=always
 
