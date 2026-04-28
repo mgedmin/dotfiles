@@ -1,3 +1,12 @@
 " WSL doesn't really have a primary selection, so if I want to paste things
 " from Vim into chat apps or terminals, I need to use the clipboard.
 set clipboard=unnamedplus
+
+" Windows Terminal uses right click to paste and I get confused sometimes
+" I should maybe check for Windows Terminal by looking if $WT_SESSION_ID or
+" $WT_PROFILE are defined...
+set mousemodel=
+imap    <RightMouse>    <C-G>u<C-R>+
+map     <RightMouse>    "+<MiddleMouse>
+map     <2-RightMouse>  <Nop>
+imap    <2-RightMouse>  <Nop>
