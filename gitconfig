@@ -44,6 +44,8 @@
 [init]
 # needs git 2.28, which means Ubuntu 21.04 or newer
 	defaultBranch = main
+[submodule]
+	recurse = true
 
 #
 # I wonder if I still need anyting in this section
