@@ -10,3 +10,8 @@ imap    <RightMouse>    <C-G>u<C-R>+
 map     <RightMouse>    "+<MiddleMouse>
 map     <2-RightMouse>  <Nop>
 imap    <2-RightMouse>  <Nop>
+
+" With the default setting of backupcopy (auto) I frequently get 4+ second
+" pauses while Vim does unlink("NOTES.txt"), according to strace.  It's
+" probably OneDrive.
+setlocal backupcopy=yes
