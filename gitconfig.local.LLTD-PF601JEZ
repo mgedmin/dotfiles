@@ -15,3 +15,5 @@
 	allowedSignersFile = ~/.ssh/git-allowed-signers
 	# contents of the file: "marius.gedminas@draeger.com ssh-ed25519 AAA..."
 	# test with git show --show-signature
+[alias "all"]
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim
