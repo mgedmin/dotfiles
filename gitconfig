@@ -229,8 +229,11 @@
 	show-original-commit = !git show $(cat .git/rebase-apply/original-commit .git/rebase-merge/stopped-sha 2>/dev/null)
 
 # during git merge conflicts, show both versions of the diff (base vs ours, base vs theirs) for a file
-	diff-ours = "!f() { f=${1:?usage: git diff-outs filename}; git diff :1:\"$f\" :2:\"$f\"; }; f"
-	diff-theirs = "!f() { f=${1:?usage: git diff-outs filename}; git diff :1:\"$f\" :3:\"$f\"; }; f"
+	diff-ours   = "!f() { f=${1:?usage: git diff-ours filename};   git diff :1:\"$f\" :2:\"$f\"; }; f"
+	diff-theirs = "!f() { f=${1:?usage: git diff-theirs filename}; git diff :1:\"$f\" :3:\"$f\"; }; f"
+	show-base   = "!f() { f=${1:?usage: git show-base filename};   git show :1:\"$f\"; }; f"
+	show-ours   = "!f() { f=${1:?usage: git show-ours filename};   git show :2:\"$f\"; }; f"
+	show-theirs = "!f() { f=${1:?usage: git show-theirs filename}; git show :3:\"$f\"; }; f"
 
 # git amend [-a|-p|FILE] to just add something to the last commit
 # (lately I've mostly been using git add [-p]; git show --staged; git amend)
