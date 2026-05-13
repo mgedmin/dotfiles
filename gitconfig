@@ -225,8 +225,12 @@
 	autosquash = rebase -i --autosquash -r
 
 # show me the commit I'm rebasing
-# (the other v. useful command is git diff :{1,2}path/to/file-I'm-editing)
+# (the other v. useful command is git diff :{1,2}:path/to/file-I'm-editing)
 	show-original-commit = !git show $(cat .git/rebase-apply/original-commit .git/rebase-merge/stopped-sha 2>/dev/null)
+
+# during git merge conflicts, show both versions of the diff (base vs ours, base vs theirs) for a file
+	diff-ours = "!f() { f=${1:?usage: git diff-outs filename}; git diff :1:\"$f\" :2:\"$f\"; }; f"
+	diff-theirs = "!f() { f=${1:?usage: git diff-outs filename}; git diff :1:\"$f\" :3:\"$f\"; }; f"
 
 # git amend [-a|-p|FILE] to just add something to the last commit
 # (lately I've mostly been using git add [-p]; git show --staged; git amend)
