@@ -215,7 +215,7 @@
 	fork = !gh repo fork --remote --remote-name mgedmin
 
 # monitor github actions please
-	watch-gha = !uvx --from watchgha watch_gha_runs
+	watch-gha = !uvx watchgha
 
 # show branch protection rules please
 	branch-protection = !gh api /repos/{owner}/{repo}/branches/$(git main-branch)/protection/required_status_checks/contexts
