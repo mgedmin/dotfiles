@@ -1,14 +1,8 @@
-#[user]
-#	email = marius@pov.lt
-
 [url "ssh://git@git.vaultit.org:23/"]
 	insteadOf = https://git.vaultit.org/
 
 [url "git@github.com:ProgrammersOfVilnius/"]
 	insteadOf = https://github.com/ProgrammersOfVilnius/
-
-[includeIf "gitdir:~/src/tilaajavastuu/"]
-	path = ~/.gitconfig.work
 
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim ~/.ssh ~/.mutt ~/.gtimelog \

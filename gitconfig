@@ -3,6 +3,7 @@
 	name = Marius Gedminas
 	email = marius@gedmin.as
 	signingkey = 8121AD32F00A8094748A6CD09157445DE7A6D78F
+
 [color]
 	ui = auto
 	diff = auto
@@ -366,3 +367,12 @@
 # means Ubuntu 14.04+) -- this needs to be the last thing in this file!
 [include]
 	path = ~/.gitconfig.local
+
+# but actually switch back to my personal user.name/user.email if
+# I'm working on my personal dotfiles
+[includeIf "gitdir:~/.vim/"]
+	path = ~/.gitconfig.personal
+[includeIf "gitdir:~/bin/"]
+	path = ~/.gitconfig.personal
+[includeIf "gitdir:~/dotfiles/"]
+	path = ~/.gitconfig.personal
