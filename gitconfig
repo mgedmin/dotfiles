@@ -252,6 +252,10 @@
 # git undo, for unding an accidental git amend/reword/commit; use with care
 	undo = reset HEAD@{1}
 
+# git last-edit, to edit the files touched by the previous commit
+	last-touched-files = show --name-only --format= --diff-filter=d
+	last-edit = "!files=$(git last-touched-files); set -x; vim $files"
+
 # git archive-branch branchname renames it to archived/branchname
 # alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; for arg in \"$@\"; do case \"$arg\" in --archived|--applied|--abandoned) p=\"${arg#--}\"; continue;; --*) printf \"unrecognized argument: %s\\n\" \"$arg\"; exit 1;; esac; git branch -m \"$arg\" \"$p/$arg\"; done; }; f"
