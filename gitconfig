@@ -257,7 +257,7 @@
 	last-edit = "!files=$(git last-touched-files); set -x; vim $files"
 
 # git edit-conflict, to edit the first conflicting file
-	edit-conflict = "!file=$(git status --porcelain|grep -E '^(U.|.U|AA)'|cut -c 4-|sed -e 's/^.*-> //'); if test -e $file; then set -x; vim $file '+/<<<<<<<'; fi"
+	edit-conflict = "!file=$(git status --porcelain|grep -E '^(U.|.U|AA)'|cut -c 4-|sed -e 's/^.*-> //'); if test -n \"$file\" && test -e $file; then set -x; vim $file '+/<<<<<<<'; else echo No files with conflicts.; fi"
 
 # git archive-branch branchname renames it to archived/branchname
 # alternative naming schemes available with git archive-branch --applied/--abandoned
