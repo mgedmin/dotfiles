@@ -256,6 +256,9 @@
 	last-touched-files = show --name-only --format= --diff-filter=d
 	last-edit = "!files=$(git last-touched-files); set -x; vim $files"
 
+# git edit-conflict, to edit the first conflicting file
+	edit-conflict = "!file=$(git status --porcelain|grep -E '^(U.|.U|AA)'|cut -c 4-|sed -e 's/^.*-> //'); if test -e $file; then set -x; vim $file '+/<<<<<<<'; fi"
+
 # git archive-branch branchname renames it to archived/branchname
 # alternative naming schemes available with git archive-branch --applied/--abandoned
 	archive-branch = "!f() { p=archived; for arg in \"$@\"; do case \"$arg\" in --archived|--applied|--abandoned) p=\"${arg#--}\"; continue;; --*) printf \"unrecognized argument: %s\\n\" \"$arg\"; exit 1;; esac; git branch -m \"$arg\" \"$p/$arg\"; done; }; f"
