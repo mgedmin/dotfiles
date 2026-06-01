@@ -17,7 +17,7 @@
 # https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/263637
 # and experimented and realised that nope, it does *not* work.
 
-if [ -n "$WT_SESSION" ] && [ -x /usr/bin/wslpath ]; then
+if [ -n "$WT_SESSION" ] && [ -x /usr/bin/wslpath ] && [[ $- == *i* ]]; then
     # Windows Terminal uses OSC 9;9 instead of OSC 7
     __vte_osc7() {
         printf '\e]9;9;"%s"\e\\' "$(wslpath -w .)"
@@ -42,6 +42,6 @@ fi
 # so I can do things like 'cd foo && long-running-command'
 if declare -f __vte_osc7 > /dev/null; then
     cd() {
-        command cd "$@" && __vte_osc7
+        command cd "$@" && if test -t 1; then __vte_osc7; fi
     }
 fi
