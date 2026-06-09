@@ -230,6 +230,7 @@ __set_ps1() {
     local chroot='${debian_chroot:+($debian_chroot) }'
     local jhbuild='${UNDER_JHBUILD:+(jhbuild) }'
     local virtualenv='$(__virtualenv_name "(%s) ")'
+    local hostalias='$(test -s ~/.hostalias && printf " aka %s" $(cat ~/.hostalias))'
     local svn='$(__svn_ps1 " [svn:%s]")'
     local git='$(__git_ps1_fancy " [git:%s]")'
     local hg='$(__hg_ps1 " [hg:%s]")'
@@ -254,7 +255,7 @@ __set_ps1() {
     # VTE integration
     local vte_before_prompt='\[\e]133;D;$?\e\\\e]133;A\e\\\]'
     local vte_after_prompt='\[\e]133;B\e\\\]'
-    PS1="${cr}${vte_before_prompt}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${reset}${red}${restart_required}${reset}${no_restart_required}${shell} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ ${vte_after_prompt}"
+    PS1="${cr}${vte_before_prompt}${chroot}${cyan}${jhbuild}${virtualenv}${_prompt_color}\\u@\\h${hostalias}${reset}${red}${restart_required}${reset}${no_restart_required}${shell} ${blue}\\w${purple}${svn}${git}${hg}${bzr}${reset}${darkgrey}${njobs}${reset} \\$ ${vte_after_prompt}"
 }
 
 __set_ps1
