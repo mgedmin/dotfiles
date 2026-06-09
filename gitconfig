@@ -275,6 +275,13 @@
 # does a git grep for file contents in all the branches
 	grep-all-branches = "!f() { git list-branches | xargs git grep \"$@\"; }; f"
 
+# git past-branch-names fishes out names of branches from git log messages; recognizes
+# - Merge branch 'source_branch_name' of ssh://git.example.com/repository.git into target_branch_name
+# - Merge pull request #99 in owner/repo from source_branch_name to target_branch_name
+# - Merge in owner/repo from source_branch_name to target_branch_name
+# and pulls source branch names from them (ignoring target branch names)
+	past-branch-names = "!f() { git log \"$@\" --format='%B' --grep 'Merge' | grep -Po \"Merge (?:branch '|(?:pull request|in) .* from (?:[^ :]+:)?)\\K([^' ]+)\" | sort -u; }; f"
+
 # git rename-current-branch NAME renames the current branch
 	rename-current-branch = branch -m
 
