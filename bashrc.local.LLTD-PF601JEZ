@@ -7,3 +7,7 @@ export MSYS=winsymlinks:nativestrict
 export LC_VIM_BACKGROUND=dark
 
 export ADM_USER=adm-gedminas
+
+if [ -z "$SSH_AUTH_SOCK" ] && [ -x /usr/bin/keychain ]; then
+    eval "$(keychain --quiet --eval)"
+fi
