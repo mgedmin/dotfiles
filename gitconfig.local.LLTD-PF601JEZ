@@ -17,7 +17,9 @@
 	# test with git show --show-signature
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim
+	vim = ~/.vim/bundle/*
 	src = ~/src/*
 	all = \
 		$(eval "echo $(git config alias.all.dirs)") \
-		$(eval "echo $(git config alias.all.src)") \
+		$(eval "echo $(git config alias.all.vim)") \
+		$(eval "echo $(git config alias.all.src)")
