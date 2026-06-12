@@ -16,7 +16,7 @@
 	# contents of the file: "marius.gedminas@draeger.com ssh-ed25519 AAA..."
 	# test with git show --show-signature
 [alias "all"]
-	dirs = ~/bin ~/bin/local ~/dotfiles ~/.vim
+	dirs = ~/bin ~/bin/local ~/dotfiles ~/.ssh ~/.vim
 	vim = ~/.vim/bundle/*
 	src = ~/src/*
 	all = \
