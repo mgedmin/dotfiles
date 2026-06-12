@@ -14,7 +14,7 @@ imap    <2-RightMouse>  <Nop>
 " With the default setting of backupcopy (auto) I frequently get 4+ second
 " pauses while Vim does unlink("NOTES.txt"), according to strace.  It's
 " probably OneDrive.
-setlocal backupcopy=yes
+set backupcopy=yes
 
 " Also, we don't want to upload the .swp files to The Clown
 set directory=~/.local/state/vimswap//
