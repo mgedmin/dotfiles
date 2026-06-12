@@ -15,3 +15,7 @@ imap    <2-RightMouse>  <Nop>
 " pauses while Vim does unlink("NOTES.txt"), according to strace.  It's
 " probably OneDrive.
 setlocal backupcopy=yes
+
+" Also, we don't want to upload the .swp files to The Clown
+set directory=~/.local/state/vimswap//
+call mg#mkdir#if_missing(&directory)
