@@ -27,3 +27,7 @@ export SSH_AUTH_SOCK=/data/data/com.termux/files/usr/var/run/ssh-agent.socket
 
 # uv complains it can't hardlink
 export UV_LINK_MODE=copy
+
+# vim background detection breaks if I ssh to plato
+# and use screen/tmux
+export VIM_LC_BACKGROUND=dark
