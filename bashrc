@@ -5,7 +5,15 @@
 (( bashrc_start_time_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 ))
 
 source_bashrc_snippet() {
-    local snippet=$HOME/$1
+    local here
+    here=$(dirname "${BASH_SOURCE[0]}")
+    if [ "${BASH_SOURCE[0]##*/}" = .bashrc ]; then
+        # sourcing ~/.bashrc should source ~/.bashrc.snippet
+        local snippet=$here/$1
+    else
+        # sourcing ~/dotfiles/bashrc should source ~/dotfiles/bashrc.snippet
+        local snippet=$here/${1#.}
+    fi
     if [ -f "$snippet" ]; then
         # shellcheck source=/dev/null
         . "$snippet"
