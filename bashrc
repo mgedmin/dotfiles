@@ -79,5 +79,7 @@ if [ -n "$PS1" ]; then
     # .bashrc.title defines enable_title(), and it needs to be executed as the
     # very last thing in .bashrc to avoid title bar flashing all the .bashrc
     # commands when you open a new terminal
-    enable_title
+    if declare -f enable_title > /dev/null; then
+        enable_title
+    fi
 fi
