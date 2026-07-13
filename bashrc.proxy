@@ -3,7 +3,7 @@
 
 if [ -x /usr/bin/gconftool ]; then
     mode=$(gconftool -g /system/proxy/mode 2>/dev/null)
-    if [ -n "$mode" -a "$mode" != "none" ]; then
+    if [ -n "$mode" ] && [ "$mode" != "none" ]; then
         echo "You have a proxy server enabled for GNOME."
     fi
 fi
