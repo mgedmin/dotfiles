@@ -182,10 +182,11 @@ fi
 # you can specify color name or color number (30..37)
 # you can specify 256-color numbers too with "38;5;nnn", e.g.
 #    prompt_color="38;5;197"
+declare -g prompt_color
 prompt_color=green
 
 unset colors
-declare -A colors
+declare -g -A colors
 colors[reset]=0
 colors[black]=30
 colors[red]=31
