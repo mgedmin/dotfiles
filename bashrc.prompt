@@ -184,6 +184,8 @@ fi
 #    prompt_color="38;5;197"
 declare -g prompt_color
 prompt_color=green
+[ -n "$SSH_TTY" ] && prompt_color=cyan
+[ "$(id -u)" -eq 0 ] && prompt_color=red
 
 unset colors
 declare -g -A colors
