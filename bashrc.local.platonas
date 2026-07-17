@@ -3,3 +3,7 @@ export MAIL=$HOME/Maildir
 if [ -n "$PS1" ]; then
     mailq | { grep -v "^Mail queue is empty" || true; }
 fi
+
+if [ -z "$SSH_AUTH_SOCK" ] && [ -x /usr/bin/keychain ]; then
+    eval "$(keychain --quiet --eval)"
+fi
