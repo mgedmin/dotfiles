@@ -27,12 +27,15 @@ if ! declare -f __git_ps1 > /dev/null; then
         . /usr/lib/git-core/git-sh-prompt
     elif [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
         # CentOS
+        # shellcheck source=/dev/null
         . /usr/share/git-core/contrib/completion/git-prompt.sh
     elif [ -e /etc/bash_completion.d/git ]; then
+        # shellcheck source=/dev/null
         . /etc/bash_completion.d/git
-    elif [ -e $PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
+    elif [ -e "$PREFIX"/etc/bash_completion.d/git-prompt.sh ]; then
         # Termux
-        . $PREFIX/etc/bash_completion.d/git-prompt.sh
+        # shellcheck source=/dev/null
+        . "$PREFIX"/etc/bash_completion.d/git-prompt.sh
     else
         __git_ps1()
         {
@@ -64,7 +67,7 @@ __git_ps1_fancy()
 {
     # override some aspects of __git_ps1 in certain locations because slooooow
     if [[ $PWD = /home/mg/Mail/Home ]]; then
-        GIT_PS1_SHOWDIRTYSTATE= GIT_PS1_SHOWUNTRACKEDFILES= __git_ps1 "$@"
+        GIT_PS1_SHOWDIRTYSTATE='' GIT_PS1_SHOWUNTRACKEDFILES='' __git_ps1 "$@"
     elif [[ $PWD == /run/* ]]; then
         :
     else
@@ -75,7 +78,7 @@ __git_ps1_fancy()
 __has_dot_dir()
 {
     # this is a hack
-    test -d $1 || test -d ../$1 || test -d ../../$1 || test -d ../../../$1 || test -d ../../../../$1
+    test -d "$1" || test -d ../"$1" || test -d ../../"$1" || test -d ../../../"$1" || test -d ../../../../"$1"
 }
 
 # svn branch name in shell prompt
@@ -136,8 +139,8 @@ __exit_line()
     local grey='\033[0;37m'
 
     local cmdtime=0
-    if [ -n "$__cmdstart" -a "$__cmdstart" != "go" ]; then
-        cmdtime=$(($EPOCHSECONDS - __cmdstart))
+    if [ -n "$__cmdstart" ] && [ "$__cmdstart" != "go" ]; then
+        cmdtime=$((EPOCHSECONDS - __cmdstart))
     fi
 
     local message=
@@ -149,7 +152,7 @@ __exit_line()
         test $m -ne 0 && message="${message}${purple}${m}${grey}m"
         test $s -ne 0 && message="${message}${purple}${s}${grey}s"
     fi
-    if [ $rc -ne 0 ]; then
+    if [ "$rc" -ne 0 ]; then
         test -n "$message" && message="${message}, "
         message="${message}exited with ${red}${rc}${grey}"
     fi
@@ -174,7 +177,7 @@ PROMPT_COMMAND='__exit_line $?; __do_cmdstart=go'
 ##trap update_cmdstart DEBUG
 
 # Debian standard stuff that I never actually use
-if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 

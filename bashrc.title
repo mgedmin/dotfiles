@@ -71,13 +71,13 @@ if [ $xterm_title -ne 0 ]; then
     show_command_in_title_bar()
     {
         case "$BASH_COMMAND" in
-            *\033]0*|*\\e]0*)
+            *\\033]0*|*\\e]0*)
                 # The command is trying to set the title bar as well;
                 # this is most likely the execution of $PROMPT_COMMAND.
                 # In any case nested escapes confuse the terminal, so don't
                 # output them.
                 ;;
-            *\033*|*\007*|*\\e*)
+            *\\033*|*\\007*|*\\e*)
                 # actually just avoid escapes of any kind in the title
                 ;;
             history\ -a|__do_cmdstart=go|__exit_line\ \$__rc|__vte_osc7|__vte_precmd|__tilde=*|__rc=*|__msg=*|__systemd_osc_context_precmdline)
