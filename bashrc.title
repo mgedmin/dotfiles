@@ -35,8 +35,16 @@ if [ -z "$MC_SID" ]; then
     esac
 fi
 
-[ -n "$SSH_TTY" ] && TITLE_SUFFIX=' 🐚'
-[ -n "$SSH_TTY" ] && [ -n "$SSH_AUTH_SOCK" ] && TITLE_SUFFIX=' 🐚🕵'
+case "$TERM" in
+    xterm*|rxvt*|tmux*)
+        [ -n "$SSH_TTY" ] && TITLE_SUFFIX=' 🐚'
+        [ -n "$SSH_TTY" ] && [ -n "$SSH_AUTH_SOCK" ] && TITLE_SUFFIX=' 🐚🕵'
+        ;;
+    screen*)
+        [ -n "$SSH_TTY" ] && TITLE_SUFFIX=' [ssh]'
+        [ -n "$SSH_TTY" ] && [ -n "$SSH_AUTH_SOCK" ] && TITLE_SUFFIX=' [ssh][auth]'
+        ;;
+esac
 
 if [ $xterm_title -ne 0 ]; then
     # bashrc.vte tries to get these declared, but vte.sh doesn't define them
