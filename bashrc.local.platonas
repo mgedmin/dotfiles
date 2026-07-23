@@ -1,4 +1,5 @@
 export MAIL=$HOME/Maildir
+export LC_VIM_BACKGROUND=dark
 
 if [ -n "$PS1" ]; then
     mailq | { grep -v "^Mail queue is empty" || true; }
