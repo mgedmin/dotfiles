@@ -8,10 +8,12 @@
 
 # universal-ctags 5.9 complains "Warning: Unsupported kind: 'Y' for --kinds-python option"
 # and generates 'x' kind for "from module import name"
---kinds-python=-x
+#--kinds-python=-x
 # universal-ctags 6.2 complains "Warning: Unsupported kind: 'x' for --kinds-python option"
 # and generates 'Y' kind for those imports
 #--kinds-python=-Y
+#
+# so now I have autodetection in a ~/bin/ctags wrapper script
 
 --tag-relative=always
 
