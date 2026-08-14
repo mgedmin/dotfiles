@@ -1,5 +1,20 @@
 [lint]
+# I want ruff to be a superset of flake8, thus enable all flake8 warnings by
+# default
 extend-select = ["I", "W", "E"]
+
+# I don't want ruff to be too much of a superset; code that is flake8-valid is
+# generally fine and some of the extra lints are way too prone to false
+# positives.
+extend-ignore = [
+  "RUF059",   # Unpacked variable is never used
+  "PLW1510",  # 'subprocess.run' without explicit 'check' argument
+  "BLE001",   # Do not catch blind exception
+  "T100",     # Import for 'pdb' found
+  "UP031",    # printf-string-formatting
+  "UP032",    # f-string
+  "PIE808",   # unnecessary-range-start
+]
 
 [lint.isort]
 lines-after-imports = 2
