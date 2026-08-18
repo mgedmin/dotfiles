@@ -14,6 +14,7 @@ extend-ignore = [
   "UP031",    # printf-string-formatting
   "UP032",    # f-string
   "PIE808",   # unnecessary-range-start
+  "FLY002",   # Consider f-string instead of string join
 ]
 
 [lint.isort]
