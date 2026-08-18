@@ -15,6 +15,7 @@ extend-ignore = [
   "UP032",    # f-string
   "PIE808",   # unnecessary-range-start
   "FLY002",   # Consider f-string instead of string join
+  "DTZ011",   # `datetime.date.today()` used
 ]
 
 [lint.isort]
