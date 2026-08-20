@@ -105,11 +105,11 @@ process_dir() {
             local target=dotfiles/$fn
             local skeleton=/etc/skel/.$fn
             case "$fn" in
-                *.local.$HOSTNAME|mailcheckrc.$HOSTNAME)
-                    dotfile=$HOME/.${fn%.$HOSTNAME}
+                *.local."$HOSTNAME"|mailcheckrc."$HOSTNAME")
+                    dotfile=$HOME/.${fn%."$HOSTNAME"}
                     ;;
-                *.local.$hostname|mailcheckrc.$hostname)
-                    dotfile=$HOME/.${fn%.$hostname}
+                *.local."$hostname"|mailcheckrc."$hostname")
+                    dotfile=$HOME/.${fn%."$hostname"}
                     ;;
                 *.sh|*.local.*|mailcheckrc.*|core|core.*)
                     debug "skipping $fn"

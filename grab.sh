@@ -48,9 +48,9 @@ run() {
 cd ~/dotfiles/ || exit 1
 rc=0
 for arg; do
-    s=${arg#$HOME/}
+    s=${arg#"$HOME"/}
     fn=${s#.}
-    if ! [ x".$fn" = x"$s" ]; then
+    if ! [ ".$fn" = "$s" ]; then
         echo "$arg: not a dotfile" 1>&2
         rc=1
         continue
