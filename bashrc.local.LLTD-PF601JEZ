@@ -25,4 +25,12 @@ if [ -n "$PS1" ]; then
             printf 'Kerberos TGT expired.  You may want to run\n\n  kinit $ADM_USER\n'
         fi
     fi
+    if ! test -e "$XDG_RUNTIME_DIR"/bashrc-forwarding-check-done; then
+        forwarding_status=$(powershell.exe 'Get-NetIPInterface -ifAlias "vEthernet (WSL (Hyper-V firewall))","vEthernet (Default Switch)" | Format-Table InterfaceAlias, AddressFamily, Forwarding')
+        if grep -q Disabled <<<"$forwarding_status"; then
+            printf "%s\n" "$forwarding_status"
+        else
+            touch "$XDG_RUNTIME_DIR"/bashrc-forwarding-check-done
+        fi
+    fi
 fi
