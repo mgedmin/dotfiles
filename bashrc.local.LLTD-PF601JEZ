@@ -15,6 +15,14 @@ fi
 if [ -n "$PS1" ]; then
     if ! test -e /tmp/krb5cc_$UID; then
         # shellcheck disable=SC2016
-        printf 'You may want to run\n  kinit $ADM_USER\n\n'
+        printf 'No Kerberos ticket.  You may want to run\n\n  kinit $ADM_USER\n'
+    else
+        expiration_time=$(klist | awk '$5 == "krbtgt/CORP.DRAEGER.GLOBAL@CORP.DRAEGER.GLOBAL" { print $3 " " $4 }')
+        expiration_time_t=$(date --date="$expiration_time" +%s)
+        now_time_t=$(date +%s)
+        if [[ $expiration_time_t -lt $now_time_t ]]; then
+            # shellcheck disable=SC2016
+            printf 'Kerberos TGT expired.  You may want to run\n\n  kinit $ADM_USER\n'
+        fi
     fi
 fi
