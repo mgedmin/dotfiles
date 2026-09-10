@@ -164,10 +164,17 @@
 	local = "!f() { command=$1; shift; file=$1; if [ -d $file ]; then dir=$file; shift; else dir=$(dirname $file); fi; echo + cd $dir; cd $dir && git $command \"$@\"; }; f"
 
 # creating new projects on fridge: git push-to-fridge [path/repo.git]
-	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh mg@fridge.pov.lt git init --bare $repo && git remote add origin mg@fridge.pov.lt:$repo && git push -u origin HEAD; }; f"
+	push-to-fridge = push-to-server mg@fridge.pov.lt
 
 # creating new projects on plato: git push-to-plato [path/repo.git]
-	push-to-plato = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh mg@plato.gedmin.as git init --bare $repo && git remote add origin mg@plato.gedmin.as:$repo && git push -u origin HEAD; }; f"
+	push-to-plato = push-to-server mg@plato.gedmin.as
+
+# implementation detail: git push-to-server user@server[:path/repo.git]
+# implementation detail: git push-to-server user@server path/repo.git
+	push-to-server = "!f() { server=${1%:*} && repo=${1#*:} && repo=${repo:-$2} && repo=${repo:-git/$(basename $(pwd)).git} && remote=$(git new-remote-name $server) && ssh $server git init --bare $repo && git remote add $remote $server:$repo && git push -u $remote HEAD; }; f"
+
+# implementation detail: git new-remote-name user@server [preferred]
+	new-remote-name = "!f() { server=$1 && name=${2:-origin} && if git config remote.$name.url > /dev/null; then echo $server | sed -e s/^.*@// -e s/[.].*//; else echo $name; fi; }; f"
 
 # list all roots (commits without a parent)
 	roots = log --all --oneline --decorate --max-parents=0
