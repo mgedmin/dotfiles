@@ -296,8 +296,12 @@
 # used by other aliases such as 'git list-merged-branches' or 'git up'
 	main-branch = "!f() { git config alias.main-branch.name \"$@\" || for c in main master devel; do git show-ref --quiet --verify refs/heads/$c && echo $c && break; done || git config init.defaultBranch || echo master; }; f"
 
+# git dev-branch [name] -- get or set the name of the default development branch (e.g. 'devel')
+# used by other aliases such as 'git dev'
+	dev-branch = "!f() { git config alias.dev-branch.name \"$@\" || for c in dev devel develop; do git show-ref --quiet --verify refs/heads/$c && echo $c && break; done || echo devel; }; f"
+
 # git list-merged-branches shows branches that have been merged to master
-	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[^ ]|^  (master|main|devel(op)?|staging|live|([a-z]+/)?(prod|test|uat)|'\"$(git main-branch)\"')$'; true; }; f"
+	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[^ ]|^  (master|main|devel(op)?|staging|live|([a-z]+/)?(prod|test|uat)|'\"$(git main-branch)\"'|'\"$(git dev-branch)\"')$'; true; }; f"
 
 # git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
 	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
@@ -306,10 +310,15 @@
 	up = !git update
 	update = "!f() { git checkout-if-not-already-on $(git main-branch) && git pull --rebase \"$@\" && git clean-merged-branches; }; f"
 
+# git dev is like git up, but it uses the dev-branch instead of the main branch
+	dev = !git develop
+	develop = "!f() { git checkout-if-not-already-on $(git dev-branch) && git pull --rebase \"$@\" && git clean-merged-branches; }; f"
+
 # git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
 	checkout-if-not-already-on = "!f() { branch=$1; if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" != $branch ]; then git checkout $branch; fi; }; f"
 
 # git pull-all-branches does a fast-forward pull for each local branch
+# the --update-head-ok is a bit risky; better do a regular git pull before you try to pull-all-branches
 	pull-all-branches = "!git branch --format \"%(if)%(upstream:short)%(then)git fetch --update-head-ok . %(upstream:short):%(refname:short)%(end)\" | sh"
 
 # git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
