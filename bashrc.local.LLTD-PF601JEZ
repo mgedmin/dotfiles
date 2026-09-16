@@ -12,7 +12,7 @@ if [ -z "$SSH_AUTH_SOCK" ] && [ -x /usr/bin/keychain ]; then
     eval "$(keychain --quiet --eval)"
 fi
 
-if [ -n "$PS1" ]; then
+if [ -n "$PS1" ] && [ "$UID" -ne 0 ]; then
     if ! test -e /tmp/krb5cc_$UID; then
         # shellcheck disable=SC2016
         printf 'No Kerberos ticket.  You may want to run\n\n  kinit $ADM_USER\n'
