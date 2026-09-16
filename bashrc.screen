@@ -52,6 +52,9 @@ _checktmux() {
     if [[ -z $user ]]; then
         return
     fi
+    if ! command -v tmux >/dev/null; then
+        return
+    fi
     if [[ -n $uid ]]; then
         if ! [[ -e /tmp/tmux-$uid/default ]]; then
             return
@@ -66,7 +69,7 @@ _checktmux() {
 
 _checkscreen "$USER"
 _checkscreen "$SUDO_USER"
-_checktmux "$USER"
+_checktmux "$USER" "$UID"
 _checktmux "$SUDO_USER" "$SUDO_UID"
 
 # vim: ft=sh
