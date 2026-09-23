@@ -29,8 +29,11 @@ if [ -n "$PS1" ] && [ "$UID" -ne 0 ]; then
         forwarding_status=$(powershell.exe 'Get-NetIPInterface -ifAlias "vEthernet (WSL (Hyper-V firewall))","vEthernet (Default Switch)" | Format-Table InterfaceAlias, AddressFamily, Forwarding')
         if grep -q Disabled <<<"$forwarding_status"; then
             printf "%s\n" "$forwarding_status"
+        elif grep -q Enabled <<<"$forwarding_status"; then
+            printf "%s\n" "$forwarding_status" > "$XDG_RUNTIME_DIR"/bashrc-forwarding-check-done
         else
-            touch "$XDG_RUNTIME_DIR"/bashrc-forwarding-check-done
+            printf "Could not check networking status:\n\n"
+            printf "%s\n" "$forwarding_status"
         fi
     fi
 fi
