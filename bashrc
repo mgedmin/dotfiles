@@ -20,7 +20,7 @@ source_bashrc_snippet() {
         . "$snippet"
         (( snippet_duration_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 - snippet_start_time_ms ))
         if [ $snippet_duration_ms -ge 100 ]; then
-            echo "  $snippet took ${snippet_duration_ms}ms"
+            echo "$snippet took ${snippet_duration_ms}ms"
         fi
     fi
 }
