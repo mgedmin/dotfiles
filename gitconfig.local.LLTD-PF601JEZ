@@ -15,6 +15,10 @@
 	allowedSignersFile = ~/.ssh/git-allowed-signers
 	# contents of the file: "marius.gedminas@draeger.com ssh-ed25519 AAA..."
 	# test with git show --show-signature
+[credential "https://artifactory.draeger.com"]
+	# this was added automatically by git-lfs
+	provider = generic
+
 [alias "all"]
 	dirs = ~/bin ~/bin/local ~/dotfiles ~/.ssh ~/.vim ~/ansible
 	vim = ~/.vim/bundle/*
