@@ -19,7 +19,7 @@ source_bashrc_snippet() {
         # shellcheck source=/dev/null
         . "$snippet"
         (( snippet_duration_ms = ${EPOCHREALTIME/[^0-9]/} / 1000 - snippet_start_time_ms ))
-        if [ $snippet_duration_ms -ge 100 ]; then
+        if [ -n "$PS1" ] && [ $snippet_duration_ms -ge 100 ]; then
             __tilde="~"
             echo "${snippet/#$HOME/$__tilde} took ${snippet_duration_ms}ms"
         fi
