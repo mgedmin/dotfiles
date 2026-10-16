@@ -216,7 +216,7 @@
 
 # create a new PR (for GitHub URLs only)
 	new-pr = "!git check-this-is-a-branch && git do-new-pr"
-	do-new-pr = "!f() { url=\"$(git url)/pull/new/$(git branch-name)\"; echo \"$url\"; xdg-open \"$url\"; }; f"
+	do-new-pr = "!f() { url=\"$(git url)/pull/new/$(git branch-name)\"; echo + xdg-open \"$url\"; xdg-open \"$url\"; }; f"
 
 # fetch and check out one pull request
 	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout origin/pull/$a; }; f"
