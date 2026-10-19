@@ -6,3 +6,6 @@
 
 # Skip tags files, they often have matches
 --glob=!tags
+
+# Sort output by file path, which turns of parallelism, but reduces discomfort
+--sort=path
