@@ -89,6 +89,9 @@
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
 	pushInsteadOf = https://gist.github.com/mgedmin/
+#[url "git@codeberg.org:"]
+#	# does not work, codeberg insists on the final .git that git won't append here
+#	pushInsteadOf = https://codeberg.org/mgedmin/
 
 #[url "git@github.com:ProgrammersOfVilnius/"]
 # This semi-breaks Ansible, which tries to clone https:// and then gets back a
