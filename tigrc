@@ -6,6 +6,9 @@ set vertical-split = false
 # show git commit hash by default, which I want because then I can *search* for a git commit by id
 set main-view-id = true
 
+# show commit signatures
+set diff-options = --show-signature
+
 # do I want this?
 # set mouse = true
 
