@@ -139,7 +139,7 @@
 	whoami = !git var GIT_COMMITTER_IDENT | sed 's/ [0-9]\\+ [-+0-9]\\+$//'
 
 # Show which commits are signed
-	signed = "log --format='%C(auto)%h %G?%d %s'"
+	signed = "log --format='%C(auto)%h %C(magenta)%G?%C(auto)%d %s'"
 
 # I like hg incoming/hg outgoing; they make perfect sense to me
 # NB: starting with git 1.7.0 I can use @{u} to refer to origin
